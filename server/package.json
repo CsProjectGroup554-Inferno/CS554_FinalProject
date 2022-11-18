@@ -8,5 +8,8 @@
     "start": "node app.js"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^9.14.0"
+  }
 }
