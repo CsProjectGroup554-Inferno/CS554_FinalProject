@@ -30,15 +30,15 @@ const Signup = () => {
       <div className="loginContainer">
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label For="email">Email address</label>
+            <label htmlFor="email">Email address</label>
             <input type="email" className="form-control" id="email" placeholder="email" />
           </div>
           <div className="mb-3">
-            <label For="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input type="password" className="form-control" id="password" placeholder="password" />
           </div>
           <div className="mb-3">
-            <label For="confirmPassword">Confirm Password</label>
+            <label htmlFor="confirmPassword">Confirm Password</label>
             <input type="password" className="form-control" id="confirmPassword" placeholder="confirm password" />
           </div>
           <button type="submit" className="btn btn-primary">

@@ -16,8 +16,8 @@ const getCollectionFn = (collection) => {
 };
 
 module.exports = {
-  user: getCollectionFn("user"),
-  property: getCollectionFn("property"),
-  fsFiles: getCollectionFn("fs.files"),
-  fsChunks: getCollectionFn("fs.chunks"),
+  users: getCollectionFn("users"),
+  properties: getCollectionFn("properties"),
+  images: getCollectionFn("images"),
+  chunks: getCollectionFn("chunks"),
 };
