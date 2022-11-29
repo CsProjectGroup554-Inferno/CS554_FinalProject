@@ -13,7 +13,7 @@ const Signup = () => {
       e.preventDefault();
       const { email, password, confirmPassword } = e.target.elements;
       await validate.email(email.value);
-      await validate.passwords(password.value, confirmPassword.value);
+      await validate.passwordsMatch(password.value, confirmPassword.value);
       await createUserWithEmailAndPassword(auth, email.value, password.value);
       document.getElementById("HomeBtn").click();
     } catch (error) {

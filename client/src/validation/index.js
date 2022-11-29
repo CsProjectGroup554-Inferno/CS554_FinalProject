@@ -21,7 +21,7 @@ const validatePassword = async (password) => {
   }
 };
 
-const validatePasswords = async (password, confirmPassword) => {
+const validatePasswordsMatch = async (password, confirmPassword) => {
   await validatePassword(password);
   await validatePassword(confirmPassword);
   if (password !== confirmPassword) {
@@ -32,7 +32,7 @@ const validatePasswords = async (password, confirmPassword) => {
 const validate = {
   email: validateEmail,
   password: validatePassword,
-  passwords: validatePasswords,
+  passwordsMatch: validatePasswordsMatch,
 };
 
 export default validate;

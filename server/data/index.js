@@ -1,9 +1,9 @@
 const users = require("./users");
-// const property = require("./property");
-// const images = require("./images");
+const properties = require("./properties");
+const images = require("./images");
 
 module.exports = {
   users: users,
-  //   property: property,
-  //   images: images,
+  properties: properties,
+  images: images,
 };

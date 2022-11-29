@@ -110,3 +110,43 @@ let createGridFS = async (filePath, fileName, fieldName) => {
     return newId;
   }
 };
+
+let deleteImageandChunks = async (id) => {
+  if (!id) throw "You must provide an id to search for and delete";
+  if (typeof id !== "string" || id.trim() === "") throw "Invalid id";
+  if (!ObjectId.isValid(id)) throw "Invalid id";
+  const ImagesCollection = await images();
+  const ChunksCollection = await chunks();
+  const deleteInfo = await ImagesCollection.deleteOne({ _id: ObjectId(id) });
+  if (deleteInfo.deletedCount === 0) {
+    throw `Could not delete image with id of ${id}`;
+  }
+  const deleteInfo2 = await ChunksCollection.deleteMany({ files_id: ObjectId(id) });
+  if (deleteInfo2.deletedCount === 0) {
+    throw `Could not delete chunks with id of ${id}`;
+  }
+  return true;
+};
+
+let getImageById = async (id) => {
+  if (!id) throw "You must provide an id to search for";
+  if (typeof id !== "string" || id.trim() === "") throw "Invalid id";
+  if (!ObjectId.isValid(id)) throw "Invalid id";
+  const ImagesCollection = await images();
+  const ChunksCollection = await chunks();
+  const image = await ImagesCollection.findOne({ _id: ObjectId(id) });
+  if (image === null) throw "No image with that id";
+  const chunks = await ChunksCollection.find({ files_id: ObjectId(id) }).toArray();
+  let base64 = "";
+  for (let i = 0; i < chunks.length; i++) {
+    base64 += chunks[i].data;
+  }
+  return base64;
+};
+
+module.exports = {
+  validateBase64,
+  createGridFS,
+  deleteImageandChunks,
+  getImageById,
+};
