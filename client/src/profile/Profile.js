@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthorizeContext } from "../Authorization/Authorize";
-import { auth } from "../Authorization/FirebaseConfig";
+// import { auth } from "../Authorization/FirebaseConfig";
 import { useState, useEffect } from "react";
 import serverRequest from "../serverRequest";
 

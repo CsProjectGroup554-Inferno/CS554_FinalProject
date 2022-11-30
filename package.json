@@ -1,0 +1,21 @@
+{
+  "name": "final",
+  "version": "1.0.0",
+  "description": "final for CS554",
+  "main": "index.js",
+  "scripts": {
+    "seed": "npm run seed --prefix server",
+    "server": "npm start --prefix server",
+    "client": "npm start --prefix client",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "client-install": "cd client && npm install",
+    "server-install": "cd server && npm install",
+    "install-all": "concurrently \"npm run server-install\" \"npm run client-install\""
+  },
+  "author": "Team Inferno",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^5.2.0"
+  }
+}

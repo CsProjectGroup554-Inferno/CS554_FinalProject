@@ -3,6 +3,10 @@ const properties = mongoCollections.properties;
 const validate = require("../validation/validate");
 const { ObjectId } = require("mongodb");
 
+let getAllProperty = async()=>{
+
+;}
+
 let getPropertyById = async (id) => {
   validate.checkString(id);
   const propertyCollection = await properties();
@@ -47,7 +51,18 @@ let addPropertyToDB = async (property, userId) => {
   return propertyData;
 };
 
+let updateProperty = async(id, propertyUpdateInfo)=>{
+
+};
+
+let deleteProperty = async(id, ownerId)=>{
+
+};
+
 module.exports = {
+  getAllProperty,
   getPropertyById,
   addPropertyToDB,
+  updateProperty,
+  deleteProperty
 };
