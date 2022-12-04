@@ -3,6 +3,7 @@ import { AuthorizeContext } from "../Authorization/Authorize";
 // import { auth } from "../Authorization/FirebaseConfig";
 import { useState, useEffect } from "react";
 import serverRequest from "../serverRequest";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useContext(AuthorizeContext);
@@ -32,6 +33,11 @@ const Profile = () => {
               <div className="card-body">
                 {/* button for favorites */}
                 <button className="btn btn-primary">Favorites</button>
+              </div>
+              <div>
+                <Link className="card-body" to="/profile/property/add">
+                  <button className="btn btn-primary">Add Property</button>
+                </Link>
               </div>
             </div>
           </div>

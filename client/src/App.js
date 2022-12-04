@@ -7,8 +7,9 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Profile from "./profile/Profile";
 import ProtectedRoutes from "./Authorization/ProtectedRoutes";
-import Home from "./components/Home"
-import Property from "./components/Property"
+import Home from "./components/Home";
+import Property from "./components/Property";
+import AddProperty from "./profile/AddProperty";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/property/add" element={<AddProperty />} />
           </Route>
         </Routes>
       </Router>
