@@ -12,8 +12,8 @@ const Header = () => {
           <Link className="navbar-brand" to="/">
             NJ Rental
           </Link>
-          <Link className='navbar-link' to='/property'>
-            Property
+          <Link className="navbar-link" to="/properties">
+            Properties
           </Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>

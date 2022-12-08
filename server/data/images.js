@@ -8,7 +8,7 @@ const imagemin = require("imagemin");
 const imageminMozjpeg = require("imagemin-mozjpeg");
 const imageminPngquant = require("imagemin-pngquant");
 const resizeImg = require("resize-img");
-const ImageSize = require("image-size");
+const sizeOf = require("image-size");
 const fileType = require("file-type");
 const md5 = require("md5");
 
@@ -52,17 +52,15 @@ let splitBase64ToChunks = async (base64) => {
 let createGridFS = async (filePath, fileName, fieldName) => {
   if (validateImage(filePath)) {
     let RawImageData = fs.readFileSync(filePath);
-    let dimentions = ImageSize(RawImageData);
-    let width = dimentions.width;
-    let height = dimentions.height;
-    // resize image to a max width of 1280px
-    if (width > 1280) {
-      RawImageData = await resizeImg(RawImageData, { width: 1280 });
-    }
-    // resize image to a max height of 720px
-    if (height > 720) {
-      RawImageData = await resizeImg(RawImageData, { height: 720 });
-    }
+    let dimensions = sizeOf(RawImageData);
+    let width = dimensions.width;
+    let height = dimensions.height;
+    // if (dimensions.width > 1280) {
+    //   // RawImageData = await resizeImg(RawImageData, { width: 1280 });
+    // }
+    // if (height > 720) {
+    //   RawImageData = await resizeImg(RawImageData, { height: 720 });
+    // }
     // compress image
     const buffer = await imagemin.buffer(RawImageData, {
       plugins: [imageminMozjpeg({ quality: 80 }), imageminPngquant({ quality: [0.6, 0.8] })],
@@ -93,12 +91,12 @@ let createGridFS = async (filePath, fileName, fieldName) => {
       throw "Could not add image";
     }
     const newId = insertInfo.insertedId;
-    let chunks = await splitBase64ToChunks(base64);
-    for (let i = 0; i < chunks.length; i++) {
+    let chunksSplit = await splitBase64ToChunks(base64);
+    for (let i = 0; i < chunksSplit.length; i++) {
       let newChunks = {
         files_id: newId,
         n: i,
-        data: chunks[i],
+        data: chunksSplit[i],
       };
       const insertInfo = await ChunksCollection.insertOne(newChunks);
       if (insertInfo.aknowledged === false) {
@@ -136,10 +134,10 @@ let getImageById = async (id) => {
   const ChunksCollection = await chunks();
   const image = await ImagesCollection.findOne({ _id: ObjectId(id) });
   if (image === null) throw "No image with that id";
-  const chunks = await ChunksCollection.find({ files_id: ObjectId(id) }).toArray();
+  const chunksData = await ChunksCollection.find({ files_id: ObjectId(id) }).toArray();
   let base64 = "";
-  for (let i = 0; i < chunks.length; i++) {
-    base64 += chunks[i].data;
+  for (let i = 0; i < chunksData.length; i++) {
+    base64 += chunksData[i].data;
   }
   return base64;
 };

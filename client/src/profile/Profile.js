@@ -1,48 +1,132 @@
-import { useContext } from "react";
+import { createRef, useContext } from "react";
 import { AuthorizeContext } from "../Authorization/Authorize";
 // import { auth } from "../Authorization/FirebaseConfig";
 import { useState, useEffect } from "react";
 import serverRequest from "../serverRequest";
-import { Link } from "react-router-dom";
+import { Link, Routes, Route } from "react-router-dom";
+import ProtectedRoutes from "../Authorization/ProtectedRoutes";
+import MyProperty from "./MyProperty";
+import AddProperty from "./AddProperty";
+import EditProperty from "./EditProperty";
+import Favorites from "./Favorites";
 
 const Profile = () => {
   const { user } = useContext(AuthorizeContext);
   const [userData, setUserData] = useState(null);
+  const closeChangePasswordModal = createRef();
   useEffect(() => {
     if (user) {
-      serverRequest.getUserById(user.uid).then((data) => {
+      let getData = async () => {
+        let data = await serverRequest.getUserById(user.uid);
         setUserData(data);
-      });
+        console.log(data);
+      };
+      getData();
     }
   }, [user]);
+
+  let handleChangePassword = async (e) => {
+    e.preventDefault();
+    closeChangePasswordModal.current.click();
+    let { oldPassword, newPassword, confirmPassword } = e.target.elements;
+    try {
+      await serverRequest.changePassword(oldPassword.value, newPassword.value, confirmPassword.value);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   return (
     <>
-      <div className="container">
-        <div className="row">
-          {/* profile card */}
-          <div className="col-md-4">
-            <div className="card">
-              <div className="card-body">
-                <h5 className="card-title">Profile</h5>
-                <p className="card-text">email: {userData?.email}</p>
+      <main style={{ margin: "50px 100px" }}>
+        <section className="">
+          <div className="container">
+            <div className="row justify-content-center"></div>
+            <div className="col-lg-3 col-md-4 col-6">
+              {userData?.email ? (
+                <div className=" mt-4">
+                  <p>
+                    <i className=""></i>
+                    {userData.email}
+                  </p>
+                </div>
+              ) : null}
+              <div>
+                <Link className="" to="/profile">
+                  <button className="btn my-3 w-100 btn-secondary">My property</button>
+                </Link>
               </div>
-              <div className="card-body">
-                {/* button for properties */}
-                <button className="btn btn-primary">Properties</button>
-              </div>
-              <div className="card-body">
-                {/* button for favorites */}
-                <button className="btn btn-primary">Favorites</button>
+              <div>
+                <Link className="" to="/profile/favorites">
+                  <button className="btn my-3 w-100 btn-secondary">My favorites</button>
+                </Link>
               </div>
               <div>
                 <Link className="card-body" to="/profile/property/add">
                   <button className="btn btn-primary">Add Property</button>
                 </Link>
               </div>
+              {user.providerData[0].providerId === "password" ? (
+                <div>
+                  <button className="btn my-3 w-100 btn-secondary" data-bs-toggle="modal" data-bs-target="#change-password-modal">
+                    Change password
+                  </button>
+                </div>
+              ) : null}
+            </div>
+            <div className="col-lg-9 col-12 pl-4">
+              <Routes>
+                <Route element={<ProtectedRoutes />}>
+                  <Route path="/profile" element={<MyProperty />} />
+                  <Route path="/profile/property/add" element={<AddProperty />} />
+                  <Route path="/profile/favorites" element={<Favorites />} />
+                  <Route path="/profile/property/:id" element={<EditProperty />} />
+                </Route>
+              </Routes>
             </div>
           </div>
-        </div>
-      </div>
+          {/* bootstrap modal to change password */}
+          {user.providerData[0].providerId === "password" && (
+            <div className="modal fade" id="change-password-modal" tabIndex="-1" role="dialog" aria-labelledby="modal-change-password" aria-hidden="true">
+              <div className="modal-dialog modal-dialog-centered" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h2 className="modal-title" id="modal-change-password">
+                      Change Password
+                    </h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+
+                  <form onSubmit={handleChangePassword}>
+                    <div className="modal-body">
+                      <div className="form-group">
+                        <label htmlFor="oldPassword">Old password</label>
+                        <input type="password" className="form-control" id="oldPassword" name="oldPassword" />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="newPassword">New password</label>
+                        <input className="form-control" id="newPassword" name="newPassword" type="password" />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="confirmPassword">Confirm password</label>
+                        <input className="form-control" id="confirmPassword" name="confirmPassword" type="password" />
+                      </div>
+                    </div>
+                    <div className="modal-footer">
+                      <button type="submit" className="btn btn-primary">
+                        Update
+                      </button>
+                      <button type="button" ref={closeChangePasswordModal} className="btn btn-link ml-auto" data-bs-dismiss="modal">
+                        Close
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          )}
+        </section>
+      </main>
     </>
   );
 };

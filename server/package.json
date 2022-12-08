@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app.js",
+    "seed": "node ./seed/index.js"
   },
   "author": "",
   "license": "MIT",
@@ -13,6 +14,7 @@
     "base64-img": "^1.0.4",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "file-type": "^16.5.4",
     "firebase-admin": "^11.3.0",
     "image-size": "^1.0.2",
     "imagemin": "^7.0.1",
