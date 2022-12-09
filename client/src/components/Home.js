@@ -42,35 +42,35 @@ const Home = () => {
         </div>
         <div className="row">
           <div className="img-column">
-            <Link to="/properties?city=Newark">
+            <Link to={"/properties?filter=Newark"}>
               <img className="circular--square" src="./img/6.jpg" alt="txt" />
               <h6 className="img-circlle-title">Newark</h6>
             </Link>
           </div>
 
           <div className="img-column">
-            <Link to="/properties?city=Hoboken">
+            <Link to="/properties?filter=Hoboken">
               <img className="circular--square" src="./img/7.jpg" alt="txt" />
               <h6 className="img-circlle-title">Hoboken</h6>
             </Link>
           </div>
 
           <div className="img-column">
-            <Link to="/properties?city=Jersey City">
+            <Link to="/properties?filter=Jersey City">
               <img className="circular--square" src="./img/8.jpg" alt="txt" />
               <h6 className="img-circlle-title">Jersey City</h6>
             </Link>
           </div>
 
           <div className="img-column">
-            <Link to="/properties?city=Paterson">
+            <Link to="/properties?filter=Paterson">
               <img className="circular--square" src="./img/9.jpg" alt="txt" />
               <h6 className="img-circlle-title">Paterson</h6>
             </Link>
           </div>
 
           <div className="img-column">
-            <Link to="/properties?city=Trenton">
+            <Link to="/properties?filter=Trenton">
               <img className="circular--square" src="./img/10.jpg" alt="txt" />
               <h6 className="img-circlle-title">Trenton</h6>
             </Link>

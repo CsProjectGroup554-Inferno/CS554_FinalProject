@@ -24,7 +24,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/profile" element={<Profile />} />
-            <Route path="/profile/property/add" element={<AddProperty />} />
+            <Route path="/profile/properties/add" element={<AddProperty />} />
           </Route>
         </Routes>
       </Router>

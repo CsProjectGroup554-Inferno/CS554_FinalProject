@@ -5,10 +5,10 @@ import { useState, useEffect } from "react";
 import serverRequest from "../serverRequest";
 import { Link, Routes, Route } from "react-router-dom";
 import ProtectedRoutes from "../Authorization/ProtectedRoutes";
-import MyProperty from "./MyProperty";
+// import MyProperty from "./MyProperty";
 import AddProperty from "./AddProperty";
-import EditProperty from "./EditProperty";
-import Favorites from "./Favorites";
+// import EditProperty from "./EditProperty";
+// import Favorites from "./Favorites";
 
 const Profile = () => {
   const { user } = useContext(AuthorizeContext);
@@ -62,7 +62,7 @@ const Profile = () => {
                 </Link>
               </div>
               <div>
-                <Link className="card-body" to="/profile/property/add">
+                <Link className="card-body" to="/profile/properties/add">
                   <button className="btn btn-primary">Add Property</button>
                 </Link>
               </div>
@@ -77,10 +77,10 @@ const Profile = () => {
             <div className="col-lg-9 col-12 pl-4">
               <Routes>
                 <Route element={<ProtectedRoutes />}>
-                  <Route path="/profile" element={<MyProperty />} />
-                  <Route path="/profile/property/add" element={<AddProperty />} />
-                  <Route path="/profile/favorites" element={<Favorites />} />
-                  <Route path="/profile/property/:id" element={<EditProperty />} />
+                  {/* <Route path="/profile" element={<MyProperty />} /> */}
+                  <Route path="/profile/properties/add" element={<AddProperty />} />
+                  {/* <Route path="/profile/favorites" element={<Favorites />} /> */}
+                  {/* <Route path="/profile/properties/:id" element={<EditProperty />} /> */}
                 </Route>
               </Routes>
             </div>

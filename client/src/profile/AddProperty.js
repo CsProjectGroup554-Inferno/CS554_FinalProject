@@ -1,9 +1,9 @@
-import { AuthorizeContext } from "../Authorization/Authorize";
-import { useContext } from "react";
+// import { AuthorizeContext } from "../Authorization/Authorize";
+// import { useContext } from "react";
 import ReactTooltip from "react-tooltip";
 
 const AddProperty = () => {
-  const { user } = useContext(AuthorizeContext);
+  // const { user } = useContext(AuthorizeContext);
   //console.log(user)
 
   // const addProperty = async (event) => {
