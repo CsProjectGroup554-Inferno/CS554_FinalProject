@@ -4,18 +4,29 @@ const users = data.users;
 const properties = data.properties;
 const images = data.images;
 
-let addDataToDatabase = async (property, user) => {
+// drop database
+let dropDatabase = async () => {
+  try {
+    const db = dbConnection.connectToDb();
+    await db.dropDatabase();
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+dropDatabase();
+
+let addDataToDatabase = async (property, user, albumName, sampleImages) => {
   try {
     const db = dbConnection.connectToDb();
     // sampleImages = ["1.png", "2.png", "3.png", "4.png"];
-    sampleImages = ["1.png"];
     let imageList = [];
     for (let i = 0; i < sampleImages.length; i++) {
-      imageList.push(await images.createGridFS("./public/property_2/" + sampleImages[i], "property_2", sampleImages[i]));
+      imageList.push(await images.createGridFS("./public/" + albumName + "/" + sampleImages[i], albumName, sampleImages[i]));
     }
     property.images = imageList;
-    users.addUserToDB(user);
     let newProperty = await properties.addPropertyToDB(property, user.uid);
+    console.log(newProperty);
   } catch (e) {
     console.log(e);
   }
@@ -64,7 +75,6 @@ let property3 = {
   images: [],
 };
 
-
 let property4 = {
   title: "16th St, Jersey City, NJ 07310 - 1 BR 1 BA Condo",
   description: "Large residences equipped with 10' High Ceilings, sound insulating glass, centralized heating and cooling, European White Oak Flooring, Washer and Dryer.",
@@ -77,8 +87,6 @@ let property4 = {
   zipcode: "07310",
   images: [],
 };
-
-
 
 let property5 = {
   title: "16th St, Jersey City, NJ 07310 - 1 BR 1 BA Condo",
@@ -106,11 +114,29 @@ let property6 = {
   images: [],
 };
 
-addDataToDatabase(property1, user1);
-addDataToDatabase(property2, user1);
-addDataToDatabase(property3, user1);
-addDataToDatabase(property4, user1);
-addDataToDatabase(property5, user1);
-addDataToDatabase(property6, user1);
+// add user1 to database
+try {
+  users.addUserToDB(user1);
+} catch (e) {
+  console.log(e);
+}
 
+// add property to database for user1
+addDataToDatabase(property1, user1, "property_1", ["1.png", "2.png", "3.png", "4.png"]);
+addDataToDatabase(property2, user1, "property_2", ["1.png"]);
 
+let user2 = {
+  uid: "m9NbN9HPVGNKQnIVLUMWv1P6DL14",
+  email: "staremp2@gmail.com",
+};
+
+// add user2 to database
+try {
+  users.addUserToDB(user2);
+} catch (e) {
+  console.log(e);
+}
+
+// add property to database for user2
+// addDataToDatabase(property3, user2, "property_3", ["1.png", "2.png", "3.png", "4.png"]);
+// so on, but make sure the images that we are about add are in public folder
