@@ -48,13 +48,13 @@ router.delete("/:id", authorizeuser, async (req, res) => {
 
 router.get('/', async (req, res) => {
   // let allSave = ""
-  // let page = 1;
+  let page = 1;
   let sort;
   let filter;
   try {
-    // if (req.query.page) {
-    //   validate.checkPage(req.query.page);
-    // }
+    if (req.query.page) {
+      validate.checkPage(req.query.page);
+    }
 
     if (req.query.sort && req.query.sort !== "null") {
       sort = req.query.sort;
@@ -74,13 +74,13 @@ router.get('/', async (req, res) => {
 
   let propData;
   try {
-    propData = await propertiesData.getAllProperty(filter, sort);
+    propData = await propertiesData.getAllProperty(req.query.page,filter, sort);
     console.log(propData)
     
-    for (let i = 0; i < propData.length; i++) {
-      propData[i].imageData = [];
-      for (let j = 0; j < propData[i].images.length; j++) {
-        propData[i].imageData.push(await imageData.getImageById(propData[i].images[j].toString()))
+    for (let i = 0; i < propData.properties.length; i++) {
+      propData.properties[i].imageData = [];
+      for (let j = 0; j < propData.properties[i].images.length; j++) {
+        propData.properties[i].imageData.push(await imageData.getImageById(propData.properties[i].images[j].toString()))
       }
     }
     res.json(propData);

@@ -38,24 +38,32 @@ let getUser = async (user) => {
   }
 };
 
-let getAllProperty = async (filter, sort) => {
-  // if (!page) {
-  //   page = 1;
-  // }
+let getAllProperty = async (page,filter, sort) => {
+  if (!page) {
+    page = 1;
+  }
 
   let response;
 
-  if (filter !== "null" && sort !== "null") {
-    response = await axios.get(BASE_URL + "/properties/?filter=" + filter + "&sort=" + sort);
-  } else if ((filter !== "null" && sort === "null") || (filter !== "null" && !sort)) {
-    response = await axios.get(BASE_URL + "/properties/?filter=" + filter);
-  } else if ((filter === "null" && sort !== "null") || (sort !== "null" && !filter)) {
-    response = await axios.get(BASE_URL + "/properties/?sort=" + sort)
-  } else {
-    response = await axios.get(BASE_URL + "/properties")
+  if(filter === "null" || filter === undefined){
+    filter = ""
   }
 
-  // console.log(response)
+  if(sort === "null" || sort === undefined){
+    sort = ""
+  }
+
+  if (filter !== "" && sort !== "") {
+    response = await axios.get(BASE_URL + "/properties/?page=" + page + "&filter=" + filter + "&sort=" + sort);
+  } else if ((filter !== "" && sort === "") || (filter !== "" && !sort)) {
+    response = await axios.get(BASE_URL + "/properties/?page=" + page +"&filter=" + filter);
+  } else if ((filter === "" && sort !== "") || (sort !== "" && !filter)) {
+    response = await axios.get(BASE_URL + "/properties/?page" + page + "&sort=" + sort)
+  } else {
+    response = await axios.get(BASE_URL + "/properties/?page=" + page)
+  }
+
+  console.log(response)
   return response.data;
 };
 

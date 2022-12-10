@@ -8,30 +8,28 @@ const Property = (props) => {
 
 	const [propertyData, setPropertyData] = useState([]);
 	const [allDBData, setProperty] = useState([]);
-
-	// const [pageData, setPageData] = useState({});
+	const [pageData, setPageData] = useState({});
 	const [loading, setLoading] = useState(true);
 	// const alert = useRef(useAlert());
 	const urlParams = new URLSearchParams(window.location.search);
-	// let page = urlParams.get('page') || 1;
+	let page = urlParams.get('page') || 1;
 	let filter = urlParams.get('filter') || "null";
 	let sort = urlParams.get('sort') || "null";
 	let div = null;
 	let d = null;
-	// let pagination = null;
+	let pagination = null;
 
 	useEffect(
 		() => {
 			async function fetchData() {
 				try {
 					setLoading(true);
-					const un = await serverRequest.getAllProperty("", "")
-					const allDBData = await getUnique(un, 'city');
-					const propData = await serverRequest.getAllProperty(filter, sort);
-					// console.log(propData)
-					setPropertyData(propData);
+					const un = await serverRequest.getAllProperty(1,"", "")
+					const allDBData = await getUnique(un.properties, 'city');
+					const propData = await serverRequest.getAllProperty(page,filter, sort);
+					setPropertyData(propData.properties);
 					setProperty(allDBData);
-					// setPageData({next: propData.next, prev: propData.prev});
+					setPageData({next: propData.next, prev: propData.prev});
 					setLoading(false);
 				} catch (e) {
 					// alert.current.error(e.message)
@@ -53,7 +51,7 @@ const Property = (props) => {
 			};
 			fetchData();
 		},
-		[props, filter, sort]
+		[props, filter, sort, page]
 	);
 
 	div = propertyData && propertyData.map((property) => {
@@ -110,59 +108,59 @@ const Property = (props) => {
 		)
 	});
 
-	// const buildPagination = (pageData) => {
-	// 	let prev = null
-	// 	let curr = null
-	// 	let next = null
-	// 	const currentPageNumber = parseInt(page)
-	// 	const prevPageNumber = currentPageNumber - 1
-	// 	const nextPageNumber = currentPageNumber + 1
+	const buildPagination = (pageData) => {
+		let prev = null
+		let curr = null
+		let next = null
+		const currentPageNumber = parseInt(page)
+		const prevPageNumber = currentPageNumber - 1
+		const nextPageNumber = currentPageNumber + 1
 
-	// 	if (pageData.prev) {
-	// 		prev = (
-	// 			<li className="page-item">
-	// 				<Link to={"?page=" + prevPageNumber} className="page-link">
-	// 					<i className="fa fa-angle-left"></i>
-	// 					<span className="sr-only">Previous page</span>
-	// 				</Link>
-	// 			</li> )
-	// 	}
+		if (pageData.prev) {
+			prev = (
+				<li className="page-item">
+					<a href={"?page=" + prevPageNumber} className="page-link">
+						<i className="fa fa-angle-left"></i>
+						<span className="sr-only">Previous page</span>
+					</a>
+				</li> )
+		}
 
-	// 	if (pageData.next) {
-	// 		next = (
-	// 			<li className="page-item">
-	// 				<Link to={"?page=" + nextPageNumber} className="page-link">
-	// 					<i className="fa fa-angle-right"></i>
-	// 					<span className="sr-only">Next page</span>
-	// 				</Link>
-	// 			</li> )
-	// 	}
+		if (pageData.next) {
+			next = (
+				<li className="page-item">
+					<a href={"?page=" + nextPageNumber} className="page-link">
+						<i className="fa fa-angle-right"></i>
+						<span className="sr-only">Next page</span>
+					</a>
+				</li> )
+		}
 
-	// 	if (pageData.next || pageData.prev) {
-	// 		curr = (
-	// 			<li className="page-item {{@active}}">
-	// 				<Link to={"?page=" + page} className="page-link" aria-label={"go to page " + currentPageNumber}>
-	// 					{currentPageNumber}
-	// 				</Link>
-	// 			</li>)
-	// 	}
+		if (pageData.next || pageData.prev) {
+			curr = (
+				<li className="page-item {{@active}}">
+					<Link to={"?page=" + page} className="page-link" aria-label={"go to page " + currentPageNumber}>
+						{currentPageNumber}
+					</Link>
+				</li>)
+		}
 
-	// 	if (pageData.next || pageData.prev) {
-	// 		return (
-	// 			<nav>
-	// 				<ul className="pagination justify-content-center">
-	// 					{prev}
-	// 					{curr}
-	// 					{next}
-	// 				</ul>
-	// 			</nav>
-	// 		)
-	// 	}
-	// }
+		if (pageData.next || pageData.prev) {
+			return (
+				<nav>
+					<ul className="pagination justify-content-center">
+						{prev}
+						{curr}
+						{next}
+					</ul>
+				</nav>
+			)
+		}
+	}
 
-	// if (pageData) {
-	// 	pagination = buildPagination(pageData)
-	// }
+	if (pageData) {
+		pagination = buildPagination(pageData)
+	}
 
 	if (loading) {
 		return (
@@ -206,9 +204,9 @@ const Property = (props) => {
 							</Dropdown.Toggle>
 
 							<Dropdown.Menu className="dropdown-menu">
-								<Dropdown.Item href={"?filter=price1&sort=" + sort}>$ 0 - 1000</Dropdown.Item>
-								<Dropdown.Item href={"?filter=price2&sort=" + sort}>$ 1000 - 2000</Dropdown.Item>
-								<Dropdown.Item href={"?filter=price3&sort=" + sort}>$ 2000 +</Dropdown.Item>
+								<Dropdown.Item href={"?page="+1+"&filter=price1&sort=" + sort}>$ 0 - 1000</Dropdown.Item>
+								<Dropdown.Item href={"?page="+1+"&filter=price2&sort=" + sort}>$ 1000 - 2000</Dropdown.Item>
+								<Dropdown.Item href={"?page="+1+"&filter=price3&sort=" + sort}>$ 2000 +</Dropdown.Item>
 							</Dropdown.Menu>
 						</Dropdown>
 
@@ -223,10 +221,10 @@ const Property = (props) => {
 							</Dropdown.Toggle>
 
 							<Dropdown.Menu className="dropdown-menu">
-								<Dropdown.Item href={"?filter=1&sort=" + sort}>1 Bed</Dropdown.Item>
-								<Dropdown.Item href={"?filter=2&sort=" + sort}>2 Bed</Dropdown.Item>
-								<Dropdown.Item href={"?filter=3&sort=" + sort}>3 Bed</Dropdown.Item>
-								<Dropdown.Item href={"?filter=4&sort=" + sort}>4 Bed</Dropdown.Item>
+								<Dropdown.Item href={"?page="+1+"&filter=1&sort=" + sort}>1 Bed</Dropdown.Item>
+								<Dropdown.Item href={"?page="+1+"&filter=2&sort=" + sort}>2 Bed</Dropdown.Item>
+								<Dropdown.Item href={"?page="+1+"&filter=3&sort=" + sort}>3 Bed</Dropdown.Item>
+								<Dropdown.Item href={"?page="+1+"&filter=4&sort=" + sort}>4 Bed</Dropdown.Item>
 							</Dropdown.Menu>
 						</Dropdown>
 					</div>
@@ -241,9 +239,9 @@ const Property = (props) => {
 							</Dropdown.Toggle>
 
 							<Dropdown.Menu className="dropdown-menu">
-								<Dropdown.Item href={"?filter=size1&sort=" + sort}>$ 0 - 1000</Dropdown.Item>
-								<Dropdown.Item href={"?filter=size2&sort=" + sort}>$ 1000 - 2000</Dropdown.Item>
-								<Dropdown.Item href={"?filter=size3&sort=" + sort}>$ 2000 +</Dropdown.Item>
+								<Dropdown.Item href={"?page="+1+"&filter=size1&sort=" + sort}>$ 0 - 1000</Dropdown.Item>
+								<Dropdown.Item href={"?page="+1+"&filter=size2&sort=" + sort}>$ 1000 - 2000</Dropdown.Item>
+								<Dropdown.Item href={"?page="+1+"&filter=size3&sort=" + sort}>$ 2000 +</Dropdown.Item>
 							</Dropdown.Menu>
 						</Dropdown>
 					</div>
@@ -258,8 +256,8 @@ const Property = (props) => {
 							</Dropdown.Toggle>
 
 							<Dropdown.Menu className="dropdown-menu">
-								<Dropdown.Item href={"?&filter=" + filter + "&sort=priceUp"}>Low to High</Dropdown.Item>
-								<Dropdown.Item href={"?filter=" + filter + "&sort=priceDown"}>High to Low</Dropdown.Item>
+								<Dropdown.Item href={"?page="+1+"&filter=" + filter + "&sort=priceUp"}>Low to High</Dropdown.Item>
+								<Dropdown.Item href={"?page="+1+"&filter=" + filter + "&sort=priceDown"}>High to Low</Dropdown.Item>
 							</Dropdown.Menu>
 						</Dropdown>
 
@@ -268,12 +266,12 @@ const Property = (props) => {
 
 				<div className="filter-column-reset">
 					<button className="btn btn-default filter-dropdown ">
-						<a href='/properties' className='a-btn'>Reset</a>
+						<a href='/properties/page=1' className='a-btn'>Reset</a>
 					</button>
 				</div>
 			</div>
 			{div}
-			{/* {pagination} */}
+			{pagination}
 		</main >
 	);
 };

@@ -5,7 +5,7 @@ const validate = require("../validation/validate");
 const { ObjectId } = require("mongodb");
 // const xss = require("xss");
 
-let getAllProperty = async (filter, sort) => {
+let getAllProperty = async (page,filter, sort) => {
   try {
     // validate.checkPage(page);
     //sort
@@ -17,8 +17,9 @@ let getAllProperty = async (filter, sort) => {
       sort = {};
     }
 
-    console.log(filter)
+    console.log(page, filter)
     //filter
+    validate.checkPage(page)
     const propertyCollection = await properties();
     const propertyCity = await propertyCollection.findOne({ "city": filter });
     console.log(propertyCity)
@@ -50,37 +51,37 @@ let getAllProperty = async (filter, sort) => {
 
     console.log(filter)
     //get propert after filter and sort
-    const allProperty = await propertyCollection.find(filter).sort(sort).toArray();
-    console.log(allProperty)
+    var allProperty = await propertyCollection.find(filter).sort(sort).toArray();
     if (!allProperty) {
       throw "Property not found in data base";
     }
+    let take = 1;
 
-    // let data = {
-    //   properties: null,
-    //   next: false,
-    //   prev: false,
-    // }
+    let data = {
+      properties: null,
+      next: false,
+      prev: false,
+    }
 
-    // if (allProperty.length - page * take > 0) {
-    //   data.next = true
-    // }
+    if (allProperty.length - page * take > 0) {
+      data.next = true
+    }
 
-    // if (allProperty.length > take && page > 1) {
-    //   data.prev = true
-    // }
+    if (allProperty.length > take && page > 1) {
+      data.prev = true
+    }
 
-    // allProperty = allProperty.slice((page - 1) * take);
-    // allProperty = allProperty.slice(0, take);
-    // data.properties = allProperty
+    allProperty = allProperty.slice((page - 1) * take);
+    allProperty = allProperty.slice(0, take);
 
     // convert all _id to string
     for (let i = 0; i < allProperty.length; i++) {
       allProperty[i]._id = allProperty[i]._id.toString();
     }
+    data.properties = allProperty
 
-    // console.log(data)
-    return allProperty;
+    console.log(data)
+    return data;
   } catch (e) {
     throw e;
   }

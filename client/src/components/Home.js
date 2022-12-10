@@ -1,6 +1,6 @@
-// import { useContext } from "react";
+import { useContext } from "react";
 // import { Link } from "react-router-dom";
-// import { AuthorizeContext } from "../Authorization/Authorize";
+import { AuthorizeContext } from "../Authorization/Authorize";
 // import { auth } from "../Authorization/FirebaseConfig";
 // import { Helmet } from 'react-helmet-async';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -8,7 +8,7 @@ import { Carousel } from "react-responsive-carousel";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  // const { user } = useContext(AuthorizeContext);
+  const { user } = useContext(AuthorizeContext);
   return (
     <>
       <section className="home-section1">
@@ -78,29 +78,6 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="home-section2">
-        <div className="gallery">
-          <figure className="gallery__item gallery__item--1">
-            <img src="./img/14.jpg" className="gallery__img" alt="Image 1" />
-          </figure>
-          <figure className="gallery__item gallery__item--2">
-            <img src="./img/15.jpg" className="gallery__img" alt="Image 2" />
-          </figure>
-          <figure className="gallery__item gallery__item--3">
-            <img src="./img/16.jpg" className="gallery__img" alt="Image 3" />
-          </figure>
-          <figure className="gallery__item gallery__item--4">
-            <img src="./img/17.jpg" className="gallery__img" alt="Image 4" />
-          </figure>
-          <figure className="gallery__item gallery__item--5">
-            <img src="./img/18.jpg" className="gallery__img" alt="Image 5" />
-          </figure>
-          <figure className="gallery__item gallery__item--6">
-            <img src="./img/19.jpg" className="gallery__img" alt="Image 6" />
-          </figure>
-        </div>
-      </section>
-
       <section className="home-section3">
         <div className="row">
           <div className="column-2">
@@ -128,8 +105,33 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section><br /><br /></>
-    
+      </section><br /><br />
+
+      <section className="home-section2">
+        <div className="gallery">
+          <figure className="gallery__item gallery__item--1">
+            <img src="./img/14.jpg" className="gallery__img" alt="txt" />
+          </figure>
+          <figure className="gallery__item gallery__item--2">
+            <img src="./img/15.jpg" className="gallery__img" alt="txt" />
+          </figure>
+          <figure className="gallery__item gallery__item--3">
+            <img src="./img/16.jpg" className="gallery__img" alt="txt" />
+          </figure>
+          <figure className="gallery__item gallery__item--4">
+            <img src="./img/17.jpg" className="gallery__img" alt="txt" />
+          </figure>
+          <figure className="gallery__item gallery__item--5">
+            <img src="./img/18.jpg" className="gallery__img" alt="txt" />
+          </figure>
+          <figure className="gallery__item gallery__item--6">
+            <img src="./img/19.jpg" className="gallery__img" alt="txt" />
+          </figure>
+        </div>
+      </section></>
+
+
+
   );
 };
 

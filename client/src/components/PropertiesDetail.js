@@ -1,10 +1,6 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import serverRequest from '../serverRequest'
 import { Link } from 'react-router-dom';
-// import { AuthorizeContext } from "../Authorization/Authorize";
-// import { useAlert } from 'react-alert'
-// import { Helmet } from 'react-helmet-async'
-// import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import { Carousel } from 'react-responsive-carousel';
 import { BiBed, BiUserCircle } from 'react-icons/bi';
@@ -15,13 +11,12 @@ import { MdLocationCity, MdMyLocation } from 'react-icons/md'
 
 const PropertiesDetail = (props) => {
     const [propertyData, setPropertyData] = useState([]);
-    const [ /*isWatchlist,*/ setIsWatchlist] = useState();
+    // const [ /*isWatchlist,*/ setIsWatchlist] = useState();
     const [loading, setLoading] = useState(true);
     // const { currentUser } = useContext(AuthorizeContext);
     // const alert = useRef(useAlert());
     var id = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
-    const [photoIndex, setPhotoIndex] = useState(0);
-    const [isOpen, setIsOpen] = useState(false);
+
 
     useEffect(
         () => {
@@ -30,7 +25,6 @@ const PropertiesDetail = (props) => {
                     setLoading(true);
                     const property = await serverRequest.getPropertyById(id)
                     console.log(property)
-                    resPropertyData = property;
                     setPropertyData(property);
                     setLoading(false);
                 } catch (e) {
@@ -38,24 +32,23 @@ const PropertiesDetail = (props) => {
                     // alert.current.error(e.message)
                 }
             }
-            let resPropertyData = null
             fetchData();
         },
-        [props/*, currentUser*/]
+        [props, id /*currentUser*/]
     );
 
     const div = (property) => {
         return (
             property.images.map((item, index) => (
                 <div key={index} >
-                    <img src={item} />
+                    <img src={item} alt="txt" />
                 </div>
             ))
         );
     };
 
     const li = (property) => {
-        let price, zipcode, address, city, bedrooms, bathrooms, owner, phone;
+        let price, zipcode, address, city, bedrooms, bathrooms, owner;
         if (property.price) {
             price = (
                 <>
@@ -141,22 +134,68 @@ const PropertiesDetail = (props) => {
 
     return (
         <main>
+
             <section className='property-detail-title'>
-                <h1>{propertyData.title}</h1>
-                <div className='row'>
-                    <div className='column carousal'>
-                        <Carousel >
-                            {div(propertyData)}
-                        </Carousel>
-                    </div>
-                    <div className='column detail-data'>
-                        {li(propertyData)}
-                    </div>
+                <div className='carousal'>
+                    <Carousel >
+                        {div(propertyData)}
+                    </Carousel>
                 </div>
-                <div className='my-3 description'>
-					<h2>Description</h2>
-					<p>{(propertyData && propertyData.description) || 'Not Provided'}</p>
-				</div>
+                <div id="container">
+
+                    <div class="product-details">
+
+                        <h1>{propertyData.title}</h1>
+
+                        <p class="information">{propertyData.description}</p>
+
+                        <br /><br />
+
+                        <div class="control">
+
+                            <button class="btn">
+                                <span>Contact owner</span>
+                            </button>
+
+                            <button class="btn">
+                                <span>Add to favourite</span>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="product-image">
+
+                        <img src={propertyData.images[0]} alt="" />
+                        <div className='column carousal'>
+                            <Carousel >
+                                {div(propertyData)}
+                            </Carousel>
+                        </div>
+
+                        <div class="info">
+                            <h2>Details</h2>
+                            <ul>
+                                <li><strong><BsCurrencyDollar />
+                                </strong>{propertyData.price} </li>
+                                <li><strong><BiBed />
+                                </strong>{propertyData.bedrooms}</li>
+                                <li><strong><GiBathtub />
+                                </strong> {propertyData.bathrooms}</li>
+                                <li><strong><MdMyLocation />
+                                </strong> {propertyData.address}</li>
+                                <li><strong><MdLocationCity />
+                                </strong>{propertyData.city} </li>
+                                <li><strong><GoLocation />
+                                </strong> {propertyData.zipcode}</li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
             </section>
         </main>
     );
