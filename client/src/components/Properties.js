@@ -3,6 +3,7 @@ import serverRequest from "../serverRequest";
 import { Link } from 'react-router-dom';
 // import { useAlert } from 'react-alert'
 import { Dropdown } from 'react-bootstrap';
+
 const Property = (props) => {
 
 	const [propertyData, setPropertyData] = useState([]);
@@ -27,7 +28,7 @@ const Property = (props) => {
 					const un = await serverRequest.getAllProperty("", "")
 					const allDBData = await getUnique(un, 'city');
 					const propData = await serverRequest.getAllProperty(filter, sort);
-					console.log(propData)
+					// console.log(propData)
 					setPropertyData(propData);
 					setProperty(allDBData);
 					// setPageData({next: propData.next, prev: propData.prev});
@@ -51,8 +52,6 @@ const Property = (props) => {
 				return unique;
 			};
 			fetchData();
-
-			
 		},
 		[props, filter, sort]
 	);
@@ -65,7 +64,7 @@ const Property = (props) => {
 				<div className="box">
 					<Link to={'/properties/' + property._id}>
 						<div className="top">
-							<img src="./img/1.jpg" alt="" />
+							<img src={property.imageData[0]} alt="" />
 							<span><i className="fas fa-heart"></i><i className="fas fa-exchange-alt"></i></span>
 						</div>
 					</Link>

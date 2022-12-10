@@ -9,6 +9,7 @@ import Profile from "./profile/Profile";
 import ProtectedRoutes from "./Authorization/ProtectedRoutes";
 import Home from "./components/Home";
 import Properties from "./components/Properties";
+import PropertiesDetail from "./components/PropertiesDetail";
 import AddProperty from "./profile/AddProperty";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/properties" element={<Properties />} />
+          <Route path="/properties/:id" element={<PropertiesDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route element={<ProtectedRoutes />}>

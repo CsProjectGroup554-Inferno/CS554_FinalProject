@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+body {
+  background-color: #000 !important;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -76,17 +80,18 @@ li a:hover {
 
 .home-section1 {
   text-align: center;
-  background-color: rgb(11, 105, 105);
+  background-color: #000;
 }
 
 .home-section2 {
   text-align: center;
-  background-color: rgb(34, 71, 71);
+  padding: 20px;
+  background-color: #000;
 }
 
 .home-section3 {
   text-align: center;
-  background-color: rgb(11, 105, 105);
+  background-color: #000;
 }
 
 .home-h1 {
@@ -113,7 +118,7 @@ li a:hover {
 }
 
 .column {
-  background-color: rgb(11, 105, 105);
+  background-color: #000;
   float: left;
   width: 50% !important;
   height: 650px;
@@ -133,7 +138,7 @@ li a:hover {
 }
 
 .img-column {
-  background-color: rgb(11, 105, 105);
+  background-color: #000;
   float: left;
   width: 20% !important;
   height: 320px;
@@ -178,6 +183,10 @@ li a:hover {
 
 .img-circlle-title {
   text-align: center;
+  font-style: none;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: larger;
+  color: #e8e8e8;
 }
 
 .floating {
@@ -235,7 +244,7 @@ li a:hover {
   border-radius: 0.25rem;
   background-color: #fff;
   background-clip: border-box;
-  margin: 30px;
+  margin: 40px;
 }
 
 .shadow,
@@ -251,9 +260,7 @@ li a:hover {
   border: 0 !important;
 }
 
-.bg-default {
-  background-color: #172b4d !important;
-}
+
 
 .card .card-blockquote {
   position: relative;
@@ -298,10 +305,10 @@ blockquote {
   padding: 10px;
 }
 
-.filter-column-reset{
+.filter-column-reset {
   float: left;
   width: 16.667% !important;
-  padding: 10px 45px 10px 10px!important;
+  padding: 10px 45px 10px 10px !important;
 
 }
 
@@ -310,7 +317,8 @@ blockquote {
 
 }
 
-.filter-dropdown, .a-btn {
+.filter-dropdown,
+.a-btn {
   background-color: #172b4d !important;
   color: #e8e8e8 !important;
   width: 100%;
@@ -341,11 +349,14 @@ blockquote {
 }
 
 main {
-  background-color: rgb(11, 105, 105);
+  background-color: #000;
 }
 
 .bg-default {
-  background-color: #ebe4e4 !important;
+  background-color: transparent !important;
+  border: 2px solid white !important;
+  box-shadow: 20px 20px grey;
+  margin-bottom: 50px !important;
 }
 
 .container-prop {
@@ -358,8 +369,11 @@ main {
 .container-prop .box {
   width: 50%;
   margin-left: 25%;
-  background-color: white;
+  background-color: transparent;
   position: relative;
+  border: 3px solid grey;
+  box-shadow: 20px 20px grey;
+  border-radius: 10px;
 }
 
 
@@ -423,6 +437,8 @@ main {
 .container-prop .box .bottom {
   padding: 20px 15px;
   position: relative;
+  color: #e8e8e8;
+  font-size: large;
 }
 
 .container-prop .box:not(:last-of-type) .bottom:before {
@@ -439,17 +455,22 @@ main {
 
 .container-prop .box .bottom h3 {
   font-size: 15px;
+  color: #e8e8e8;
+  font-size: x-large;
 }
 
 .container-prop .box .bottom>p {
   margin: 15px 0;
   font-size: 13px;
   line-height: 1.4;
-  color: #777;
+  color: #e8e8e8;
+  font-size: large;
 }
 
 .container-prop .box .bottom .advants {
   display: flex;
+  color: #e8e8e8;
+  font-weight: 300;
 }
 
 .container-prop .box .bottom .advants>div {
@@ -458,7 +479,8 @@ main {
 
 .container-prop .box .bottom .advants>div>span {
   font-weight: bold;
-  font-size: 12px;
+  font-size: 15px;
+   color: #e8e8e8;
 }
 
 .container-prop .box .bottom .advants>div>div {
@@ -490,7 +512,7 @@ main {
 
 .container-prop .box .bottom .price span:first-of-type {
   display: block;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: bold;
   margin-bottom: 5px;
 }
@@ -505,4 +527,78 @@ main {
   color: #e8e8e8 !important;
   width: 100%;
   margin: 20px;
+}
+
+.property-detail-title{
+  font-size: x-large;
+  color: #e8e8e8;
+  text-align: center;
+}
+
+.carousal{
+  padding: 20px;
+  width: 50%;
+}
+
+.detail-data{
+  color: #e8e8e8;
+  padding: 10%;
+  font-size: xx-large;
+
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 5vw);
+  grid-gap: 15px;
+}
+
+.gallery__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery__item--1 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.gallery__item--2 {
+  grid-column-start: 3;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.gallery__item--3 {
+  grid-column-start: 5;
+  grid-column-end: 7;
+  grid-row-start: 1;
+  grid-row-end: 4;
+  
+}
+
+.gallery__item--4 {
+  grid-column-start: 7;
+  grid-column-end: 9;
+  grid-row-start: 1;
+  grid-row-end: 4;
+}
+
+.gallery__item--5 {
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 3;
+  grid-row-end: 9;
+}
+
+.gallery__item--6 {
+  grid-column-start: 5;
+  grid-column-end: 9;
+  grid-row-start: 4;
+  grid-row-end: 9;
 }

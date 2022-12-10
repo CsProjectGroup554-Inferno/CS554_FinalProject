@@ -104,7 +104,9 @@ let getAllProperty = async (filter, sort) => {
 let getPropertyById = async (id) => {
   // validate.checkString(id);
   const propertyCollection = await properties();
-  const property = await propertyCollection.findOne({ _id: id });
+  console.log(id)
+  const property = await propertyCollection.findOne({ _id: ObjectId(id) });
+  console.log(property)
   if (!property) throw "Property not found for this id";
   property._id = property._id.toString();
   return property;

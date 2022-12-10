@@ -79,35 +79,32 @@ const Home = () => {
       </section>
 
       <section className="home-section2">
-        <div className="row">
-          <div className="column-1">
-            <h1 className="home-h1">Renting in New Jersey made easy</h1>
-            <p className="home-p-1">
-              Select from major cities accross New Jersey and find the perfect place to rent. Check out all the amemnnities in and arround the place that suits your idea of a perfect place. NJRental
-              makes finding home easy with:{" "}
-            </p>
-            <ul className="home-list">
-              <li>
-                <h3 className="home-h3-2">Filtering properties</h3>
-              </li>
-              <li>
-                <h3 className="home-h3-2">Contact owners directly</h3>
-              </li>
-              <li>
-                <h3 className="home-h3-2">Save your favorite property</h3>
-              </li>
-            </ul>
-          </div>
-          <div className="column-1">
-            <img src="./img/11.jpg" className="img-fluid floating" alt="an apartment" />
-          </div>
+        <div className="gallery">
+          <figure className="gallery__item gallery__item--1">
+            <img src="./img/14.jpg" className="gallery__img" alt="Image 1" />
+          </figure>
+          <figure className="gallery__item gallery__item--2">
+            <img src="./img/15.jpg" className="gallery__img" alt="Image 2" />
+          </figure>
+          <figure className="gallery__item gallery__item--3">
+            <img src="./img/16.jpg" className="gallery__img" alt="Image 3" />
+          </figure>
+          <figure className="gallery__item gallery__item--4">
+            <img src="./img/17.jpg" className="gallery__img" alt="Image 4" />
+          </figure>
+          <figure className="gallery__item gallery__item--5">
+            <img src="./img/18.jpg" className="gallery__img" alt="Image 5" />
+          </figure>
+          <figure className="gallery__item gallery__item--6">
+            <img src="./img/19.jpg" className="gallery__img" alt="Image 6" />
+          </figure>
         </div>
       </section>
 
       <section className="home-section3">
         <div className="row">
           <div className="column-2">
-            <div className="card bg-default shadow border-0">
+            <div className="card bg-default">
               <img src="./img/12.jpg" className="card-img-top" alt="community" />
               <blockquote className="card-blockquote">
                 <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" className="svg-bg">
@@ -119,7 +116,7 @@ const Home = () => {
             </div>
           </div>
           <div className="column-2">
-            <div className="card bg-default shadow border-0">
+            <div className="card bg-default">
               <img src="./img/13.jpg" className="card-img-top" alt="community" />
               <blockquote className="card-blockquote">
                 <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" className="svg-bg">
@@ -131,8 +128,8 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
-    </>
+      </section><br /><br /></>
+    
   );
 };
 
