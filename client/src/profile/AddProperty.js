@@ -95,6 +95,8 @@ const AddProperty = (props) => {
       </div>
     </>
   );
+
+
   const addProperty = async (event) => {
     setLoading(true);
     event.preventDefault();
@@ -137,7 +139,7 @@ const AddProperty = (props) => {
 
       setLoading(false);
       //alert.current.success("post sucessfully");
-      props.history.push("/account");
+      props.history.push("/profile");
     } catch (error) {
       setLoading(false);
       //alert.current.error(error.message);
@@ -157,7 +159,6 @@ const AddProperty = (props) => {
     <div>
       <title>Create property </title>
       <h1>Post Property</h1>
-      {/* <form onSubmit={addProperty}> */}
       <form onSubmit={addProperty}>
         <div className="row">
           <div className="col-md-12">
