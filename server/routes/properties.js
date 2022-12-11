@@ -143,6 +143,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', authorizeuser, async (req, res) => {
   let propertyInfo = req.body;
   let owner = res.locals.userUid;
+  console.log(owner)
 
   let imagesInfo = propertyInfo.images;
   propertyInfo.images = []

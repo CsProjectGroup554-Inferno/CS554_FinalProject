@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "seed": "node ./seed/index.js"
+    "seed": "node ./seed/index.js",
+    "server": "nodemon app.js"
   },
   "author": "",
   "license": "MIT",
@@ -25,5 +26,8 @@
     "node-fetch": "^2.6.1",
     "redis": "^4.5.0",
     "resize-img": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
