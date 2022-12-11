@@ -96,7 +96,6 @@ const AddProperty = (props) => {
     </>
   );
 
-
   const addProperty = async (event) => {
     setLoading(true);
     event.preventDefault();
@@ -106,10 +105,13 @@ const AddProperty = (props) => {
     let data = {
       title: eventInfo.title.value,
       description: eventInfo.description.value,
+      city: eventInfo.city.value,
+      price: eventInfo.price.value,
       bedrooms: eventInfo.bedrooms.value,
       bathrooms: eventInfo.bathrooms.value,
-      price: eventInfo.price.value,
+      size: eventInfo.size.value,
       zipcode: eventInfo.zipcode.value,
+      address: eventInfo.address.value,
       //type: eventInfo.type.value,
     };
 
