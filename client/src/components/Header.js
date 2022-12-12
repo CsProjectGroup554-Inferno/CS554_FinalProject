@@ -33,6 +33,9 @@ const Header = () => {
                   <NavDropdown.Item>
                     <Link to="/profile">Profile</Link>
                   </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <Link to="/chat">Message</Link>
+                  </NavDropdown.Item>
 
                   <NavDropdown.Item>
                     <Link to="/" onClick={() => auth.signOut()}>
