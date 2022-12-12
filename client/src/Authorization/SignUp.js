@@ -27,7 +27,7 @@ const Signup = () => {
 
   return (
     <>
-      <div className="loginContainer">
+      <div className="loginContainer mt-5">
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="email">Email address</label>

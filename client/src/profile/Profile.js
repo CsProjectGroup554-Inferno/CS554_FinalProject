@@ -3,12 +3,7 @@ import { AuthorizeContext } from "../Authorization/Authorize";
 // import { auth } from "../Authorization/FirebaseConfig";
 import { useState, useEffect } from "react";
 import serverRequest from "../serverRequest";
-import { Link, Routes, Route } from "react-router-dom";
-import ProtectedRoutes from "../Authorization/ProtectedRoutes";
-// import MyProperty from "./MyProperty";
-import AddProperty from "./AddProperty";
-// import EditProperty from "./EditProperty";
-// import Favorites from "./Favorites";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useContext(AuthorizeContext);
@@ -38,95 +33,89 @@ const Profile = () => {
 
   return (
     <>
-      <main style={{ margin: "50px 100px" }}>
-        <section className="">
-          <div className="container">
-            <div className="row justify-content-center"></div>
-            <div className="col-lg-3 col-md-4 col-6">
-              {userData?.email ? (
-                <div className=" mt-4">
-                  <p>
-                    <i className=""></i>
-                    {userData.email}
-                  </p>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-3">
+            {userData?.email ? (
+              <div className=" mt-4">
+                <p>
+                  <i className=""></i>
+                  {userData.email}
+                </p>
+              </div>
+            ) : null}
+            <div>
+              <Link className="" to="/profile/myProperties">
+                <button className="btn my-3 btn-secondary" style={{ width: "150px" }}>
+                  My property
+                </button>
+              </Link>
+            </div>
+            <div>
+              <Link className="" to="/profile/favorites">
+                <button className="btn my-3 btn-secondary" style={{ width: "150px" }}>
+                  My favorites
+                </button>
+              </Link>
+            </div>
+            <div>
+              <Link className="card-body" to="/profile/properties/add">
+                <button className="btn my-3 btn-secondary" style={{ width: "150px" }}>
+                  Add Property
+                </button>
+              </Link>
+            </div>
+            {user.providerData[0].providerId === "password" ? (
+              <div>
+                <button className="btn my-3 w-100 btn-secondary" data-bs-toggle="modal" data-bs-target="#change-password-modal">
+                  Change password
+                </button>
+              </div>
+            ) : null}
+          </div>
+          <div className="col-md-9"></div>
+        </div>
+      </div>
+      {/* bootstrap modal to change password */}
+      {user.providerData[0].providerId === "password" && (
+        <div className="modal fade" id="change-password-modal" tabIndex="-1" role="dialog" aria-labelledby="modal-change-password" aria-hidden="true">
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h2 className="modal-title" id="modal-change-password">
+                  Change Password
+                </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <form onSubmit={handleChangePassword}>
+                <div className="modal-body">
+                  <div className="form-group">
+                    <label htmlFor="oldPassword">Old password</label>
+                    <input type="password" className="form-control" id="oldPassword" name="oldPassword" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="newPassword">New password</label>
+                    <input className="form-control" id="newPassword" name="newPassword" type="password" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="confirmPassword">Confirm password</label>
+                    <input className="form-control" id="confirmPassword" name="confirmPassword" type="password" />
+                  </div>
                 </div>
-              ) : null}
-              <div>
-                <Link className="" to="/profile">
-                  <button className="btn my-3 w-100 btn-secondary">My property</button>
-                </Link>
-              </div>
-              <div>
-                <Link className="" to="/profile/favorites">
-                  <button className="btn my-3 w-100 btn-secondary">My favorites</button>
-                </Link>
-              </div>
-              <div>
-                <Link className="card-body" to="/profile/properties/add">
-                  <button className="btn btn-primary">Add Property</button>
-                </Link>
-              </div>
-              {user.providerData[0].providerId === "password" ? (
-                <div>
-                  <button className="btn my-3 w-100 btn-secondary" data-bs-toggle="modal" data-bs-target="#change-password-modal">
-                    Change password
+                <div className="modal-footer">
+                  <button type="submit" className="btn btn-primary">
+                    Update
+                  </button>
+                  <button type="button" ref={closeChangePasswordModal} className="btn btn-link ml-auto" data-bs-dismiss="modal">
+                    Close
                   </button>
                 </div>
-              ) : null}
-            </div>
-            <div className="col-lg-9 col-12 pl-4">
-              <Routes>
-                <Route element={<ProtectedRoutes />}>
-                  {/* <Route path="/profile" element={<MyProperty />} /> */}
-                  <Route path="/profile/properties/add" element={<AddProperty />} />
-                  {/* <Route path="/profile/favorites" element={<Favorites />} /> */}
-                  {/* <Route path="/profile/properties/:id" element={<EditProperty />} /> */}
-                </Route>
-              </Routes>
+              </form>
             </div>
           </div>
-          {/* bootstrap modal to change password */}
-          {user.providerData[0].providerId === "password" && (
-            <div className="modal fade" id="change-password-modal" tabIndex="-1" role="dialog" aria-labelledby="modal-change-password" aria-hidden="true">
-              <div className="modal-dialog modal-dialog-centered" role="document">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h2 className="modal-title" id="modal-change-password">
-                      Change Password
-                    </h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-
-                  <form onSubmit={handleChangePassword}>
-                    <div className="modal-body">
-                      <div className="form-group">
-                        <label htmlFor="oldPassword">Old password</label>
-                        <input type="password" className="form-control" id="oldPassword" name="oldPassword" />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="newPassword">New password</label>
-                        <input className="form-control" id="newPassword" name="newPassword" type="password" />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="confirmPassword">Confirm password</label>
-                        <input className="form-control" id="confirmPassword" name="confirmPassword" type="password" />
-                      </div>
-                    </div>
-                    <div className="modal-footer">
-                      <button type="submit" className="btn btn-primary">
-                        Update
-                      </button>
-                      <button type="button" ref={closeChangePasswordModal} className="btn btn-link ml-auto" data-bs-dismiss="modal">
-                        Close
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          )}
-        </section>
-      </main>
+        </div>
+      )}
     </>
   );
 };

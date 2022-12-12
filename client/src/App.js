@@ -11,6 +11,7 @@ import Home from "./components/Home";
 import Properties from "./components/Properties";
 import PropertiesDetail from "./components/PropertiesDetail";
 import AddProperty from "./profile/AddProperty";
+import Favorites from "./profile/Favorites";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route element={<ProtectedRoutes />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/properties/add" element={<AddProperty />} />
+            <Route path="/profile/favorites" element={<Favorites />} />
           </Route>
         </Routes>
       </Router>
