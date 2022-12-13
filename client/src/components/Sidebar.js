@@ -3,7 +3,7 @@ import React from "react";
 const Sidebar = (props) => {
   const userList = props.connectedUsers;
 
-  console.log("In sidebar userlist:", userList);
+  // console.log("In sidebar userlist:", userList);
 
   let selectedUser = "";
 

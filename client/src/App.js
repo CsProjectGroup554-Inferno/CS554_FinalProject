@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
+import { useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthorizeProvider } from "./Authorization/Authorize";
 import { AuthorizeContext } from "./Authorization/Authorize";
+import serverRequest from "./serverRequest";
 import Header from "./components/Header";
 import Chat from "./components/Chat";
 import Login from "./Authorization/Login";
@@ -16,41 +18,19 @@ import PropertiesDetail from "./components/PropertiesDetail";
 import AddProperty from "./profile/AddProperty";
 import Favorites from "./profile/Favorites";
 import socket from "./socket";
+import Csocket from "./components/Csocket";
 
 function App() {
-  const { user } = useState(AuthorizeContext);
+
+  const [userData, setUserData] = useState(null);
   const [userName, setUserName] = useState("");
   const [usersList, addUsers] = useState([]);
-  const [messages, setMessages] = useState([]);
-  
 
-  const getUsername = (fetched_userName) => {
-    setUserName(fetched_userName);
-
-    socket.auth = { fetched_userName };
-    socket.connect();
-  };
-
-  socket.on("users", (users) => {
-    users.forEach((user) => {
-      user.self = user.userID === socket.id;
-    });
-    users = users.sort((a, b) => {
-      if (a.self) return -1;
-      if (b.self) return 1;
-      if (a.username < b.username) return -1;
-      return a.username > b.username ? 1 : 0;
-    });
-    addUsers(users);
-  });
-
-  socket.on("user connected", (user) => {
-    addUsers([...usersList, user]);
-  });
   return (
     <AuthorizeProvider>
       <Router>
         <Header />
+        {/* <Csocket/> */}
         <div style={{ height: "70px" }}></div> {/*This is to push the content down so it doesn't overlap the header */}
         <Routes>
           <Route path="/" element={<Home />} />

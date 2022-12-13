@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color: #000 !important;
+  background-color: rgb(53, 5, 165) !important;
   color: white !important;
 }
 
@@ -787,4 +787,100 @@ main {
 
 .dropdown-menu a a {
   color: #000 !important;
+}
+
+.login-form {
+  width: 40vw;
+  font-size: 50px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  text-align: center;
+}
+
+.login-container {
+  text-align: center;
+  margin-top: 40vh;
+}
+
+.user-na {
+  outline: 2px solid red;
+}
+
+input:focus {
+  outline: none;
+}
+.chat-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 70vw;
+  height: 80vh;
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 20px;
+  box-shadow: 5px 5px rgb(185, 185, 185);
+  display: inline-flex;
+}
+
+.user-card {
+  width: 100%;
+  height: 2rem;
+  border: 2px solid rgb(240, 240, 240);
+  margin: 10px;
+  padding: 15px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.user-list-el {
+  text-align: center;
+  width: 100%;
+  padding: 15px;
+  margin-left: 10px;
+  border: 1px solid rgb(243, 242, 242);
+  cursor: pointer;
+}
+
+.user-list-el:hover {
+  background-color: #c7b7fe;
+  color: white;
+}
+
+.chat-window {
+  width: 750px;
+  margin-top: 10px;
+  margin-left: 4rem;
+}
+
+.user-name-card {
+  height: 50px;
+  text-align: center;
+  color: red;
+  border: 1px solid white;
+}
+
+.message-container {
+  border: 1px white solid;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 400px;
+}
+
+.chat-text-area {
+  padding: 10px;
+  width: 96.8%;
+}
+
+.no-render-message {
+  margin: 0 auto;
+  margin-top: 30%;
+}
+
+.message-ribbon {
+  width: 100%;
+  text-align: center;
+  border: 1px solid white;
 }
