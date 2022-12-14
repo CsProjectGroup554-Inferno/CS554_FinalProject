@@ -125,6 +125,7 @@ const Chat = (props) => {
   };
 
   return (
+    
     <div className="chat-container">
      
       <div>
@@ -132,10 +133,13 @@ const Chat = (props) => {
        <div className="user-card">{userData.email}</div> 
       ): null}
         <div className="user-list"></div>
+        {userData?.email ? (
         <Sidebar
           connectedUsers={usersList}
+          username ={userData.email}
           selectUser={getSelectedUser}
         />
+        ): null}
       </div>
       {userSelected ? (
         <div>
