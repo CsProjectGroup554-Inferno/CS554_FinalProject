@@ -8,11 +8,17 @@ const userData = data.users;
 const propertiesData = data.properties;
 const validate = require("../validation/validate");
 
-router.get("/:id", authorizeuser, async (req, res) => {
+router.get("/favorites", authorizeuser, async (req, res) => {
   try {
-    const userId = req.params.id;
+    const userId = req.user.uid;
     const user = await userData.getUserById(userId);
-    res.json(user);
+    let favoritesList = await userData.getFavoritesList(userId);
+    let favorites = [];
+    for (const element of favoritesList) {
+      let favorite = await propertiesData.getPropertyById(element);
+      favorites.push(favorite);
+    }
+    res.json(favorites).status(200);
   } catch (e) {
     res.status(500).json({ error: e });
   }
@@ -35,6 +41,58 @@ router.get("/", authorizeuser, async (req, res) => {
       favorites.push(favorite);
     }
     res.json({ properties, favorites, email });
+  } catch (e) {
+    res.status(500).json({ error: e });
+  }
+});
+
+router.post("/favorites", authorizeuser, async (req, res) => {
+  try {
+    const userId = req.user.uid;
+    const propertyId = req.body.propertyId;
+    const user = await userData.getUserById(userId);
+    const property = await propertiesData.getPropertyById(propertyId);
+    if (!property) {
+      res.status(404).json({ error: "Property not found" });
+      return;
+    }
+    if (user.favorites.includes(propertyId)) {
+      res.status(400).json({ error: "Property already in favorites" });
+      return;
+    }
+    await userData.addFavorite(userId, propertyId);
+    res.json({ message: "Property added to favorites" });
+  } catch (e) {
+    res.status(500).json({ error: e });
+  }
+});
+
+router.get("/:id", authorizeuser, async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await userData.getUserById(userId);
+    res.json(user);
+  } catch (e) {
+    res.status(500).json({ error: e });
+  }
+});
+
+router.delete("/favorites", authorizeuser, async (req, res) => {
+  try {
+    const userId = req.user.uid;
+    const propertyId = req.body.propertyId;
+    const user = await userData.getUserById(userId);
+    const property = await propertiesData.getPropertyById(propertyId);
+    if (!property) {
+      res.status(404).json({ error: "Property not found" });
+      return;
+    }
+    if (!user.favorites.includes(propertyId)) {
+      res.status(400).json({ error: "Property not in favorites" });
+      return;
+    }
+    await userData.removeFavorite(userId, propertyId);
+    res.json({ message: "Property removed from favorites" });
   } catch (e) {
     res.status(500).json({ error: e });
   }

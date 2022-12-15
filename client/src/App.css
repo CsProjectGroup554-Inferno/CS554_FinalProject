@@ -3,8 +3,14 @@
 }
 
 body {
-  background-color: rgb(53, 5, 165) !important;
+  background-color: black !important;
   color: white !important;
+}
+
+.modal-content {
+  background-color: #000 !important;
+  color: white !important;
+  border: white solid 1px !important;
 }
 
 .App-logo {
@@ -883,4 +889,18 @@ input:focus {
   width: 100%;
   text-align: center;
   border: 1px solid white;
+}
+
+.favoriteCard {
+  width: 100%;
+  border: 1px solid white;
+  padding: 15px;
+  overflow: hidden;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+}
+.favoriteCard:hover {
+  background-color: #3c3a43;
+  color: white;
 }

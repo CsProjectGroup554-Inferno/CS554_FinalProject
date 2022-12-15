@@ -46,28 +46,28 @@ const Profile = () => {
             ) : null}
             <div>
               <Link className="" to="/profile/myProperties">
-                <button className="btn my-3 btn-secondary" style={{ width: "150px" }}>
+                <button className="btn my-3 btn-secondary" style={{ width: "180px" }}>
                   My property
                 </button>
               </Link>
             </div>
             <div>
               <Link className="" to="/profile/favorites">
-                <button className="btn my-3 btn-secondary" style={{ width: "150px" }}>
+                <button className="btn my-3 btn-secondary" style={{ width: "180px" }}>
                   My favorites
                 </button>
               </Link>
             </div>
             <div>
               <Link className="card-body" to="/profile/properties/add">
-                <button className="btn my-3 btn-secondary" style={{ width: "150px" }}>
+                <button className="btn my-3 btn-secondary" style={{ width: "180px" }}>
                   Add Property
                 </button>
               </Link>
             </div>
             {user.providerData[0].providerId === "password" ? (
               <div>
-                <button className="btn my-3 w-100 btn-secondary" data-bs-toggle="modal" data-bs-target="#change-password-modal">
+                <button className="btn my-3 btn-secondary" style={{ width: "180px" }} data-bs-toggle="modal" data-bs-target="#change-password-modal">
                   Change password
                 </button>
               </div>
