@@ -1,6 +1,6 @@
 {
   "mongoConfig": {
-    "serverUrl": "mongodb://localhost:27017/",
+    "serverUrl": "mongodb+srv://harsha5205:Harsha123@cluster0.pfiwwyu.mongodb.net/test",
     "database": "NJRental"
   }
 }
