@@ -20,4 +20,5 @@ module.exports = {
   properties: getCollectionFn("properties"),
   images: getCollectionFn("images"),
   chunks: getCollectionFn("chunks"),
+  message: getCollectionFn("message"),
 };
