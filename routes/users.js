@@ -10,6 +10,19 @@ const userData = data.users;
 const propertiesData = data.properties;
 const validate = require("../validation/validate");
 
+router.get("/allusers/:id", authorizeuser, async (req, res) => {
+  try {
+    const user = await userData.getalluser(req.params.id);
+    
+    
+    return res.json(user);
+  } catch (e) {
+    res.status(500).json({ error: e });
+  }
+
+
+});
+
 router.get("/favorites", authorizeuser, async (req, res) => {
   try {
     const userId = req.user.uid;

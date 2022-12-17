@@ -9,6 +9,17 @@ let getUserById = async (id) => {
   return user;
 };
 
+let getalluser = async (id) => {
+  const userCollection = await users();
+  const userlist = await userCollection.find({}).toArray();
+  for (let i = 0; i < userlist.length; i++) {
+
+    userlist[i]._id = userlist[i]._id.toString();
+  }
+ 
+  return userlist;
+};
+
 let addUserToDB = async (user) => {
   validate.checkString(user.uid);
   validate.checkString(user.email);
@@ -70,6 +81,7 @@ let removeFavorite = async (id, propertyId) => {
 module.exports = {
   getUserById,
   addUserToDB,
+  getalluser,
   getFavoritesList,
   addFavorite,
   removeFavorite,
