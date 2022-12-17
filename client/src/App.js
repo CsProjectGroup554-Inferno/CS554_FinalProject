@@ -19,6 +19,8 @@ import AddProperty from "./profile/AddProperty";
 import Favorites from "./profile/Favorites";
 import socket from "./socket";
 import Csocket from "./components/Csocket";
+import MyProperty from "./profile/MyProperty";
+
 
 function App() {
 
@@ -43,6 +45,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/properties/add" element={<AddProperty />} />
             <Route path="/profile/favorites" element={<Favorites />} />
+            <Route path='/profile/myProperties' element = {<MyProperty/>} />
           </Route>
         </Routes>
       </Router>

@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { Helmet } from "react-helmet-async";
 
-const Property = (props) => {
-  const { currentUser } = useContext(AuthorizeContext);
+const MyProperty = (props) => {
+  const { user } = useContext(AuthorizeContext);
   const [propertyData, setPropertyData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -16,7 +16,7 @@ const Property = (props) => {
     async function fetchData() {
       try {
         setLoading(true);
-        const { data: resData } = await serverRequest.getUser(currentUser);
+        const { data: resData } = await serverRequest.getUser(user);
         setPropertyData(resData.property);
         setLoading(false);
       } catch (e) {
@@ -24,14 +24,14 @@ const Property = (props) => {
       }
     }
     fetchData();
-  }, [currentUser]);
+  }, [user]);
 
   const handleDelete = async (event) => {
     event.preventDefault();
     let propertyId = event.target.getAttribute("data-property");
     try {
-      await serverRequest.deleteProperty(propertyId, currentUser);
-      const { data: resData } = await serverRequest.getUser(currentUser);
+      await serverRequest.deleteProperty(propertyId, user);
+      const { data: resData } = await serverRequest.getUser(user);
       setPropertyData(resData.property);
       alert.success("deleted");
     } catch (e) {
@@ -121,7 +121,7 @@ const Property = (props) => {
   return (
     <>
       <Helmet>
-        <title>My property - RentSIT</title>
+        <title>My property - NJ Rental</title>
       </Helmet>
       <div className="row property-card property-add mb-3">
         <Link className="align-self-center d-flex align-items-center justify-content-center" to="/account/property/add">
@@ -138,4 +138,4 @@ const Property = (props) => {
   );
 };
 
-export default Property;
+export default MyProperty;
