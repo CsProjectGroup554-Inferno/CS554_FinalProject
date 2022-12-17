@@ -55,12 +55,12 @@ let createGridFS = async (filePath, fileName, fieldName) => {
     let dimensions = sizeOf(RawImageData);
     let width = dimensions.width;
     let height = dimensions.height;
-    // if (dimensions.width > 1280) {
-    //   // RawImageData = await resizeImg(RawImageData, { width: 1280 });
-    // }
-    // if (height > 720) {
-    //   RawImageData = await resizeImg(RawImageData, { height: 720 });
-    // }
+    if (dimensions.width > 1280) {
+      RawImageData = await resizeImg(RawImageData, { width: 1280 });
+    }
+    if (height > 720) {
+      RawImageData = await resizeImg(RawImageData, { height: 720 });
+    }
     // compress image
     const buffer = await imagemin.buffer(RawImageData, {
       plugins: [imageminMozjpeg({ quality: 80 }), imageminPngquant({ quality: [0.6, 0.8] })],
