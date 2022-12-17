@@ -3,6 +3,16 @@ import { auth, emailProvider } from "./Authorization/FirebaseConfig";
 import validate from "./validation";
 const BASE_URL = "http://localhost:4000";
 
+let getmessages = async () => {
+  const token = await auth.currentUser.getIdToken();
+  let response = await axios.get(BASE_URL + "/messages/getmsg" , {
+    headers: {
+      Authorization: token,
+    },
+  });
+  return response.data;
+};
+
 let getUserById = async (id) => {
   const token = await auth.currentUser.getIdToken();
   let response = await axios.get(BASE_URL + "/users/" + id, {
@@ -10,6 +20,18 @@ let getUserById = async (id) => {
       Authorization: token,
     },
   });
+  return response.data;
+};
+
+let getallUser= async (id) => {
+  const token = await auth.currentUser.getIdToken();
+  
+  let response = await axios.get(BASE_URL + "/users/allusers/" + id, {
+    headers: {
+      Authorization: token,
+    },
+  });
+  // console.log("x9"+token)
   return response.data;
 };
 
