@@ -15,7 +15,6 @@ const Csocket = () => {
                 let data = await serverRequest.getUserById(user.uid);
                 setUserData(data);
                 console.log(data);
-                console.log("hhhhhh")
                 const dd = data.email;
                 socket.auth = { dd };
             };

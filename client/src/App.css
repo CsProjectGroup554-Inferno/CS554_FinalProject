@@ -818,12 +818,12 @@ input:focus {
 }
 .chat-container {
   position: absolute;
-  top: 0;
+  top: 0px;
   bottom: 0;
   left: 0;
   right: 0;
   margin: auto;
-  width: 70vw;
+  width: 95vw;
   height: 80vh;
   border: 2px solid rgb(255, 255, 255);
   border-radius: 20px;
@@ -904,3 +904,5 @@ input:focus {
   background-color: #3c3a43;
   color: white;
 }
+
+
