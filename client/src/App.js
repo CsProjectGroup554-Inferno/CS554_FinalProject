@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthorizeProvider } from "./Authorization/Authorize";
@@ -22,9 +22,7 @@ import socket from "./socket";
 import Csocket from "./components/Csocket";
 import MyProperty from "./profile/MyProperty";
 
-
 function App() {
-
   const [userData, setUserData] = useState(null);
   const [userName, setUserName] = useState("");
   const [usersList, addUsers] = useState([]);
@@ -46,7 +44,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/properties/add" element={<AddProperty />} />
             <Route path="/profile/favorites" element={<Favorites />} />
-            <Route path='/profile/myProperties' element = {<MyProperty/>} />
+            <Route path="/profile/myProperties" element={<MyProperty />} />
           </Route>
         </Routes>
       </Router>

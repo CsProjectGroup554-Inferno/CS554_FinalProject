@@ -707,6 +707,7 @@ main {
 .btn span:hover {
   background-color: #000;
   border-radius: 8px;
+  color: #fff;
 }
 .btn .price,
 .shopping-cart {

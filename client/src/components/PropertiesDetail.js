@@ -12,10 +12,11 @@ import { useContext } from "react";
 import { AuthorizeContext } from "../Authorization/Authorize";
 
 const PropertiesDetail = (props) => {
+  const { user } = useContext(AuthorizeContext);
   const [propertyData, setPropertyData] = useState([]);
   // const [ /*isWatchlist,*/ setIsWatchlist] = useState();
   const [loading, setLoading] = useState(true);
-  const { currentUser } = useContext(AuthorizeContext);
+
   // const alert = useRef(useAlert());
   var id = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
 
@@ -33,7 +34,7 @@ const PropertiesDetail = (props) => {
       }
     }
     fetchData();
-  }, [props, id /*currentUser*/]);
+  }, [props, id, user]);
 
   let addPropertyToFavorite = async () => {
     try {
@@ -162,7 +163,7 @@ const PropertiesDetail = (props) => {
 
             <br />
             <br />
-            {currentUser ? (
+            {user ? (
               <div class="control">
                 <button class="btn">
                   <span>Contact owner</span>
@@ -172,7 +173,13 @@ const PropertiesDetail = (props) => {
                   <span>Add to favourite</span>
                 </button>
               </div>
-            ) : null}
+            ) : (
+              <Link to="/login">
+                <button class="btn">
+                  <span>Login to contact owner</span>
+                </button>
+              </Link>
+            )}
           </div>
 
           <div class="product-image">
