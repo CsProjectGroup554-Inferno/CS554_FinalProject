@@ -8,12 +8,14 @@ import { GiBathtub } from "react-icons/gi";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import { MdLocationCity, MdMyLocation } from "react-icons/md";
+import { useContext } from "react";
+import { AuthorizeContext } from "../Authorization/Authorize";
 
 const PropertiesDetail = (props) => {
   const [propertyData, setPropertyData] = useState([]);
   // const [ /*isWatchlist,*/ setIsWatchlist] = useState();
   const [loading, setLoading] = useState(true);
-  // const { currentUser } = useContext(AuthorizeContext);
+  const { currentUser } = useContext(AuthorizeContext);
   // const alert = useRef(useAlert());
   var id = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
 
@@ -160,16 +162,17 @@ const PropertiesDetail = (props) => {
 
             <br />
             <br />
+            {currentUser ? (
+              <div class="control">
+                <button class="btn">
+                  <span>Contact owner</span>
+                </button>
 
-            <div class="control">
-              <button class="btn">
-                <span>Contact owner</span>
-              </button>
-
-              <button class="btn" onClick={addPropertyToFavorite}>
-                <span>Add to favourite</span>
-              </button>
-            </div>
+                <button class="btn" onClick={addPropertyToFavorite}>
+                  <span>Add to favourite</span>
+                </button>
+              </div>
+            ) : null}
           </div>
 
           <div class="product-image">

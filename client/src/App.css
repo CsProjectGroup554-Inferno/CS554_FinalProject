@@ -703,6 +703,11 @@ main {
   font-size: 1.2em;
   margin: 0;
 }
+
+.btn span:hover {
+  background-color: #000;
+  border-radius: 8px;
+}
 .btn .price,
 .shopping-cart {
   background: #333;
@@ -904,5 +909,3 @@ input:focus {
   background-color: #3c3a43;
   color: white;
 }
-
-

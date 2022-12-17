@@ -1,11 +1,12 @@
 import axios from "axios";
 import { auth, emailProvider } from "./Authorization/FirebaseConfig";
 import validate from "./validation";
+import { updatePassword } from "firebase/auth";
 const BASE_URL = "http://localhost:4000";
 
 let getmessages = async () => {
   const token = await auth.currentUser.getIdToken();
-  let response = await axios.get(BASE_URL + "/messages/getmsg" , {
+  let response = await axios.get(BASE_URL + "/messages/getmsg", {
     headers: {
       Authorization: token,
     },
@@ -23,9 +24,9 @@ let getUserById = async (id) => {
   return response.data;
 };
 
-let getallUser= async (id) => {
+let getallUser = async (id) => {
   const token = await auth.currentUser.getIdToken();
-  
+
   let response = await axios.get(BASE_URL + "/users/allusers/" + id, {
     headers: {
       Authorization: token,
@@ -35,15 +36,12 @@ let getallUser= async (id) => {
   return response.data;
 };
 
-let changePassword = async (oldPassword, newPassword, confirmPassword) => {
+let changePassword = async (newPassword, confirmPassword) => {
   // implmentation pending
-  await validate.password(oldPassword);
   await validate.password(newPassword);
   await validate.password(confirmPassword);
   await validate.passwordsMatch(newPassword, confirmPassword);
-  let credential = emailProvider.credential(auth.currentUser.email, oldPassword);
-  await auth.currentUser.reauthenticateWithCredential(credential);
-  await auth.currentUser.updatePassword(newPassword);
+  await updatePassword(auth.currentUser, newPassword);
 };
 
 let getUser = async (user) => {
@@ -177,7 +175,7 @@ let removeFavorite = async (propertyId) => {
   let data = {
     propertyId: propertyId,
   };
-  let response = await axios.delete(BASE_URL + "/users/favorites", data, { headers: { Authorization: token } });
+  let response = await axios.post(BASE_URL + "/users/favorites/delete", data, { headers: { Authorization: token } });
   return response.data;
 };
 
@@ -194,7 +192,7 @@ let exports = {
   getFavoritesList,
   removeFavorite,
   getallUser,
-  getmessages
+  getmessages,
 };
 
 export default exports;

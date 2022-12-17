@@ -164,7 +164,7 @@ const AddProperty = (props) => {
         <div className="col-md-3">
           <Profile />
         </div>
-        <div className="col-md-9">
+        <div className="col-md-9  mt-3">
           <title>Create property </title>
           <h1>Post Property</h1>
           <form onSubmit={addProperty}>
