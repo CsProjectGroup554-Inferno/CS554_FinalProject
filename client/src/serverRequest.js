@@ -193,6 +193,8 @@ let exports = {
   addFavorite,
   getFavoritesList,
   removeFavorite,
+  getallUser,
+  getmessages
 };
 
 export default exports;

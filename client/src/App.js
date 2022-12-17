@@ -5,7 +5,8 @@ import { AuthorizeProvider } from "./Authorization/Authorize";
 import { AuthorizeContext } from "./Authorization/Authorize";
 import serverRequest from "./serverRequest";
 import Header from "./components/Header";
-import Chat from "./components/Chat";
+import Chat1 from "./components/Chat";
+import Chat from "./pages/Chat";
 import Login from "./Authorization/Login";
 import SignUp from "./Authorization/SignUp";
 import "./App.css";
@@ -33,7 +34,7 @@ function App() {
       <Router>
         <Header />
         {/* <Csocket/> */}
-        <div style={{ height: "70px" }}></div> {/*This is to push the content down so it doesn't overlap the header */}
+        <div style={{ height: "0px" }}></div> {/*This is to push the content down so it doesn't overlap the header */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/properties" element={<Properties />} />
