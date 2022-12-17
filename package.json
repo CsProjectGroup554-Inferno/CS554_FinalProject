@@ -1,21 +1,41 @@
 {
-  "name": "final",
+  "name": "server",
   "version": "1.0.0",
-  "description": "final for CS554",
-  "main": "index.js",
+  "description": "backend server for CS554 final project",
+  "main": "app.js",
   "scripts": {
-    "seed": "npm run seed --prefix server",
-    "server": "npm start --prefix server",
-    "client": "npm start --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run server\" \"npm run client\"",
-    "client-install": "cd client && npm install",
-    "server-install": "cd server && npm install",
-    "install-all": "concurrently \"npm run server-install\" \"npm run client-install\""
+    "start": "redis-server 2>&1 & node app.js",
+    "seed": "node ./seed/index.js",
+    "server": "nodemon app.js",
+    "heroku-postbuild": "cd client && npm install --legacy-peer-deps && npm install --legacy-peer-deps && npm run build"
   },
-  "author": "Team Inferno",
+  "author": "",
   "license": "MIT",
   "dependencies": {
-    "concurrently": "^5.2.0"
+    "base64-img": "^1.0.4",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "file-type": "^16.5.4",
+    "firebase-admin": "^11.3.0",
+    "image-size": "^1.0.2",
+    "imagemin": "^7.0.1",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-pngquant": "^9.0.2",
+    "md5": "^2.3.0",
+    "mongodb": "^4.12.0",
+    "node-fetch": "^2.6.1",
+    "resize-img": "^2.0.0",
+    "redis": "^4.5.0",
+    "gravatar": "1.8.0",
+    "socket.io": "3.1.2",
+    "nodemon": "^2.0.7",
+    "ejs": "2.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "engines": {
+    "node": "16.13.2"
   }
 }

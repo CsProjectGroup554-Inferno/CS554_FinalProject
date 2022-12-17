@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 const cors = require("cors");
 const http = require("http").createServer(app);
@@ -40,16 +41,19 @@ io.on("connection", (socket) => {
   });
 });
 
+app.use(express.json());
 
-app.use(express.json())
+app.use(express.static(path.join(__dirname, "client/build")));
 
 app.use(cors());
 const configRoutes = require("./routes/index");
 configRoutes(app);
 
-http.listen(4000, () => {
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+});
+
+const port = process.env.PORT || 4000;
+http.listen(port, () => {
   console.log("Listening on port 4000");
 });
-// app.listen(4000, () => {
-//   console.log("Server is running on port 4000");
-// });

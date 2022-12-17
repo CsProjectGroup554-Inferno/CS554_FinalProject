@@ -2,17 +2,15 @@ const express = require("express");
 const router = express.Router();
 const data = require("../data");
 const redis = require("redis");
-const client = redis.createClient();
+const client = redis.createClient({
+  url: process.env.REDIS_URL,
+});
 const authorizeuser = require("./authorize");
 const propertiesData = data.properties;
 const imageData = data.images;
 const userData = data.users;
 const validate = require("../validation/validate");
 const base64Img = require("base64-img");
-
-// clear redis
-client.connect();
-client.FLUSHDB();
 
 router.delete("/:id", authorizeuser, async (req, res) => {
   try {
@@ -39,11 +37,13 @@ router.delete("/:id", authorizeuser, async (req, res) => {
 
     const deletedProperty = await propertiesData.deletePropertyFromDB(req.params.id, ownerId);
 
+    await client.connect();
     // reset property redis
     await client.delAsync("property" + req.params.id);
-
+    await client.quit();
     res.json(deletedProperty);
   } catch (e) {
+    await client.quit();
     res.status(500).json({ error: e });
   }
 });
@@ -102,12 +102,14 @@ router.get("/:id", async (req, res) => {
     return;
   }
 
-  var jsonProperty = await client.get("property" + req.params.id);
-  property = JSON.parse(jsonProperty);
-
   try {
+    await client.connect();
+    var jsonProperty = await client.get("property" + req.params.id);
+    await client.quit();
+    property = JSON.parse(jsonProperty);
     property = await propertiesData.getPropertyById(req.params.id);
   } catch (e) {
+    await client.quit();
     res.status(404).json({ error: "Property not found" });
     return;
   }
@@ -115,10 +117,8 @@ router.get("/:id", async (req, res) => {
   // get images data
   try {
     let imagesIds = property.images;
-    console.log(imagesIds);
     property.images = [];
     for (let imageId of imagesIds) {
-      console.log(imageId);
       property.images.push(await imageData.getImageById(imageId.toString()));
     }
   } catch (e) {
@@ -136,7 +136,13 @@ router.get("/:id", async (req, res) => {
   }
 
   jsonProperty = JSON.stringify(property);
-  await client.set("property" + req.params.id, jsonProperty);
+  try {
+    await client.connect();
+    await client.set("property" + req.params.id, jsonProperty);
+    await client.quit();
+  } catch (e) {
+    await client.quit();
+  }
 
   res.json(property);
 });
@@ -223,10 +229,13 @@ router.put("/:id", authorizeuser, async (req, res) => {
     const property = await propertiesData.updatePropertyInDB(pid, propertyBody);
 
     // reset property redis
+    await client.connect();
     await client.delAsync("property" + pid);
+    await client.quit();
 
     res.json(property);
   } catch (e) {
+    await client.quit();
     res.status(500).json({ error: e });
   }
 });

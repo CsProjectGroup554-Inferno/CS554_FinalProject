@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const data = require("../data");
 const redis = require("redis");
-const client = redis.createClient();
+const client = redis.createClient({
+  url: process.env.REDIS_URL
+});
 const authorizeuser = require("./authorize");
 const userData = data.users;
 const propertiesData = data.properties;
