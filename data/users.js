@@ -21,7 +21,7 @@ let addUserToDB = async (user) => {
     favorites: [],
   };
   const newInsertInfo = await userCollection.insertOne(newUser);
-  if (newInsertInfo.aknowledged === false) {
+  if (newInsertInfo.acknowledged === false) {
     throw "Could not add user";
   }
   const newId = newInsertInfo.insertedId;
