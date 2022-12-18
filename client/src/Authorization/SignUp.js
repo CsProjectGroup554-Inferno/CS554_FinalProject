@@ -15,6 +15,7 @@ const Signup = () => {
       await validate.email(email.value);
       await validate.passwordsMatch(password.value, confirmPassword.value);
       await createUserWithEmailAndPassword(auth, email.value, password.value);
+      await auth.signOut();
       document.getElementById("HomeBtn").click();
     } catch (error) {
       alert(error.message);
@@ -27,7 +28,7 @@ const Signup = () => {
 
   return (
     <>
-      <div className="loginContainer">
+      <div className="loginContainer mt-5">
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="email">Email address</label>
@@ -44,8 +45,11 @@ const Signup = () => {
           <button type="submit" className="btn btn-primary">
             Sign Up
           </button>
+          <Link to="/login" className=" btn btn-primary ms-3">
+            Login
+          </Link>
         </form>
-        <Link to="/" id="HomeBtn" visibility="hidden"></Link>
+        <Link to="/login" id="HomeBtn" visibility="hidden"></Link>
       </div>
     </>
   );

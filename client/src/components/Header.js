@@ -2,54 +2,59 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthorizeContext } from "../Authorization/Authorize";
 import { auth } from "../Authorization/FirebaseConfig";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 const Header = () => {
   const { user } = useContext(AuthorizeContext);
   return (
-    <>
-      <nav style={{ height: "70px" }} className="navbar navbar-expand navbar-dark bg-dark fixed-top">
-        <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
-            NJ Rental
-          </Link>
-          <Link className='navbar-link' to='/property'>
-            Property
-          </Link>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div id="navbarText">
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-              <br />
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Container>
+        <Link to="/">
+          <Navbar.Brand>NJ Rental</Navbar.Brand>
+        </Link>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto"></Nav>
+          <Nav>
+            <NavDropdown title="Menu" id="collasible-nav-dropdown">
+              <NavDropdown.Item>
+                <Link to="/properties">Properties</Link>
+              </NavDropdown.Item>
+
               {!user ? (
-                <li>
+                <NavDropdown.Item>
                   <Link to="/login">Login</Link>
-                </li>
+                </NavDropdown.Item>
               ) : (
                 <>
-                  <li>
+                  <NavDropdown.Item>
                     <Link to="/profile">Profile</Link>
-                  </li>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <Link to="/chat">Message</Link>
+                  </NavDropdown.Item>
 
-                  <li>
+                  <NavDropdown.Item>
                     <Link to="/" onClick={() => auth.signOut()}>
                       Logout
                     </Link>
-                  </li>
+                  </NavDropdown.Item>
                 </>
               )}
-              <br />
 
               {!user && (
-                <li>
-                  <Link to="/signup">Sign Up</Link>
-                </li>
+                <NavDropdown.Item>
+                  <Link to="/signup">Sign up</Link>
+                </NavDropdown.Item>
               )}
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 

@@ -3,7 +3,7 @@ import { auth, googleProvider } from "./FirebaseConfig";
 import { AuthorizeContext } from "./Authorize";
 import validate from "../validation/index";
 import { signInWithEmailAndPassword, signInWithRedirect } from "firebase/auth";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const Login = () => {
   const { user } = useContext(AuthorizeContext);
@@ -32,7 +32,7 @@ const Login = () => {
   }
 
   return (
-    <div className="loginContainer">
+    <div className="loginContainer mt-5">
       <form onSubmit={handleLogIn}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
@@ -52,6 +52,9 @@ const Login = () => {
         <button onClick={handleLogInWithGoogle} className="btn btn-primary">
           Log In with Google
         </button>
+        <Link to="/signup" className=" ms-3 btn btn-primary">
+          Sign Up
+        </Link>
       </form>
     </div>
   );
