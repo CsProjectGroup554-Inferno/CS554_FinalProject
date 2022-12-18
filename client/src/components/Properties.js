@@ -8,12 +8,15 @@ import { GiBathtub } from "react-icons/gi";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import { MdLocationCity, MdMyLocation } from "react-icons/md";
+import { useContext } from "react";
+import { AuthorizeContext } from "../Authorization/Authorize";
 
 const Property = (props) => {
   const [propertyData, setPropertyData] = useState([]);
   const [allDBData, setProperty] = useState([]);
   const [pageData, setPageData] = useState({});
   const [loading, setLoading] = useState(true);
+  const { user } = useContext(AuthorizeContext);
   // const alert = useRef(useAlert());
   const urlParams = new URLSearchParams(window.location.search);
   let page = urlParams.get("page") || 1;
@@ -79,9 +82,11 @@ const Property = (props) => {
                 </div>
               </Link>
               <div className="bottom">
-                <span className="heart-icon" style={{ float: "right", cursor: "pointer" }} onClick={() => addPropertyToFavorite(property._id)}>
-                  <BiHeart />
-                </span>
+                {user ? (
+                  <span className="heart-icon" style={{ float: "right", cursor: "pointer" }} onClick={() => addPropertyToFavorite(property._id)}>
+                    <BiHeart />
+                  </span>
+                ) : null}
                 <h1>
                   <b>Title: </b>
                   {property.title}

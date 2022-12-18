@@ -8,13 +8,15 @@ import { GiBathtub } from "react-icons/gi";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import { MdLocationCity, MdMyLocation } from "react-icons/md";
+import { useContext } from "react";
+import { AuthorizeContext } from "../Authorization/Authorize";
 
 const PropertiesDetail = (props) => {
   const navigate = useNavigate();
   const [propertyData, setPropertyData] = useState([]);
   // const [ /*isWatchlist,*/ setIsWatchlist] = useState();
   const [loading, setLoading] = useState(true);
-  // const { currentUser } = useContext(AuthorizeContext);
+  const { user } = useContext(AuthorizeContext);
   // const alert = useRef(useAlert());
   var id = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
 
@@ -46,32 +48,24 @@ const PropertiesDetail = (props) => {
 
   let contactwithOwner = async () => {
     try {
-      console.log("owner" + JSON.stringify(propertyData.owner._id))
+      console.log("owner" + JSON.stringify(propertyData.owner._id));
 
-      
-        const id = propertyData.owner
-        let data1 = await serverRequest.getallUser(id);
-        // console.log("index" + JSON.stringify(data1))
-        let indexx = data1.findIndex(x => x._id === id);
-        console.log("index" + indexx)
-        console.log(data1)
-        // setpropertyindex(indexx)
+      const id = propertyData.owner;
+      let data1 = await serverRequest.getallUser(id);
+      // console.log("index" + JSON.stringify(data1))
+      let indexx = data1.findIndex((x) => x._id === id);
+      console.log("index" + indexx);
+      console.log(data1);
+      // setpropertyindex(indexx)
 
-        // setContacts(data1);
+      // setContacts(data1);
 
-        let data2 = {
-          data: propertyData.owner,
-          index: 0,
-  
-        }
-        localStorage.setItem(
-          process.env.CONNECT_WITH_OWNER,
-          JSON.stringify(propertyData.owner)
-        );
-        navigate("/chat");
-     
-
-     
+      let data2 = {
+        data: propertyData.owner,
+        index: 0,
+      };
+      localStorage.setItem(process.env.CONNECT_WITH_OWNER, JSON.stringify(propertyData.owner));
+      navigate("/chat");
     } catch (error) {
       console.log(error);
       alert(error.response.data.error);
@@ -184,7 +178,6 @@ const PropertiesDetail = (props) => {
   return (
     <main>
       <section className="property-detail-title">
-       
         <div id="container">
           <div class="product-details">
             <h1>{propertyData.title}</h1>
@@ -193,17 +186,25 @@ const PropertiesDetail = (props) => {
 
             <br />
             <br />
+            {user ? (
+              <div class="control">
+                <button class="btn" onClick={contactwithOwner}>
+                  <span>Contact owner</span>
+                </button>
 
-            <div class="control">
-              <button class="btn" onClick={contactwithOwner}>
-                <span>Contact owner</span>
-
-              </button>
-
-              <button class="btn" onClick={addPropertyToFavorite}>
-                <span>Add to favourite</span>
-              </button>
-            </div>
+                <button class="btn" onClick={addPropertyToFavorite}>
+                  <span>Add to favourite</span>
+                </button>
+              </div>
+            ) : (
+              <div class="control">
+                <Link to="/login">
+                  <button class="btn">
+                    <span>Login to contact owner</span>
+                  </button>
+                </Link>
+              </div>
+            )}
           </div>
 
           <div class="product-image">
@@ -217,37 +218,48 @@ const PropertiesDetail = (props) => {
               <ul>
                 <li>
                   <strong>
-                    <BsCurrencyDollar />&nbsp;
+                    <BsCurrencyDollar />
+                    &nbsp;
                   </strong>
                   {propertyData.price}{" "}
-                </li><br></br>
+                </li>
+                <br></br>
                 <li>
                   <strong>
-                    <BiBed />&nbsp;
+                    <BiBed />
+                    &nbsp;
                   </strong>
                   {propertyData.bedrooms}
-                </li><br></br>
+                </li>
+                <br></br>
                 <li>
                   <strong>
-                    <GiBathtub />&nbsp;
+                    <GiBathtub />
+                    &nbsp;
                   </strong>{" "}
                   {propertyData.bathrooms}
-                </li><br></br>
+                </li>
+                <br></br>
                 <li>
                   <strong>
-                    <MdMyLocation />&nbsp;
+                    <MdMyLocation />
+                    &nbsp;
                   </strong>{" "}
                   {propertyData.address}
-                </li><br></br>
+                </li>
+                <br></br>
                 <li>
                   <strong>
-                    <MdLocationCity />&nbsp;
+                    <MdLocationCity />
+                    &nbsp;
                   </strong>
                   {propertyData.city}{" "}
-                </li><br></br>
+                </li>
+                <br></br>
                 <li>
                   <strong>
-                    <GoLocation />&nbsp;
+                    <GoLocation />
+                    &nbsp;
                   </strong>{" "}
                   {propertyData.zipcode}
                 </li>
