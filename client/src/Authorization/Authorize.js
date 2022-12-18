@@ -10,9 +10,13 @@ const AuthorizeProvider = (props) => {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       setUser(user);
+      
+      let data3 = {
+        userdata : user
+      };
       localStorage.setItem(
         process.env.REACT_APP_LOCALHOST_KEY,
-        JSON.stringify(user)
+        JSON.stringify(data3)
       );
       setLoading(false);
     });

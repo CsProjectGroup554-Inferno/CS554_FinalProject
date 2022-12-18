@@ -51,21 +51,30 @@ const PropertiesDetail = (props) => {
     try {
       console.log("owner" + JSON.stringify(propertyData.owner._id));
 
-      const id = propertyData.owner;
+      const id = propertyData.owner._id;
       let data1 = await serverRequest.getallUser(id);
+      let data2 = await serverRequest.getUserById(id);
       // console.log("index" + JSON.stringify(data1))
       let indexx = data1.findIndex((x) => x._id === id);
-      console.log("index" + indexx);
-      console.log(data1);
+      // console.log("index" + indexx);
+      // console.log(data1);
+      // console.log(data2)
       // setpropertyindex(indexx)
 
       // setContacts(data1);
-
-      let data2 = {
-        data: propertyData.owner,
-        index: 0,
+      let oldData = JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
+      let data3 = {
+        index: indexx,
+        propertyowner : data2,
+        data: propertyData.owner
       };
-      localStorage.setItem(process.env.CONNECT_WITH_OWNER, JSON.stringify(propertyData.owner));
+      // console.log("ddd"+JSON.stringify(data3))
+      // let oldData = JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
+      console.log(JSON.stringify(oldData))
+      // const previousPosts = oldData ? JSON.parse(oldData) : [];
+      const updatedPosts = {...oldData, ...data3};
+      // console.log("uuuu"+JSON.stringify(updatedPosts))
+      localStorage.setItem(process.env.REACT_APP_LOCALHOST_KEY, JSON.stringify(updatedPosts));
       navigate("/chat");
     } catch (error) {
       console.log(error);

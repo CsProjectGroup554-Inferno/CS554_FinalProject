@@ -45,22 +45,22 @@ const Chat = () => {
     }
   }, [userData]);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    const data1 = JSON.parse(
-      localStorage.getItem(process.env.CONNECT_WITH_OWNER)
-    );
-    // console.log("truedata1" + JSON.stringify(data1))
-    // console.log("contacts" + JSON.stringify(contacts))
+  //   const data1 = JSON.parse(
+  //     localStorage.getItem(process.env.CONNECT_WITH_OWNER)
+  //   );
+  //   // console.log("truedata1" + JSON.stringify(data1))
+  //   // console.log("contacts" + JSON.stringify(contacts))
 
-    let getData = async () => {
-      let user = await serverRequest.getUserById(data1._id);
-      // console.log("vvv" +JSON.stringify(user) )
-      setpropertyContact(user)
-    }
-    getData();
+  //   let getData = async () => {
+  //     let user = await serverRequest.getUserById(data1._id);
+  //     // console.log("vvv" +JSON.stringify(user) )
+  //     setpropertyContact(user)
+  //   }
+  //   getData();
 
-  });
+  // });
 
   useEffect(() => {
     if (userData) {
@@ -70,9 +70,9 @@ const Chat = () => {
       let getData = async () => {
         let data1 = await serverRequest.getallUser(userData._id);
         // console.log("index" + JSON.stringify(data1))
-        let indexx = data1.findIndex(x => x._id === data._id);
-        console.log("index" + indexx)
-        setpropertyindex(indexx)
+        // let indexx = data1.findIndex(x => x._id === data._id);
+        // console.log("index" + indexx)
+        // setpropertyindex(indexx)
 
         setContacts(data1);
       }
@@ -102,7 +102,7 @@ const Chat = () => {
     <>
       <Container>
         <div className="container">
-          <Contacts contacts={contacts} changeChat={handleChatChange} index={setpindex} propertyContact={setpcontact} />
+          <Contacts contacts={contacts} changeChat={handleChatChange} />
           {currentChat === undefined ? (
             <Welcome />
           ) : (
