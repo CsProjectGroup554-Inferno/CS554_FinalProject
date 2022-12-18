@@ -24,9 +24,9 @@ const Profile = () => {
   let handleChangePassword = async (e) => {
     e.preventDefault();
     closeChangePasswordModal.current.click();
-    let { oldPassword, newPassword, confirmPassword } = e.target.elements;
+    let { newPassword, confirmPassword } = e.target.elements;
     try {
-      await serverRequest.changePassword(oldPassword.value, newPassword.value, confirmPassword.value);
+      await serverRequest.changePassword(newPassword.value, confirmPassword.value);
     } catch (error) {
       alert(error.message);
     }
@@ -39,8 +39,11 @@ const Profile = () => {
           <div className="col-md-3">
             {userData?.email ? (
               <div className="mt-4">
-                <h5><br /><MdOutlineEmail />
-                  {userData.email}</h5>
+                <h5>
+                  <br />
+                  <MdOutlineEmail />
+                  {userData.email}
+                </h5>
               </div>
             ) : null}
             <div>
@@ -67,7 +70,7 @@ const Profile = () => {
             {user.providerData[0].providerId === "password" ? (
               <div>
                 <button className="btn my-3 btn-secondary" style={{ width: "260px", backgroundColor: "transparent" }} data-bs-toggle="modal" data-bs-target="#change-password-modal">
-                    Change password
+                  Change password
                 </button>
               </div>
             ) : null}
@@ -89,10 +92,6 @@ const Profile = () => {
 
               <form onSubmit={handleChangePassword}>
                 <div className="modal-body">
-                  <div className="form-group">
-                    <label htmlFor="oldPassword">Old password</label>
-                    <input type="password" className="form-control" id="oldPassword" name="oldPassword" />
-                  </div>
                   <div className="form-group">
                     <label htmlFor="newPassword">New password</label>
                     <input className="form-control" id="newPassword" name="newPassword" type="password" />
