@@ -15,6 +15,9 @@ const Header = () => {
         <Link to="/">
           <Navbar.Brand>NJ Rental</Navbar.Brand>
         </Link>
+        {/* <Link to="/properties" className="mx-auto propertyHead">
+          <Navbar.Text>Properties</Navbar.Text>
+        </Link> */}
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>

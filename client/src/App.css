@@ -1049,3 +1049,19 @@ input:focus {
 .form-group-add-content {
   margin: 15px;
 }
+
+.heart-icon:hover {
+  color: red !important;
+}
+
+.propertyHead {
+  position: relative;
+  left: 33%;
+  font-size: 24px;
+  font-weight: 400;
+  color: white;
+}
+
+.navbar-text {
+  color: white !important;
+}
