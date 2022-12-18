@@ -3,7 +3,7 @@ import serverRequest from "../serverRequest";
 import { Link, useNavigate } from "react-router-dom";
 import "react-image-lightbox/style.css";
 import { Carousel } from "react-responsive-carousel";
-import { BiBed, BiUserCircle } from "react-icons/bi";
+import { BiBed } from "react-icons/bi";
 import { GiBathtub } from "react-icons/gi";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
@@ -14,10 +14,8 @@ import { AuthorizeContext } from "../Authorization/Authorize";
 const PropertiesDetail = (props) => {
   const navigate = useNavigate();
   const [propertyData, setPropertyData] = useState([]);
-  // const [ /*isWatchlist,*/ setIsWatchlist] = useState();
   const [loading, setLoading] = useState(true);
   const { user } = useContext(AuthorizeContext);
-  // const alert = useRef(useAlert());
   var id = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
 
   useEffect(() => {
@@ -30,7 +28,6 @@ const PropertiesDetail = (props) => {
         setLoading(false);
       } catch (e) {
         setLoading(false);
-        // alert.current.error(e.message)
       }
     }
     fetchData();
@@ -60,10 +57,7 @@ const PropertiesDetail = (props) => {
 
       // setContacts(data1);
 
-      let data2 = {
-        data: propertyData.owner,
-        index: 0,
-      };
+      
       localStorage.setItem(process.env.CONNECT_WITH_OWNER, JSON.stringify(propertyData.owner));
       navigate("/chat");
     } catch (error) {
@@ -78,91 +72,6 @@ const PropertiesDetail = (props) => {
         <img src={item} alt="txt" />
       </div>
     ));
-  };
-
-  const li = (property) => {
-    let price, zipcode, address, city, bedrooms, bathrooms, owner;
-    if (property.price) {
-      price = (
-        <>
-          <BsCurrencyDollar />
-          {property.price}
-        </>
-      );
-    }
-    if (property.address) {
-      address = (
-        <>
-          <MdMyLocation />
-          {property.address}
-        </>
-      );
-    }
-    if (property.city) {
-      city = (
-        <>
-          <MdLocationCity />
-          {property.city}
-        </>
-      );
-    }
-    if (property.zipcode) {
-      zipcode = (
-        <>
-          <GoLocation />
-          {property.zipcode}
-        </>
-      );
-    }
-    if (property.bedrooms) {
-      bedrooms = (
-        <>
-          <BiBed />
-          {property.bedrooms}
-        </>
-      );
-    }
-    if (property.bathrooms) {
-      bathrooms = (
-        <>
-          <GiBathtub />
-          {property.bathrooms}
-        </>
-      );
-    }
-    if (property.owner._id && property.owner.email) {
-      owner = (
-        <>
-          <BiUserCircle />
-          <Link to={"/user/" + property.owner._id}>{property.owner.email}</Link>
-        </>
-      );
-    }
-
-    return (
-      <>
-        {price || bedrooms || bathrooms ? (
-          <div className="icon-group">
-            <p>
-              {price} &nbsp;&nbsp;{bedrooms}&nbsp;&nbsp; {bathrooms}
-            </p>
-          </div>
-        ) : null}
-
-        <div className="icon-group">
-          <p>{address}</p>
-        </div>
-        <div className="icon-group">
-          <p>{city}</p>
-        </div>
-        <div className="icon-group">
-          <p>{zipcode}</p>
-        </div>
-        <div className="icon-group">
-          <p>{owner}</p>
-        </div>
-      </>
-    );
   };
 
   if (loading) {
