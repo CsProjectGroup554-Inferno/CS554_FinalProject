@@ -494,7 +494,7 @@ main {
   font-size: x-large;
 }
 
-.container-prop .box .bottom>p {
+.container-prop .box .bottom > p {
   margin: 15px 0;
   font-size: 13px;
   line-height: 1.4;
@@ -508,34 +508,34 @@ main {
   font-weight: 300;
 }
 
-.container-prop .box .bottom .advants>div {
+.container-prop .box .bottom .advants > div {
   margin-right: 15px;
 }
 
-.container-prop .box .bottom .advants>div>span {
+.container-prop .box .bottom .advants > div > span {
   font-weight: bold;
   font-size: 15px;
   color: #e8e8e8;
 }
 
-.container-prop .box .bottom .advants>div>div {
+.container-prop .box .bottom .advants > div > div {
   margin-top: 10px;
   display: flex;
   align-items: center;
 }
 
-.container-prop .box .bottom .advants>div>div i {
+.container-prop .box .bottom .advants > div > div i {
   color: #777;
   font-size: 22px;
 }
 
-.container-prop .box .bottom .advants>div>div>span {
+.container-prop .box .bottom .advants > div > div > span {
   font-size: 12px;
   font-weight: bold;
   margin-left: 10px;
 }
 
-.container-prop .box .bottom .advants>div>div>span>span {
+.container-prop .box .bottom .advants > div > div > span > span {
   color: #777;
   font-weight: normal;
   margin-left: 5px;
@@ -694,7 +694,7 @@ main {
   width: 50%;
 }
 
-#container .product-details>p {
+#container .product-details > p {
   font-family: "EB Garamond", serif;
   text-align: center;
   font-size: 18px;
@@ -1043,4 +1043,20 @@ input:focus {
 
 .form-group-add-content {
   margin: 15px;
+}
+
+.heart-icon:hover {
+  color: red !important;
+}
+
+.propertyHead {
+  position: relative;
+  left: 33%;
+  font-size: 24px;
+  font-weight: 400;
+  color: white;
+}
+
+.navbar-text {
+  color: white !important;
 }
