@@ -3,6 +3,11 @@ import serverRequest from "../serverRequest";
 import { Link } from "react-router-dom";
 // import { useAlert } from 'react-alert'
 import { Dropdown } from "react-bootstrap";
+import { BiBed, BiFontSize, BiHeart } from "react-icons/bi";
+import { GiBathtub } from "react-icons/gi";
+import { BsCurrencyDollar } from "react-icons/bs";
+import { GoLocation } from "react-icons/go";
+import { MdLocationCity, MdMyLocation } from "react-icons/md";
 
 const Property = (props) => {
   const [propertyData, setPropertyData] = useState([]);
@@ -17,6 +22,16 @@ const Property = (props) => {
   let div = null;
   let d = null;
   let pagination = null;
+
+  let addPropertyToFavorite = async (id) => {
+    try {
+      await serverRequest.addFavorite(id);
+      alert("Added to favorite");
+    } catch (error) {
+      console.log(error);
+      alert(error.response.data.error);
+    }
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -55,53 +70,69 @@ const Property = (props) => {
     propertyData &&
     propertyData.map((property) => {
       return (
-        <div key={property._id} className="container-prop">
-          <div className="box">
-            <Link to={"/properties/" + property._id}>
-              <div className="top">
-                <img src={property.imageData[0]} alt="" />
-                <span>
-                  <i className="fas fa-heart"></i>
-                  <i className="fas fa-exchange-alt"></i>
+        <>
+          <div key={property._id} className="container-prop">
+            <div className="box">
+              <Link to={"/properties/" + property._id}>
+                <div className="top">
+                  <img src={property.imageData[0]} alt="" />
+                </div>
+              </Link>
+              <div className="bottom">
+                <span className="heart-icon" style={{ float: "right", cursor: "pointer" }} onClick={() => addPropertyToFavorite(property._id)}>
+                  <BiHeart />
                 </span>
-              </div>
-            </Link>
-            <div className="bottom">
-              <h3>{property.title}</h3>
-              <p>{property.description}</p>
-              <div className="advants">
-                <div>
-                  <span>Bedrooms</span>
+                <h1>
+                  <b>Title: </b>
+                  {property.title}
+                </h1>
+                <p className="about-prop">
+                  <b>About property: </b>
+                  {property.description}
+                </p>
+                <div className="advants">
                   <div>
-                    <i className="fas fa-th-large"></i>
-                    <span>{property.bedrooms}</span>
+                    <span>Bedrooms</span>
+                    <div>
+                      <BiBed />
+                      <span>{property.bedrooms}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <span>Bathrooms</span>
+                    <div>
+                      <GiBathtub />
+                      <span>{property.bathrooms}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <span>Area</span>
+                    <div>
+                      <BiFontSize />
+                      <span>
+                        {property.size}
+                        <span>Sq Ft</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <span>City</span>
+                    <div>
+                      <GoLocation />
+                      <span>{property.city}</span>
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <span>Bathrooms</span>
-                  <div>
-                    <i className="fas fa-shower"></i>
-                    <span>{property.bathrooms}</span>
-                  </div>
+                <div className="price">
+                  <span>For Rent</span>
+                  <BsCurrencyDollar />
+                  <b>{property.price}</b>
                 </div>
-                <div>
-                  <span>Area</span>
-                  <div>
-                    <i className="fas fa-vector-square"></i>
-                    <span>
-                      {property.size}
-                      <span>Sq Ft</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="price">
-                <span>For Rent</span>
-                <span>${property.price}</span>
               </div>
             </div>
           </div>
-        </div>
+        </>
       );
     });
 
@@ -126,7 +157,7 @@ const Property = (props) => {
     if (pageData.prev) {
       prev = (
         <li className="page-item">
-          <a href={"?page=" + prevPageNumber} className="page-link">
+          <a href={"?page=" + prevPageNumber + "&filter=" + filter + "&sort=" + sort} className="page-link">
             <i className="fa fa-angle-left"></i>
             <span className="sr-only">Previous page</span>
           </a>
@@ -137,7 +168,7 @@ const Property = (props) => {
     if (pageData.next) {
       next = (
         <li className="page-item">
-          <a href={"?page=" + nextPageNumber} className="page-link">
+          <a href={"?page=" + nextPageNumber + "&filter=" + filter + "&sort=" + sort} className="page-link">
             <i className="fa fa-angle-right"></i>
             <span className="sr-only">Next page</span>
           </a>
@@ -148,7 +179,7 @@ const Property = (props) => {
     if (pageData.next || pageData.prev) {
       curr = (
         <li className="page-item {{@active}}">
-          <Link to={"?page=" + page} className="page-link" aria-label={"go to page " + currentPageNumber}>
+          <Link to={"?page=" + page + "&filter=" + filter + "&sort=" + sort} className="page-link" aria-label={"go to page " + currentPageNumber}>
             {currentPageNumber}
           </Link>
         </li>
@@ -194,7 +225,7 @@ const Property = (props) => {
 
   return (
     <main>
-      <div className="row">
+      <div className="row-filter">
         <div className="filter-column">
           <div className="dropdown pr-2">
             <Dropdown>
@@ -272,11 +303,9 @@ const Property = (props) => {
         </div>
 
         <div className="filter-column-reset">
-          <button className="btn btn-default filter-dropdown ">
-            <a href="/properties?page=1" className="a-btn">
-              Reset
-            </a>
-          </button>
+          <a href="/properties?page=1" className="a-btn">
+            <button className="btn btn-default filter-dropdown ">Reset</button>
+          </a>
         </div>
       </div>
       {div}

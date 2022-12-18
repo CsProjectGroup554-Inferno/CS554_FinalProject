@@ -4,6 +4,7 @@ import { AuthorizeContext } from "../Authorization/Authorize";
 import { useState, useEffect } from "react";
 import serverRequest from "../serverRequest";
 import { Link } from "react-router-dom";
+import { MdOutlineEmail } from "react-icons/md";
 
 const Profile = () => {
   const { user } = useContext(AuthorizeContext);
@@ -23,9 +24,9 @@ const Profile = () => {
   let handleChangePassword = async (e) => {
     e.preventDefault();
     closeChangePasswordModal.current.click();
-    let { oldPassword, newPassword, confirmPassword } = e.target.elements;
+    let { newPassword, confirmPassword } = e.target.elements;
     try {
-      await serverRequest.changePassword(oldPassword.value, newPassword.value, confirmPassword.value);
+      await serverRequest.changePassword(newPassword.value, confirmPassword.value);
     } catch (error) {
       alert(error.message);
     }
@@ -37,37 +38,38 @@ const Profile = () => {
         <div className="row">
           <div className="col-md-3">
             {userData?.email ? (
-              <div className=" mt-4">
-                <p>
-                  <i className=""></i>
+              <div className="mt-4">
+                <h5>
+                  <br />
+                  <MdOutlineEmail />
                   {userData.email}
-                </p>
+                </h5>
               </div>
             ) : null}
             <div>
               <Link className="" to="/profile/myProperties">
-                <button className="btn my-3 btn-secondary" style={{ width: "180px" }}>
+                <button className="btn my-3 btn-secondary" style={{ width: "260px", backgroundColor: "transparent" }}>
                   My property
                 </button>
               </Link>
             </div>
             <div>
               <Link className="" to="/profile/favorites">
-                <button className="btn my-3 btn-secondary" style={{ width: "180px" }}>
+                <button className="btn my-3 btn-secondary" style={{ width: "260px", backgroundColor: "transparent" }}>
                   My favorites
                 </button>
               </Link>
             </div>
             <div>
               <Link className="card-body" to="/profile/properties/add">
-                <button className="btn my-3 btn-secondary" style={{ width: "180px" }}>
+                <button className="btn my-3 btn-secondary" style={{ width: "260px", backgroundColor: "transparent" }}>
                   Add Property
                 </button>
               </Link>
             </div>
             {user.providerData[0].providerId === "password" ? (
               <div>
-                <button className="btn my-3 btn-secondary" style={{ width: "180px" }} data-bs-toggle="modal" data-bs-target="#change-password-modal">
+                <button className="btn my-3 btn-secondary" style={{ width: "260px", backgroundColor: "transparent" }} data-bs-toggle="modal" data-bs-target="#change-password-modal">
                   Change password
                 </button>
               </div>
@@ -90,10 +92,6 @@ const Profile = () => {
 
               <form onSubmit={handleChangePassword}>
                 <div className="modal-body">
-                  <div className="form-group">
-                    <label htmlFor="oldPassword">Old password</label>
-                    <input type="password" className="form-control" id="oldPassword" name="oldPassword" />
-                  </div>
                   <div className="form-group">
                     <label htmlFor="newPassword">New password</label>
                     <input className="form-control" id="newPassword" name="newPassword" type="password" />

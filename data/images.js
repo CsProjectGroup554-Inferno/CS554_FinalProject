@@ -12,10 +12,11 @@ const sizeOf = require("image-size");
 const fileType = require("file-type");
 const md5 = require("md5");
 
-let validateImage = async (filePath) => {
+async function validateImage(filePath) {
   if (!filePath) throw "You must provide a file path";
   let stream = fs.createReadStream(filePath);
-  let type = await fileType.fromStream(stream);
+  let mimetype = await fileType.fromStream(stream);
+  const type = mimetype.mime.split("/");
   if (!type) throw "Invalid file type";
   if (type.mime !== "image/jpeg" && type.mime !== "image/png" && type.mime !== "image/jpg") {
     fs.unlinkSync(filePath);
@@ -32,7 +33,7 @@ let validateImage = async (filePath) => {
   return true;
 };
 
-let validateBase64 = async (base64) => {
+function validateBase64(base64) {
   if (!base64) throw "You must provide a base64 string";
   let re = /^data:image\/(jpeg|png|jpg);base64,/;
   if (!re.test(base64)) throw "Invalid base64 string";
@@ -52,7 +53,7 @@ let splitBase64ToChunks = async (base64) => {
 let createGridFS = async (filePath, fileName, fieldName) => {
   if (validateImage(filePath)) {
     let RawImageData = fs.readFileSync(filePath);
-    let dimensions = sizeOf(RawImageData);
+    let dimensions = sizeOf(RawImageData);  
     let width = dimensions.width;
     let height = dimensions.height;
     if (dimensions.width > 1280) {
@@ -74,16 +75,21 @@ let createGridFS = async (filePath, fileName, fieldName) => {
     let base64 = base64Img.base64Sync(filePath);
     let newImages = {
       filename: fileName,
-      contentType: "image/jpeg",
-      length: base64.length,
-      chunkSize: 255 * 1024,
+      //contentType: "image/jpeg",
+      contentType: mimetype,
+
+      //length: base64.length,
+      //chunkSize: 255 * 1024,
+      chunkSize: 261120,
       uploadDate: new Date(),
       md5: md5(base64),
-      metadata: {
-        fieldName: fieldName,
-        width: width,
-        height: height,
-      },
+
+
+      // metadata: {
+      //   fieldName: fieldName,
+      //   width: width,
+      //   height: height,
+      // },
     };
     const insertInfo = await ImagesCollection.insertOne(newImages);
     if (insertInfo.aknowledged === false) {
