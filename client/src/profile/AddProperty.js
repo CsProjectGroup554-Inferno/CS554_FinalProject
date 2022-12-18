@@ -61,7 +61,9 @@ const AddProperty = (props) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: "image/jpeg, image/png",
+    accept: {
+      "image/*": [".jpeg", ".jpg", ".png"],
+    },
     minSize: 0,
     maxSize: 5242880,
   });
@@ -92,7 +94,10 @@ const AddProperty = (props) => {
           <p>
             <i className="fas fa-file-image"></i>
           </p>
-          <p  style={{ fontSize: "x-large" }}><BiImageAdd/>Click here or drop file to upload photos!</p>
+          <p style={{ fontSize: "x-large" }}>
+            <BiImageAdd />
+            Click here or drop file to upload photos!
+          </p>
         </div>
       </div>
     </>
@@ -160,14 +165,14 @@ const AddProperty = (props) => {
   }
 
   return (
-    <div className="container" >
+    <div className="container">
       <div className="row">
         <div className="col-md-3">
           <Profile />
         </div>
         <div className="col-md-9" style={{ padding: "30px" }}>
           <title>Create property </title>
-          <h1  style={{ textAlign: "center" }}>Post Property</h1>
+          <h1 style={{ textAlign: "center" }}>Post Property</h1>
           <form onSubmit={addProperty}>
             <div className="row form-group-add">
               <div className="col-md-12 ">
@@ -232,13 +237,15 @@ const AddProperty = (props) => {
                   <input className="form-control" id="zipcode" name="zipcode" type="number" placeholder="07306" />
                 </div>
               </div>
-              <div className="col-md-12 "><br/><br/>
+              <div className="col-md-12 ">
+                <br />
+                <br />
                 {uploadImage}
                 {preview ? <div className="row mb-2">{preview}</div> : null}
               </div>
             </div>
 
-            <button className="btn btn-primary "  style={{ width: "260px", backgroundColor: "transparent", margin: "50px", border: "2px solid white"}} type="submit">
+            <button className="btn btn-primary " style={{ width: "260px", backgroundColor: "transparent", margin: "50px", border: "2px solid white" }} type="submit">
               Post
             </button>
           </form>
