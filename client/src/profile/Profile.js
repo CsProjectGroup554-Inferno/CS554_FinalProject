@@ -4,6 +4,7 @@ import { AuthorizeContext } from "../Authorization/Authorize";
 import { useState, useEffect } from "react";
 import serverRequest from "../serverRequest";
 import { Link } from "react-router-dom";
+import { MdOutlineEmail } from "react-icons/md";
 
 const Profile = () => {
   const { user } = useContext(AuthorizeContext);
@@ -37,38 +38,36 @@ const Profile = () => {
         <div className="row">
           <div className="col-md-3">
             {userData?.email ? (
-              <div className=" mt-4">
-                <p>
-                  <i className=""></i>
-                  {userData.email}
-                </p>
+              <div className="mt-4">
+                <h5><br /><MdOutlineEmail />
+                  {userData.email}</h5>
               </div>
             ) : null}
             <div>
               <Link className="" to="/profile/myProperties">
-                <button className="btn my-3 btn-secondary" style={{ width: "180px" }}>
+                <button className="btn my-3 btn-secondary" style={{ width: "260px", backgroundColor: "transparent" }}>
                   My property
                 </button>
               </Link>
             </div>
             <div>
               <Link className="" to="/profile/favorites">
-                <button className="btn my-3 btn-secondary" style={{ width: "180px" }}>
+                <button className="btn my-3 btn-secondary" style={{ width: "260px", backgroundColor: "transparent" }}>
                   My favorites
                 </button>
               </Link>
             </div>
             <div>
               <Link className="card-body" to="/profile/properties/add">
-                <button className="btn my-3 btn-secondary" style={{ width: "180px" }}>
+                <button className="btn my-3 btn-secondary" style={{ width: "260px", backgroundColor: "transparent" }}>
                   Add Property
                 </button>
               </Link>
             </div>
             {user.providerData[0].providerId === "password" ? (
               <div>
-                <button className="btn my-3 btn-secondary" style={{ width: "180px" }} data-bs-toggle="modal" data-bs-target="#change-password-modal">
-                  Change password
+                <button className="btn my-3 btn-secondary" style={{ width: "260px", backgroundColor: "transparent" }} data-bs-toggle="modal" data-bs-target="#change-password-modal">
+                    Change password
                 </button>
               </div>
             ) : null}

@@ -33,8 +33,8 @@ const Favorites = () => {
         <div className="col-md-3">
           <Profile />
         </div>
-        <div className="col-md-9">
-          <h1>Favorites</h1>
+        <div className="col-md-9" style={{ padding: "30px", marginTop: "20px" }}>
+          <h1 style={{ textAlign: "center" }}>Favorites</h1>
           {favorites.map((data) => (
             <Link to={"/properties/" + data._id} key={data._id}>
               <div key={data._id} className="favoriteCard my-5">

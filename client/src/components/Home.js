@@ -11,32 +11,22 @@ const Home = () => {
   const { user } = useContext(AuthorizeContext);
   return (
     <>
-      <section className="home-section1">
-        <div className="row">
-          <div className="column">
-            <h1 className="home-h1">NJ Rental</h1>
-            <p className="home-p-1">
-              <b>NJ Rental</b> is one stop for all users to search for thier perfect home or post thier property available for rent. Chat with the owner get every little details checked off your check
-              list for a perfect home. We make finding your perfect home in any city all across New Jersey easy.Our suite of online services enables clients to analyze, interpret and gain unmatched
-              insight on commercial property values, market conditions and current availabilities.
-            </p>
-            <img className="home-img" src="./img/5.jpg" alt="img5" />
-          </div>
-          <div className="column">
-            <Carousel autoPlay>
-              <div>
-                <img className="home-carousel-img" src="./img/1.jpg" alt="txt" />
-              </div>
-              <div>
-                <img className="home-carousel-img" src="./img/2.jpg" alt="txt" />
-              </div>
-              <div>
-                <img className="home-carousel-img" src="./img/3.jpg" alt="txt" />
-              </div>
-            </Carousel>
-          </div>
-        </div>
 
+      <section className="home-section1">
+        <Carousel autoPlay>
+          <div>
+            <img className="home-carousel-img" src="./img/1.jpg" alt="txt" />
+          </div>
+          <div>
+            <img className="home-carousel-img" src="./img/2.jpg" alt="txt" />
+          </div>
+          <div>
+            <img className="home-carousel-img" src="./img/3.jpg" alt="txt" />
+          </div>
+        </Carousel>
+      </section>
+
+      <section className="home-section2">
         <div className="home-div">
           <h3 className="home-h3-1"> Major Cities</h3>
         </div>
@@ -79,56 +69,35 @@ const Home = () => {
       </section>
 
       <section className="home-section3">
-        <div className="row">
-          <div className="column-2">
-            <div className="card bg-default">
-              <img src="./img/12.jpg" className="card-img-top" alt="community" />
-              <blockquote className="card-blockquote">
-                <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" className="svg-bg">
-                  <polygon points="0,52 583,95 0,95" className="fill-default" />
-                  <polygon points="0,42 583,95 683,0 0,95" opacity=".2" className="fill-default" />
-                </svg>
-                <h1 className="display-3 font-weight-bold text-white">Lovely Community</h1>
-              </blockquote>
-            </div>
-          </div>
-          <div className="column-2">
-            <div className="card bg-default">
-              <img src="./img/13.jpg" className="card-img-top" alt="community" />
-              <blockquote className="card-blockquote">
-                <svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 583 95" className="svg-bg">
-                  <polygon points="0,52 583,95 0,95" className="fill-default" />
-                  <polygon points="0,42 583,95 683,0 0,95" opacity=".2" className="fill-default" />
-                </svg>
-                <h1 className="display-3 font-weight-bold text-white">Ammenities you want</h1>
-              </blockquote>
-            </div>
-          </div>
-        </div>
-      </section><br /><br />
+        <head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>About us</title>
+          <link rel="stylesheet" href="{% static 'about.css' %}" />
+          <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+            integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+          <link rel="icon" href="{% static 'PICO-LOGO-SHORT.png' %}" type="image/gif" />
+        </head>
 
-      <section className="home-section2">
-        <div className="gallery">
-          <figure className="gallery__item gallery__item--1">
-            <img src="./img/14.jpg" className="gallery__img" alt="txt" />
-          </figure>
-          <figure className="gallery__item gallery__item--2">
-            <img src="./img/15.jpg" className="gallery__img" alt="txt" />
-          </figure>
-          <figure className="gallery__item gallery__item--3">
-            <img src="./img/16.jpg" className="gallery__img" alt="txt" />
-          </figure>
-          <figure className="gallery__item gallery__item--4">
-            <img src="./img/17.jpg" className="gallery__img" alt="txt" />
-          </figure>
-          <figure className="gallery__item gallery__item--5">
-            <img src="./img/18.jpg" className="gallery__img" alt="txt" />
-          </figure>
-          <figure className="gallery__item gallery__item--6">
-            <img src="./img/19.jpg" className="gallery__img" alt="txt" />
-          </figure>
+        <div className="company">
+          <div className="img">
+            <img src="./img/5.jpg" alt="" />
+          </div>
+          <div className="company-info">
+            <span>NJRental - <span className="our">Rental made easy</span></span>
+            <p>
+              <b>NJ Rental</b> is one stop for all users to search for thier perfect home or post thier property available for rent. Chat with the owner get every little details checked off your check
+              list for a perfect home. We make finding your perfect home in any city all across New Jersey easy.Our suite of online services enables clients to analyze, interpret and gain unmatched
+              insight on commercial property values, market conditions and current availabilities.Search thousands of up-to-date property listings on our easy-to-use website. Narrow down your options
+              by choosing what's most important to you, such as number of bedrooms and bathrooms, price range, location, pet policy and more. Chat with other users to get an insight to their experience
+              and ideas for finding the perfect place.
+            </p>
+          </div>
         </div>
-      </section></>
+      </section>
+
+    </>
 
 
 
