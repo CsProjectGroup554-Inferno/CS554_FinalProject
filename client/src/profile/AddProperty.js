@@ -61,7 +61,9 @@ const AddProperty = (props) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: "image/jpeg, image/png",
+    accept: {
+      "image/*": [".jpeg", ".jpg", ".png"],
+    },
     minSize: 0,
     maxSize: 5242880,
   });
