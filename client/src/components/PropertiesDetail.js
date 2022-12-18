@@ -17,7 +17,7 @@ const PropertiesDetail = (props) => {
   const [propertyData, setPropertyData] = useState([]);
   // const [ /*isWatchlist,*/ setIsWatchlist] = useState();
   const [loading, setLoading] = useState(true);
-
+  const { user } = useContext(AuthorizeContext);
   // const alert = useRef(useAlert());
   var id = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
 
@@ -179,7 +179,6 @@ const PropertiesDetail = (props) => {
   return (
     <main>
       <section className="property-detail-title">
-       
         <div id="container">
           <div class="product-details">
             <h1>{propertyData.title}</h1>
@@ -199,11 +198,13 @@ const PropertiesDetail = (props) => {
                 </button>
               </div>
             ) : (
-              <Link to="/login">
-                <button class="btn">
-                  <span>Login to contact owner</span>
-                </button>
-              </Link>
+              <div class="control">
+                <Link to="/login">
+                  <button class="btn">
+                    <span>Login to contact owner</span>
+                  </button>
+                </Link>
+              </div>
             )}
           </div>
 
@@ -218,37 +219,48 @@ const PropertiesDetail = (props) => {
               <ul>
                 <li>
                   <strong>
-                    <BsCurrencyDollar />&nbsp;
+                    <BsCurrencyDollar />
+                    &nbsp;
                   </strong>
                   {propertyData.price}{" "}
-                </li><br></br>
+                </li>
+                <br></br>
                 <li>
                   <strong>
-                    <BiBed />&nbsp;
+                    <BiBed />
+                    &nbsp;
                   </strong>
                   {propertyData.bedrooms}
-                </li><br></br>
+                </li>
+                <br></br>
                 <li>
                   <strong>
-                    <GiBathtub />&nbsp;
+                    <GiBathtub />
+                    &nbsp;
                   </strong>{" "}
                   {propertyData.bathrooms}
-                </li><br></br>
+                </li>
+                <br></br>
                 <li>
                   <strong>
-                    <MdMyLocation />&nbsp;
+                    <MdMyLocation />
+                    &nbsp;
                   </strong>{" "}
                   {propertyData.address}
-                </li><br></br>
+                </li>
+                <br></br>
                 <li>
                   <strong>
-                    <MdLocationCity />&nbsp;
+                    <MdLocationCity />
+                    &nbsp;
                   </strong>
                   {propertyData.city}{" "}
-                </li><br></br>
+                </li>
+                <br></br>
                 <li>
                   <strong>
-                    <GoLocation />&nbsp;
+                    <GoLocation />
+                    &nbsp;
                   </strong>{" "}
                   {propertyData.zipcode}
                 </li>
