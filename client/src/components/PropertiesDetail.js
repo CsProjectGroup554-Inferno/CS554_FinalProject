@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import serverRequest from "../serverRequest";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "react-image-lightbox/style.css";
 import { Carousel } from "react-responsive-carousel";
 import { BiBed, BiUserCircle } from "react-icons/bi";
@@ -13,6 +13,7 @@ import { AuthorizeContext } from "../Authorization/Authorize";
 
 const PropertiesDetail = (props) => {
   const { user } = useContext(AuthorizeContext);
+  const navigate = useNavigate();
   const [propertyData, setPropertyData] = useState([]);
   // const [ /*isWatchlist,*/ setIsWatchlist] = useState();
   const [loading, setLoading] = useState(true);
@@ -40,6 +41,32 @@ const PropertiesDetail = (props) => {
     try {
       await serverRequest.addFavorite(propertyData._id);
       alert("Added to favorite");
+    } catch (error) {
+      console.log(error);
+      alert(error.response.data.error);
+    }
+  };
+
+  let contactwithOwner = async () => {
+    try {
+      console.log("owner" + JSON.stringify(propertyData.owner._id));
+
+      const id = propertyData.owner;
+      let data1 = await serverRequest.getallUser(id);
+      // console.log("index" + JSON.stringify(data1))
+      let indexx = data1.findIndex((x) => x._id === id);
+      console.log("index" + indexx);
+      console.log(data1);
+      // setpropertyindex(indexx)
+
+      // setContacts(data1);
+
+      let data2 = {
+        data: propertyData.owner,
+        index: 0,
+      };
+      localStorage.setItem(process.env.CONNECT_WITH_OWNER, JSON.stringify(propertyData.owner));
+      navigate("/chat");
     } catch (error) {
       console.log(error);
       alert(error.response.data.error);
@@ -165,7 +192,7 @@ const PropertiesDetail = (props) => {
             <br />
             {user ? (
               <div class="control">
-                <button class="btn">
+                <button class="btn" onClick={contactwithOwner}>
                   <span>Contact owner</span>
                 </button>
 

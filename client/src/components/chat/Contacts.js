@@ -3,13 +3,14 @@ import styled from "styled-components";
 import avatar from "../../assets/avatar1.webp";
 import avatar2 from "../../assets/avtar4.png";
 
-export default function Contacts({ contacts, changeChat }) {
+export default function Contacts({ contacts, changeChat, indexx, propertyContact }) {
 
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
 
 
+  
   useEffect(() => {
     const data = JSON.parse(
       localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
@@ -17,11 +18,29 @@ export default function Contacts({ contacts, changeChat }) {
 
     setCurrentUserName(data.email);
     setCurrentUserImage(avatar2);
+   
+
   }, []);
+
+  
   const changeCurrentChat = (index, contact) => {
+    console.log(index + "&&" + JSON.stringify(contact))
     setCurrentSelected(index);
     changeChat(contact);
   };
+  useEffect(() => {
+    console.log("hhhh")
+    console.log(indexx)
+    console.log(JSON.stringify(contacts))
+    const data1 = JSON.parse(
+      localStorage.getItem(process.env.CONNECT_WITH_OWNER)
+    );
+    if (data1) {
+      changeCurrentChat(indexx, propertyContact)
+    }
+
+
+  }, []);
   return (
     <>
       {currentUserImage && currentUserImage && (
