@@ -7,6 +7,7 @@ import { useDropzone } from "react-dropzone";
 //import { useAlert } from "react-alert";
 import serverRequest from "../serverRequest";
 import Profile from "./Profile";
+import { BiImageAdd } from "react-icons/bi";
 
 const AddProperty = (props) => {
   const { user } = useContext(AuthorizeContext);
@@ -75,7 +76,7 @@ const AddProperty = (props) => {
             <div className="img-preview-container avatar-container">
               <img className="img-fluid img-preview" src={key[2]} alt={key[0]} />
               <button type="button" onClick={() => removeImage(idx)} data-idx={idx} className="btn btn-danger btn-sm btn-round btn-shadow btn-delete-preview position-absolute">
-                delete
+                Delete
               </button>
             </div>
           </div>
@@ -84,14 +85,17 @@ const AddProperty = (props) => {
     });
   const uploadImage = (
     <>
-      <label htmlFor="images">images</label>
+      <label htmlFor="images">Images</label>
       <div {...getRootProps()} className="image-upload property-card property-add align-self-center d-flex align-items-center justify-content-center mb-3">
         <input id="images" {...getInputProps()} />
         <div>
           <p>
             <i className="fas fa-file-image"></i>
           </p>
-          <p>Click here or drop to upload photos!</p>
+          <p style={{ fontSize: "x-large" }}>
+            <BiImageAdd />
+            Click here or drop file to upload photos!
+          </p>
         </div>
       </div>
     </>
@@ -164,20 +168,20 @@ const AddProperty = (props) => {
         <div className="col-md-3">
           <Profile />
         </div>
-        <div className="col-md-9  mt-3">
+        <div className="col-md-9  mt-3" style={{ padding: "30px" }}>
           <title>Create property </title>
-          <h1>Post Property</h1>
+          <h1 style={{ textAlign: "center" }}>Post Property</h1>
           <form onSubmit={addProperty}>
-            <div className="row">
-              <div className="col-md-12 m-3">
-                <div className="form-group">
+            <div className="row form-group-add">
+              <div className="col-md-12 ">
+                <div className="form-group-add-content">
                   <label htmlFor="title">Title</label>
                   <input className="form-control" id="title" name="title" placeholder="title" />
                 </div>
               </div>
 
-              <div className="col-md-12 m-3">
-                <div className="form-group">
+              <div className="col-md-12 ">
+                <div className="form-group-add-content">
                   <label htmlFor="description">Description</label>
                   <textarea id="description" rows="10" className="form-control" name="description" type="text" placeholder="description" />
                 </div>
@@ -188,56 +192,58 @@ const AddProperty = (props) => {
             {preview ? <div className="row mb-2">{preview}</div> : null}
           </div> */}
 
-              <div className="col-md-3 m-3">
-                <div className="form-group">
+              <div className="col-md-3 ">
+                <div className="form-group-add-content">
                   <label htmlFor="city">City</label>
                   <input className="form-control" name="city" id="city" placeholder="city" type="text" />
                 </div>
               </div>
 
-              <div className="col-md-3 m-3">
-                <div className="form-group">
+              <div className="col-md-3 ">
+                <div className="form-group-add-content">
                   <label htmlFor="price">Price</label>
                   <input className="form-control" name="price" id="price" placeholder="price" type="number" />
                 </div>
               </div>
-              <div className="col-md-3 m-3">
-                <div className="form-group">
+              <div className="col-md-3 ">
+                <div className="form-group-add-content">
                   <label htmlFor="bedrooms">Bedroom</label>
                   <input className="form-control" id="bedrooms" name="bedrooms" type="number" placeholder="3" />
                 </div>
               </div>
-              <div className="col-md-3 m-3">
-                <div className="form-group">
-                  <label htmlFor="bathrooms">Bath</label>
+              <div className="col-md-3 ">
+                <div className="form-group-add-content">
+                  <label htmlFor="bathrooms">Bathroom</label>
                   <input className="form-control" id="bathrooms" name="bathrooms" type="number" placeholder="1" />
                 </div>
               </div>
-              <div className="col-md-3 m-3">
-                <div className="form-group">
+              <div className="col-md-3 ">
+                <div className="form-group-add-content">
                   <label htmlFor="size">Size</label>
                   <input className="form-control" id="size" name="size" type="number" placeholder="1,100 sq ft" />
                 </div>
               </div>
-              <div className="col-md-3 m-3">
-                <div className="form-group">
-                  <label htmlFor="address">address</label>
+              <div className="col-md-3 ">
+                <div className="form-group-add-content">
+                  <label htmlFor="address">Address</label>
                   <input className="form-control" id="address" name="address" type="text" placeholder="1" />
                 </div>
               </div>
-              <div className="col-md-3 m-3">
-                <div className="form-group">
-                  <label htmlFor="zipcode">zipcode</label>
+              <div className="col-md-3 ">
+                <div className="form-group-add-content">
+                  <label htmlFor="zipcode">Zip-Code</label>
                   <input className="form-control" id="zipcode" name="zipcode" type="number" placeholder="07306" />
                 </div>
               </div>
-              <div className="col-md-12 m-3">
+              <div className="col-md-12 ">
+                <br />
+                <br />
                 {uploadImage}
                 {preview ? <div className="row mb-2">{preview}</div> : null}
               </div>
             </div>
 
-            <button className="btn btn-primary m-3" type="submit">
+            <button className="btn btn-primary " style={{ width: "260px", backgroundColor: "transparent", margin: "50px", border: "2px solid white" }} type="submit">
               Post
             </button>
           </form>

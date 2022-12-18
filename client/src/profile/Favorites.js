@@ -33,8 +33,8 @@ const Favorites = () => {
         <div className="col-md-3">
           <Profile />
         </div>
-        <div className="col-md-9 mt-3">
-          <h1>Favorites</h1>
+        <div className="col-md-9 mt-3" style={{ padding: "30px", marginTop: "20px" }}>
+          <h1 style={{ textAlign: "center" }}>Favorites</h1>
           {favorites.length === 0 && <div>No favorites yet</div>}
           {favorites.map((data) => (
             <div className="my-5">

@@ -179,9 +179,7 @@ const PropertiesDetail = (props) => {
   return (
     <main>
       <section className="property-detail-title">
-        <div className="carousal">
-          <Carousel>{div(propertyData)}</Carousel>
-        </div>
+       
         <div id="container">
           <div class="product-details">
             <h1>{propertyData.title}</h1>
@@ -220,43 +218,47 @@ const PropertiesDetail = (props) => {
               <ul>
                 <li>
                   <strong>
-                    <BsCurrencyDollar />
+                    <BsCurrencyDollar />&nbsp;
                   </strong>
                   {propertyData.price}{" "}
-                </li>
+                </li><br></br>
                 <li>
                   <strong>
-                    <BiBed />
+                    <BiBed />&nbsp;
                   </strong>
                   {propertyData.bedrooms}
-                </li>
+                </li><br></br>
                 <li>
                   <strong>
-                    <GiBathtub />
+                    <GiBathtub />&nbsp;
                   </strong>{" "}
                   {propertyData.bathrooms}
-                </li>
+                </li><br></br>
                 <li>
                   <strong>
-                    <MdMyLocation />
+                    <MdMyLocation />&nbsp;
                   </strong>{" "}
                   {propertyData.address}
-                </li>
+                </li><br></br>
                 <li>
                   <strong>
-                    <MdLocationCity />
+                    <MdLocationCity />&nbsp;
                   </strong>
                   {propertyData.city}{" "}
-                </li>
+                </li><br></br>
                 <li>
                   <strong>
-                    <GoLocation />
+                    <GoLocation />&nbsp;
                   </strong>{" "}
                   {propertyData.zipcode}
                 </li>
               </ul>
             </div>
           </div>
+        </div>
+
+        <div className="carousal">
+          <Carousel>{div(propertyData)}</Carousel>
         </div>
       </section>
     </main>
