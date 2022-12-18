@@ -174,7 +174,7 @@ let removeFavorite = async (propertyId) => {
   let data = {
     propertyId: propertyId,
   };
-  let response = await axios.delete(BASE_URL + "/users/favorites", data, { headers: { Authorization: token } });
+  let response = await axios.post(BASE_URL + "/users/favorites/delete", data, { headers: { Authorization: token } });
   return response.data;
 };
 
