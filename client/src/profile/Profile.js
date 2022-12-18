@@ -39,8 +39,11 @@ const Profile = () => {
           <div className="col-md-3">
             {userData?.email ? (
               <div className="mt-4">
-                <h5><br /><MdOutlineEmail />
-                  {userData.email}</h5>
+                <h5>
+                  <br />
+                  <MdOutlineEmail />
+                  {userData.email}
+                </h5>
               </div>
             ) : null}
             <div>
@@ -67,7 +70,7 @@ const Profile = () => {
             {user.providerData[0].providerId === "password" ? (
               <div>
                 <button className="btn my-3 btn-secondary" style={{ width: "260px", backgroundColor: "transparent" }} data-bs-toggle="modal" data-bs-target="#change-password-modal">
-                    Change password
+                  Change password
                 </button>
               </div>
             ) : null}
