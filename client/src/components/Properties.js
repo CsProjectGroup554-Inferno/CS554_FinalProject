@@ -3,7 +3,7 @@ import serverRequest from "../serverRequest";
 import { Link } from "react-router-dom";
 // import { useAlert } from 'react-alert'
 import { Dropdown } from "react-bootstrap";
-import { BiBed, BiFontSize,BiHeart } from "react-icons/bi";
+import { BiBed, BiFontSize, BiHeart } from "react-icons/bi";
 import { GiBathtub } from "react-icons/gi";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
@@ -22,6 +22,16 @@ const Property = (props) => {
   let div = null;
   let d = null;
   let pagination = null;
+
+  let addPropertyToFavorite = async (id) => {
+    try {
+      await serverRequest.addFavorite(id);
+      alert("Added to favorite");
+    } catch (error) {
+      console.log(error);
+      alert(error.response.data.error);
+    }
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -60,61 +70,69 @@ const Property = (props) => {
     propertyData &&
     propertyData.map((property) => {
       return (
-        <><div key={property._id} className="container-prop">
-          <div className="box">
-            <Link to={"/properties/" + property._id}>
-              <div className="top">
-                <img src={property.imageData[0]} alt="" />
-                <span className="heart-icon">
-                  <BiHeart/>
+        <>
+          <div key={property._id} className="container-prop">
+            <div className="box">
+              <Link to={"/properties/" + property._id}>
+                <div className="top">
+                  <img src={property.imageData[0]} alt="" />
+                </div>
+              </Link>
+              <div className="bottom">
+                <span className="heart-icon" style={{ float: "right", cursor: "pointer" }} onClick={() => addPropertyToFavorite(property._id)}>
+                  <BiHeart />
                 </span>
-              </div>
-            </Link>
-            <div className="bottom">
-              <h1><b>Title: </b>{property.title}</h1>
-              <p className="about-prop" ><b>About property: </b>{property.description}</p>
-              <div className="advants">
-                <div>
-                  <span>Bedrooms</span>
+                <h1>
+                  <b>Title: </b>
+                  {property.title}
+                </h1>
+                <p className="about-prop">
+                  <b>About property: </b>
+                  {property.description}
+                </p>
+                <div className="advants">
                   <div>
-                    <BiBed/>
-                    <span>{property.bedrooms}</span>
+                    <span>Bedrooms</span>
+                    <div>
+                      <BiBed />
+                      <span>{property.bedrooms}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <span>Bathrooms</span>
+                    <div>
+                      <GiBathtub />
+                      <span>{property.bathrooms}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <span>Area</span>
+                    <div>
+                      <BiFontSize />
+                      <span>
+                        {property.size}
+                        <span>Sq Ft</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <span>City</span>
+                    <div>
+                      <GoLocation />
+                      <span>{property.city}</span>
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <span>Bathrooms</span>
-                  <div>
-                    <GiBathtub/>
-                    <span>{property.bathrooms}</span>
-                  </div>
+                <div className="price">
+                  <span>For Rent</span>
+                  <BsCurrencyDollar />
+                  <b>{property.price}</b>
                 </div>
-                <div>
-                  <span>Area</span>
-                  <div>
-                    <BiFontSize/>
-                    <span>
-                      {property.size}
-                      <span>Sq Ft</span>
-                    </span>
-                  </div>
-                </div><div></div>
-                <div>
-                  <span>City</span>
-                  <div>
-                    <GoLocation/>
-                    <span>
-                      {property.city}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="price">
-                <span>For Rent</span>
-                <BsCurrencyDollar/><b>{property.price}</b>
               </div>
             </div>
           </div>
-        </div></>
+        </>
       );
     });
 
@@ -286,9 +304,7 @@ const Property = (props) => {
 
         <div className="filter-column-reset">
           <a href="/properties?page=1" className="a-btn">
-            <button className="btn btn-default filter-dropdown ">
-              Reset
-            </button>
+            <button className="btn btn-default filter-dropdown ">Reset</button>
           </a>
         </div>
       </div>

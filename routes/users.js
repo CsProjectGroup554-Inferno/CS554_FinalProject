@@ -17,6 +17,7 @@ router.get("/allusers/:id", authorizeuser, async (req, res) => {
     return res.json(user);
   } catch (e) {
     res.status(500).json({ error: e });
+    return;
   }
 });
 
