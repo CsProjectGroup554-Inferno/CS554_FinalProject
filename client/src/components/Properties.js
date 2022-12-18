@@ -7,7 +7,6 @@ import { BiBed, BiFontSize, BiHeart } from "react-icons/bi";
 import { GiBathtub } from "react-icons/gi";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
-import { MdLocationCity, MdMyLocation } from "react-icons/md";
 import { useContext } from "react";
 import { AuthorizeContext } from "../Authorization/Authorize";
 

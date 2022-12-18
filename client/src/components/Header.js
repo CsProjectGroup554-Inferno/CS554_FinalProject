@@ -23,9 +23,7 @@ const Header = () => {
           <Nav className="me-auto"></Nav>
           <Nav>
             <NavDropdown title="Menu" id="collasible-nav-dropdown">
-              <NavDropdown.Item>
-                <Link to="/properties">Properties</Link>
-              </NavDropdown.Item>
+
 
               {!user ? (
                 <NavDropdown.Item>
@@ -33,6 +31,9 @@ const Header = () => {
                 </NavDropdown.Item>
               ) : (
                 <>
+                  <NavDropdown.Item>
+                    <Link to="/properties">Properties</Link>
+                  </NavDropdown.Item>
                   <NavDropdown.Item>
                     <Link to="/profile">Profile</Link>
                   </NavDropdown.Item>
