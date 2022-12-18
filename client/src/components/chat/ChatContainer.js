@@ -104,12 +104,12 @@ export default function ChatContainer({ currentChat, socket }) {
         <div className="user-details">
           <div className="avatar">
             <img
-              src={`${avatar2}`}
+              src={`${avatar}`}
               alt=""
             />
           </div>
           <div className="username">
-            <h3>harshil</h3>
+            <h3>{currentChat.email}</h3>
           </div>
         </div>
         

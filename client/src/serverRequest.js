@@ -85,7 +85,7 @@ let getAllProperty = async (page, filter, sort) => {
     response = await axios.get(BASE_URL + "/properties/?page=" + page);
   }
 
-  console.log(response);
+  // console.log(response);
   return response.data;
 };
 
