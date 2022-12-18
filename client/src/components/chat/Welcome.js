@@ -7,7 +7,7 @@ export default function Welcome() {
     setUserName(
        JSON.parse(
         localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-      ).email
+      ).userdata.email
     );
   }, []);
   return (

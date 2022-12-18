@@ -12,32 +12,36 @@ export default function Contacts({ contacts, changeChat, indexx, propertyContact
 
   
   useEffect(() => {
+    console.log("kkk"+localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
     const data = JSON.parse(
       localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
     );
+    // console.log(data)
 
-    setCurrentUserName(data.email);
+    setCurrentUserName(data.userdata.email);
     setCurrentUserImage(avatar2);
+    // console.log(data.index)
+    changeCurrentChat(data.index, data.propertyowner)
    
 
   }, []);
 
   
   const changeCurrentChat = (index, contact) => {
-    console.log(index + "&&" + JSON.stringify(contact))
+    // console.log(index + "&&" + JSON.stringify(contact))
     setCurrentSelected(index);
     changeChat(contact);
   };
   useEffect(() => {
     console.log("hhhh")
-    console.log(indexx)
-    console.log(JSON.stringify(contacts))
-    const data1 = JSON.parse(
-      localStorage.getItem(process.env.CONNECT_WITH_OWNER)
-    );
-    if (data1) {
-      changeCurrentChat(indexx, propertyContact)
-    }
+    
+    // const data1 = JSON.parse(
+    //   localStorage.getItem(process.env.CONNECT_WITH_OWNER)
+    // );
+    // console.log("ddd"+JSON.stringify(data1))
+    // if (data1) {
+     
+    // }
 
 
   }, []);

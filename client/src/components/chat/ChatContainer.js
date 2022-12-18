@@ -23,7 +23,7 @@ export default function ChatContainer({ currentChat, socket }) {
         let data = await serverRequest.getUserById(user.uid);
 
         setUserData(data);
-        console.log("x7" + JSON.stringify(data));
+        // console.log("x7" + JSON.stringify(data));
       };
       getData();
     }
@@ -34,13 +34,13 @@ export default function ChatContainer({ currentChat, socket }) {
       localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
     );
 
-
+console.log(JSON.stringify(data))
     let getData = async () => {
       const response = await axios.post(recieveMessageRoute, {
-        from: data.uid,
+        from: data.userdata.uid,
         to: currentChat._id,
       });
-      console.log("111"+JSON.stringify(response))
+      // console.log("111"+JSON.stringify(response))
       setMessages(response.data);
     }
     getData();
@@ -53,7 +53,7 @@ export default function ChatContainer({ currentChat, socket }) {
       if (currentChat) {
         await JSON.parse(
           localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-        ).uid;
+        ).userdata.uid;
       }
     };
     getCurrentChat();
@@ -65,13 +65,13 @@ export default function ChatContainer({ currentChat, socket }) {
     );
     socket.current.emit("send-msg", {
       to: currentChat._id,
-      from: data.uid,
+      from: data.userdata.uid,
       msg,
     });
 
     
      axios.post(sendMessageRoute, {
-        from: data.uid,
+        from: data.userdata.uid,
         to: currentChat._id,
         message: msg,
       });
