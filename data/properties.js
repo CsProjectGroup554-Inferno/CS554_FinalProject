@@ -121,6 +121,7 @@ let getAllProperty = async (page, filter, sort) => {
 // };
 
 let getPropertyById = async (id) => {
+  id = id.toString();
   // validate.checkString(id);
   const propertyCollection = await properties();
   // console.log(id);
@@ -209,15 +210,15 @@ let deletePropertyFromDB = async (id, ownerId) => {
   const propertyCollection = await properties();
   const deletionInfo = await propertyCollection.deleteOne({ _id: idObj });
   if (deletionInfo.deletedCount === 0) {
-    throw "Cpuld not delete property";
+    throw "Could not delete property";
   }
 
   // delete from favorite
   const userCollection = await users();
-  await userCollection.updateMany({}, { $pull: { favorite: id } });
+  await userCollection.updateMany({}, { $pull: { favorites: id } });
 
   // delete from owner's property list
-  const updateInfo = await userCollection.updateOne({ _id: ownerId }, { $pull: { property: idObj } });
+  const updateInfo = await userCollection.updateOne({ _id: ownerId }, { $pull: { properties: idObj } });
   if (!updateInfo.matchedCount && !updateInfo.modifiedCount) {
     throw "Could not delete property";
   }
