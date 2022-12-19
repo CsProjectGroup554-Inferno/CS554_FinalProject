@@ -5,10 +5,14 @@ import { auth } from "../Authorization/FirebaseConfig";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+// import "../../public/css/styles.min.css"
 
 const Header = () => {
   const { user } = useContext(AuthorizeContext);
   return (
+
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Link to="/">
@@ -38,7 +42,10 @@ const Header = () => {
           </Nav>
         </Navbar.Collapse>
       </Container>
+      
     </Navbar >
+
+
   );
 };
 
