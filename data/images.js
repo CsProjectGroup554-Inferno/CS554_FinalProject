@@ -20,8 +20,9 @@ async function validateImage(filePath) {
   const type = mimetype.mime.split("/");
 
   if (!type) throw "Invalid file type";
+  console.log(mimetype)
 
-  if (mimetype.mime !== "image/jpeg" && mimetype.mime !== "image/png" && mimetype.mime !== "image/jpg") {
+  if (mimetype.mime !== "image/jpeg" && mimetype.mime !== "image/png" && mimetype.mime !== "image/jpg" && mimetype.mime !== "image/avif") {
     fs.unlinkSync(filePath);
     throw "Invalid file type - must be jpeg or png";
   }
@@ -56,7 +57,7 @@ let splitBase64ToChunks = async (base64) => {
 let createGridFS = async (filePath, fileName, fieldName, mime) => {
   if (validateImage(filePath)) {
     let RawImageData = fs.readFileSync(filePath);
-    let dimensions = sizeOf(RawImageData);
+    //let dimensions = sizeOf(RawImageData);
     // let width = dimensions.width;
     // let height = dimensions.height;
     // if (dimensions.width > 1280) {
