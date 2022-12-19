@@ -39,9 +39,10 @@ const Property = (props) => {
     async function fetchData() {
       try {
         setLoading(true);
-        const un = await serverRequest.getAllProperty(1, "", "");
-        const allDBData = await getUnique(un.properties, "city");
+        // const un = await serverRequest.getAllProperty(1, "", "");
+        // const allDBData = await getUnique(un.properties, "city");
         const propData = await serverRequest.getAllProperty(page, filter, sort);
+        const allDBData = propData.properties[0].cities
         setPropertyData(propData.properties);
         setProperty(allDBData);
         setPageData({ next: propData.next, prev: propData.prev });
@@ -144,8 +145,8 @@ const Property = (props) => {
     allDBData.length > 0 &&
     allDBData.map((property, i) => {
       return (
-        <Dropdown.Item key={property.city} href={"?filter=" + property.city + "&sort=" + sort}>
-          {property.city}
+        <Dropdown.Item key={property} href={"?filter=" + property + "&sort=" + sort}>
+          {property}
         </Dropdown.Item>
       );
     });
@@ -237,7 +238,7 @@ const Property = (props) => {
                 Filter by city
               </Dropdown.Toggle>
 
-              <Dropdown.Menu className="dropdown-menu">{d}</Dropdown.Menu>
+              <Dropdown.Menu  className="dropdown-menu">{d}</Dropdown.Menu>
             </Dropdown>
           </div>
         </div>

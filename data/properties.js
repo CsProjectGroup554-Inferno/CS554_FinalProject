@@ -16,6 +16,9 @@ let getAllProperty = async (page, filter, sort) => {
     sort = {};
   }
 
+  if(!page){
+    page=1
+  }
   // console.log(page, filter);
   //filter
   validate.checkPage(page);
@@ -51,6 +54,26 @@ let getAllProperty = async (page, filter, sort) => {
   // console.log(filter);
   //get propert after filter and sort
   var allProperty = await propertyCollection.find(filter).sort(sort).toArray();
+  var allPropertyCity = await propertyCollection.find({}).sort({}).toArray();
+
+
+  allPropertyCity[0].cities = []
+  for(let i=0;i<allPropertyCity.length;i++){
+    allPropertyCity[0].cities.push(allPropertyCity[i].city)
+  }
+
+  allPropertyCity[0].cities= allPropertyCity[0].cities.filter((item, 
+    index) => allPropertyCity[0].cities.indexOf(item) === index);
+
+  for(let i=0;i<allProperty.length;i++){
+    allProperty[i].cities = []
+    allProperty[i].cities= allPropertyCity[0].cities
+  }
+
+
+
+
+  console.log(allProperty[0].cities[0])
   if (!allProperty) {
     throw "Property not found in data base";
   }
