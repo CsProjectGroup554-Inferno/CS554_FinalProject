@@ -15,7 +15,7 @@ const authorizeuser = async (req, res, next) => {
     const user = await userData.getUserById(req.user.uid);
     if (user === null) {
       const newUser = await userData.addUserToDB(req.user);
-      req.user = newUser;
+      req.user = newUser; 
     }
     next();
   } catch (error) {

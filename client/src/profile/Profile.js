@@ -15,7 +15,7 @@ const Profile = () => {
       let getData = async () => {
         let data = await serverRequest.getUserById(user.uid);
         setUserData(data);
-        console.log(data);
+        //console.log(data);
       };
       getData();
     }
