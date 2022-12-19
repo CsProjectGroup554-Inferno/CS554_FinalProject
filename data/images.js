@@ -57,15 +57,6 @@ let splitBase64ToChunks = async (base64) => {
 let createGridFS = async (filePath, fileName, fieldName, mime) => {
   if (validateImage(filePath)) {
     let RawImageData = fs.readFileSync(filePath);
-    //let dimensions = sizeOf(RawImageData);
-    // let width = dimensions.width;
-    // let height = dimensions.height;
-    // if (dimensions.width > 1280) {
-    //   RawImageData = await resizeImg(RawImageData, { width: 1280 });
-    // }
-    // if (height > 720) {
-    //   RawImageData = await resizeImg(RawImageData, { height: 720 });
-    // }
     // compress image
     const buffer = await imagemin.buffer(RawImageData, {
       plugins: [imageminMozjpeg({ quality: 80 }), imageminPngquant({ quality: [0.6, 0.8] })],
@@ -83,20 +74,11 @@ let createGridFS = async (filePath, fileName, fieldName, mime) => {
 
     let newImages = {
       filename: fileName,
-      //contentType: "image/jpeg",
       contentType: mime,
-
-      //length: base64.length,
-      //chunkSize: 255 * 1024,
       chunkSize: 261120,
       uploadDate: new Date(),
       md5: md5(base64),
 
-      // metadata: {
-      //   fieldName: fieldName,
-      //   width: width,
-      //   height: height,
-      // },
     };
     const insertInfo = await ImagesCollection.insertOne(newImages);
     if (insertInfo.aknowledged === false) {

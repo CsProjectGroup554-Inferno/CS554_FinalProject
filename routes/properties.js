@@ -75,13 +75,10 @@ router.get("/", async (req, res) => {
   let propData;
   try {
     propData = await propertiesData.getAllProperty(req.query.page, filter, sort);
-    // console.log(propData);
 
     for (let i = 0; i < propData.properties.length; i++) {
       propData.properties[i].imageData = [];
-      // for (let j = 0; j < propData.properties[i].images.length; j++) {
       propData.properties[i].imageData.push(await imageData.getImageById(propData.properties[i].images[0].toString()));
-      // }
     }
     res.json(propData);
   } catch (e) {
@@ -129,7 +126,6 @@ router.get("/:id", async (req, res) => {
   try {
     let ownerId = property.owner;
     property.owner = await userData.getUserById(ownerId);
-    // res.json(property);
   } catch (e) {
     res.status(500).json({ error: e });
   }
@@ -149,7 +145,6 @@ router.get("/:id", async (req, res) => {
 router.post("/", authorizeuser, async (req, res) => {
   let propertyInfo = req.body.owner;
   let owner = req.user.uid;
-  //console.log(owner);
 
   let imagesInfo = propertyInfo.images;
   propertyInfo.images = [];
@@ -229,7 +224,6 @@ router.put("/:id", authorizeuser, async (req, res) => {
 
   try {
     let pid = req.params.id;
-    // console.log("pid", propertyBody);
     const property = await propertiesData.updatePropertyInDB(pid, propertyBody);
 
     // reset property redis

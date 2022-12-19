@@ -1,14 +1,8 @@
-import { useContext } from "react";
-// import { Link } from "react-router-dom";
-import { AuthorizeContext } from "../Authorization/Authorize";
-// import { auth } from "../Authorization/FirebaseConfig";
-// import { Helmet } from 'react-helmet-async';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const { user } = useContext(AuthorizeContext);
   return (
     <>
 
@@ -73,7 +67,6 @@ const Home = () => {
           <meta charset="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <title>About us</title>
-          {/* <link rel="stylesheet" href="{% static 'about.css' %}" /> */}
           <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
             integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />

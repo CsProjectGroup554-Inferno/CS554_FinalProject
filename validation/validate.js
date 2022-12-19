@@ -114,10 +114,10 @@ const checkPropertyInfo = async (info) => {
   this.checkString(info.title);
   this.checkString(info.description);
   this.checkString(info.city);
-  this.checkPrice(info.price);
-  this.checkBedroom(info.bedrooms);
-  this.checkBathroom(info.bathrooms);
-  this.checkSize(info.size);
+  this.checkPrice(parseInt(nfo.price));
+  this.checkBedroom(parseInt(info.bedrooms));
+  this.checkBathroom(parseInt(info.bathrooms));
+  this.checkSize(parseInt(info.size));
   this.checkString(info.address);
   this.checkString(info.zipcode);
   this.checkString(info.images);

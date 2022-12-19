@@ -24,7 +24,6 @@ const PropertiesDetail = (props) => {
       try {
         setLoading(true);
         const property = await serverRequest.getPropertyById(id);
-        // console.log(property);
         setPropertyData(property);
         setLoading(false);
       } catch (e) {
@@ -32,7 +31,7 @@ const PropertiesDetail = (props) => {
       }
     }
     fetchData();
-  }, [props, id, user]);
+  }, [props, id]);
 
   let addPropertyToFavorite = async () => {
     try {
@@ -51,16 +50,16 @@ const PropertiesDetail = (props) => {
       const id = propertyData.owner._id;
       let data1 = await serverRequest.getallUser(id);
       let data2 = await serverRequest.getUserById(id);
-      // console.log("index" + JSON.stringify(data1))
       let indexx = data1.findIndex((x) => x._id === id);
-      // console.log("index" + indexx);
-      // console.log(data1);
-      // console.log(data2)
-      // setpropertyindex(indexx)
-
-      // setContacts(data1);
-
-      localStorage.setItem(process.env.CONNECT_WITH_OWNER, JSON.stringify(propertyData.owner));
+      let oldData = JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY));
+      let data3 = {
+        index: indexx,
+        propertyowner: data2,
+        data: propertyData.owner,
+      };
+      console.log(JSON.stringify(oldData));
+      const updatedPosts = { ...oldData, ...data3 };
+      localStorage.setItem(process.env.REACT_APP_LOCALHOST_KEY, JSON.stringify(updatedPosts));
       navigate("/chat");
     } catch (error) {
       console.log(error);

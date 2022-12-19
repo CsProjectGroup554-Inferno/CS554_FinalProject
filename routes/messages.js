@@ -38,7 +38,6 @@ router.post("/getmsg/", async (req, res, next) => {
     try {
 
         const { from, to } = req.body;
-        // console.log("hh3"+JSON.stringify({ from, to }) )
         const userCollection = await dMessage();
 
         const messages = await userCollection.find({
@@ -46,7 +45,6 @@ router.post("/getmsg/", async (req, res, next) => {
                 $all: [from, to],
             },
         }).sort({ updatedAt: 1 }).toArray();
-        // console.log("hh2"+JSON.stringify(messages))
 
         const projectedMessages = messages.map((msg) => {
             return {
@@ -54,7 +52,6 @@ router.post("/getmsg/", async (req, res, next) => {
                 message: msg.message.text,
             };
         });
-        // console.log("hh1"+JSON.stringify(projectedMessages))
         res.json(projectedMessages);
     } catch (ex) {
         next(ex);

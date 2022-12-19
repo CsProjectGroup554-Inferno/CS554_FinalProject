@@ -15,7 +15,6 @@ const Profile = () => {
       let getData = async () => {
         let data = await serverRequest.getUserById(user.uid);
         setUserData(data);
-        //console.log(data);
       };
       getData();
     }
@@ -67,13 +66,6 @@ const Profile = () => {
                 </button>
               </Link>
             </div>
-            {/* <div>
-              <Link className="card-body" to="/profile/properties/edit">
-                <button className="btn my-3 btn-secondary" style={{ width: "260px", backgroundColor: "transparent" }}>
-                  Edit Property
-                </button>
-              </Link>
-            </div> */}
             {user.providerData[0].providerId === "password" ? (
               <div>
                 <button className="btn my-3 btn-secondary" style={{ width: "260px", backgroundColor: "transparent" }} data-bs-toggle="modal" data-bs-target="#change-password-modal">

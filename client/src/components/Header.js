@@ -5,7 +5,6 @@ import { auth } from "../Authorization/FirebaseConfig";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 
 const Header = () => {
   const { user } = useContext(AuthorizeContext);
@@ -15,9 +14,6 @@ const Header = () => {
         <Link to="/">
           <Navbar.Brand>NJ Rental</Navbar.Brand>
         </Link>
-        {/* <Link to="/properties" className="mx-auto propertyHead">
-          <Navbar.Text>Properties</Navbar.Text>
-        </Link> */}
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>

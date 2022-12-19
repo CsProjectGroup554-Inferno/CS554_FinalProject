@@ -116,7 +116,6 @@ const AddProperty = (props) => {
       size: eventInfo.size.value,
       zipcode: eventInfo.zipcode.value,
       address: eventInfo.address.value,
-      //type: eventInfo.type.value,
     };
 
     let time = new Date();
@@ -124,31 +123,31 @@ const AddProperty = (props) => {
     data.images = imageData;
 
     try {
-      // TODO move these checker into function
-      //if (!data.title) throw Object.assign(new Error("title not exist"), { code: null });
-      //if (data.title.length > 70) throw Object.assign(new Error("title too long"), { code: null });
-      //if (!data.description) throw Object.assign(new Error("description not exist"), { code: null });
-      //if (data.description.length > 1000) throw Object.assign(new Error("description too long"), { code: null });
-      // if (!data.bedroom) throw Object.assign(new Error("bedroom not exist"), { code: null });
-      // if (parseInt(data.bedroom) < 1 || parseInt(data.bedroom) > 10) throw Object.assign(new Error("bedroom number invalid"), { code: null });
-      // if (!data.bath) throw Object.assign(new Error("bath not exist"), { code: null });
 
-      // if (parseInt(data.bath) < 0 || parseInt(data.bath) > 10) throw Object.assign(new Error("bath number invalid"), { code: null });
-      // if (!data.price) throw Object.assign(new Error("price not exist"), { code: null });
-      // if (parseInt(data.price) < 0) throw Object.assign(new Error("price invalid"), { code: null });
-      // if (!data.zipcode) throw Object.assign(new Error("zipcode not exist"), { code: null });
-      // if (data.zipcode.length !== 5) throw Object.assign(new Error("zipcode invalid"), { code: null });
-      // if (!data.type) throw Object.assign(new Error("type is not exist"), { code: null });
-      // if (data.type !== "apartment" && data.type !== "house") throw Object.assign(new Error("type is invalid"), { code: null });
+      // TODO move these checker into function
+      if (!data.title) throw Object.assign(new Error("title data does not exist"), { code: null });
+      if (!data.address) throw Object.assign(new Error("address data does not exist"), { code: null });
+      if (data.title.length > 70 || typeof data.title != "string") throw Object.assign(new Error("title data too long or invalid"), { code: null });
+      if (!data.description) throw Object.assign(new Error("description data does not exist"), { code: null });
+      if (data.description.length > 3000 || typeof data.description != "string" ) throw Object.assign(new Error("description data too long or invalid"), { code: null });
+      if (!data.bedrooms) throw Object.assign(new Error("bedroom data does not exist"), { code: null });
+      if (parseInt(data.bedrooms) < 1 || parseInt(data.bedrooms) > 10) throw Object.assign(new Error("bedroom data is invalid"), { code: null });
+      if (!data.bathrooms) throw Object.assign(new Error("bathroom data does not exist"), { code: null });
+      if (parseInt(data.bathrooms) < 0 || parseInt(data.bathrooms) > 10) throw Object.assign(new Error("bathroom data is invalid"), { code: null });
+      if (!data.size) throw Object.assign(new Error("size data does not exist"), { code: null });
+      if (parseInt(data.size) < 0 ) throw Object.assign(new Error("size data is invalid"), { code: null });
+      if (!data.price) throw Object.assign(new Error("price data does not exist"), { code: null });
+      if (parseInt(data.price) < 0) throw Object.assign(new Error("price invalid"), { code: null });
+      if (!data.zipcode) throw Object.assign(new Error("zipcode data does not exist"), { code: null });
+      if (!data.city || typeof data.description != "string") throw Object.assign(new Error("City data does not exist or is invalid"), { code: null });
+      if (data.zipcode.length !== 5 || typeof data.description != "string") throw Object.assign(new Error("Zipcode data is invalid"), { code: null });
 
       await serverRequest.addProperty(user, data);
 
       setLoading(false);
-      //alert.current.success("post sucessfully");
       props.history.push("/profile");
     } catch (error) {
       setLoading(false);
-      //alert.current.error(error.message);
     }
   };
   if (loading) {

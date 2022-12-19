@@ -3,10 +3,8 @@ const properties = mongoCollections.properties;
 const users = mongoCollections.users;
 const validate = require("../validation/validate");
 const { ObjectId } = require("mongodb");
-// const xss = require("xss");
 
 let getAllProperty = async (page, filter, sort) => {
-  // validate.checkPage(page);
   //sort
   if (sort && sort === "priceUp") {
     sort = { price: 1 };
@@ -19,12 +17,10 @@ let getAllProperty = async (page, filter, sort) => {
   if(!page){
     page=1
   }
-  // console.log(page, filter);
   //filter
   validate.checkPage(page);
   const propertyCollection = await properties();
   const propertyCity = await propertyCollection.findOne({ city: filter });
-  // console.log(propertyCity);
   if (filter && filter === "price1") {
     filter = { price: { $lt: 1000 } };
   } else if (filter && filter === "price2") {
@@ -38,7 +34,7 @@ let getAllProperty = async (page, filter, sort) => {
   } else if (filter && filter === "3") {
     filter = { bedrooms: { $eq: 3 } };
   } else if (filter && filter === "4") {
-    filter = { bedrooms: { $eq: 4 } };
+    filter = { bedrooms: { $gte: 4 } };
   } else if (filter && filter === "size1") {
     filter = { size: { $lt: 1000 } };
   } else if (filter && filter === "size2") {
@@ -51,7 +47,6 @@ let getAllProperty = async (page, filter, sort) => {
     filter = {};
   }
 
-  // console.log(filter);
   //get propert after filter and sort
   var allProperty = await propertyCollection.find(filter).sort(sort).toArray();
   var allPropertyCity = await propertyCollection.find({}).sort({}).toArray();
@@ -69,9 +64,6 @@ let getAllProperty = async (page, filter, sort) => {
     allProperty[i].cities = []
     allProperty[i].cities= allPropertyCity[0].cities
   }
-
-
-
 
   console.log(allProperty[0].cities[0])
   if (!allProperty) {
@@ -102,48 +94,22 @@ let getAllProperty = async (page, filter, sort) => {
   }
   data.properties = allProperty;
 
-  // console.log(data);
   return data;
 };
 
-//remove code later filter with city preset above
-// let getPropertiesByCity = async (city) => {
-//   // validate.checkString(city);
-//   const propertyCollection = await properties();
-//   const property = await propertyCollection.find({ city: city }).toArray();
-
-//   if (!property) throw "Property not found in this city";
-//   // convert all _id to string
-//   for (let i = 0; i < property.length; i++) {
-//     property[i]._id = property[i]._id.toString();
-//   }
-//   return property;
-// };
 
 let getPropertyById = async (id) => {
   id = id.toString();
-  // validate.checkString(id);
+  validate.checkId(id);
   const propertyCollection = await properties();
-  // console.log(id);
   const property = await propertyCollection.findOne({ _id: ObjectId(id) });
-  // console.log(property);
   if (!property) throw "Property not found for this id";
   property._id = property._id.toString();
   return property;
 };
 
 let addPropertyToDB = async (property, userId) => {
-  // validate.checkString(property.title);
-  // validate.checkString(property.description);
-  // validate.checkString(property.city);
-  // validate.checkString(property.price);
-  // validate.checkString(property.bedrooms);
-  // validate.checkString(property.bathrooms);
-  // validate.checkString(property.size);
-  // validate.checkString(property.address);
-  // validate.checkString(property.zipcode);
-  // validate.checkString(property.images);
-  // validate.checkString(userId);
+  validate.checkPropertyInfo(property)
 
   const propertyCollection = await properties();
   const newProperty = {
@@ -175,9 +141,10 @@ let addPropertyToDB = async (property, userId) => {
 };
 
 let updatePropertyInDB = async (id, propertyUpdateInfo) => {
-  validate.checkId(id);
   id = id.toString();
-  // validate.checkPropertyInfo(propertyUpdateInfo);
+  validate.checkId(id);
+
+  validate.checkPropertyInfo(propertyUpdateInfo);
   const objId = ObjectId.createFromHexString(id);
 
   let data = {
