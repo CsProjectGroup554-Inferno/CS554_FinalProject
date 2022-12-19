@@ -6,7 +6,9 @@ import Chat from "./pages/Chat";
 import Login from "./Authorization/Login";
 import SignUp from "./Authorization/SignUp";
 import "./App.css";
+
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./coustom.css";
 import Profile from "./profile/Profile";
 import ProtectedRoutes from "./Authorization/ProtectedRoutes";
 import Home from "./components/Home";
@@ -19,6 +21,7 @@ import MyProperty from "./profile/MyProperty";
 
 function App() {
   return (
+  
     <AuthorizeProvider>
       <Router>
         <Header />

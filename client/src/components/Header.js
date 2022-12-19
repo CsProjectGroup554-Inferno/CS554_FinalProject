@@ -5,6 +5,9 @@ import { auth } from "../Authorization/FirebaseConfig";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+// import "../../public/css/styles.min.css"
 
 const Header = () => {
   const { user } = useContext(AuthorizeContext);
@@ -19,12 +22,20 @@ const Header = () => {
           <Nav className="me-auto"></Nav>
           <Nav>
             {!user ? (
-              <Link to="/login" className="nav-link">Login</Link>
+              <Link to="/login" className="nav-link">
+                Login
+              </Link>
             ) : (
               <>
-                <Link to="/properties" className="nav-link">Properties</Link>
-                <Link to="/profile" className="nav-link">Profile</Link>
-                <Link to="/chat" className="nav-link">Message</Link>
+                <Link to="/properties" className="nav-link">
+                  Properties
+                </Link>
+                <Link to="/profile" className="nav-link">
+                  Profile
+                </Link>
+                <Link to="/chat" className="nav-link">
+                  Message
+                </Link>
 
                 <Link to="/" onClick={() => auth.signOut()} className="nav-link">
                   Logout
@@ -33,12 +44,14 @@ const Header = () => {
             )}
 
             {!user && (
-              <Link to="/signup" className="nav-link">Sign up</Link>
+              <Link to="/signup" className="nav-link">
+                Sign up
+              </Link>
             )}
           </Nav>
         </Navbar.Collapse>
       </Container>
-    </Navbar >
+    </Navbar>
   );
 };
 

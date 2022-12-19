@@ -91,18 +91,18 @@ li a:hover {
 .home-section1 {
   text-align: center;
   background-color: #000;
-  padding: 100px;
+  padding: 100px 0;
 }
 
 .home-section2 {
   text-align: center;
-  padding: 100px;
+  padding: 100px 0;
   background-color: #000;
 }
 
 .home-section3 {
   text-align: center;
-  padding: 100px;
+  padding: 100px 0;
   background-color: #000;
 }
 
@@ -147,9 +147,8 @@ li a:hover {
 }
 
 .img-column {
-  background-color: #000;
-  float: left;
-  width: 20% !important;
+  
+  width: 100% !important;
   height: 320px;
   text-align: center;
 }
@@ -197,9 +196,10 @@ li a:hover {
 
 .circular--square {
   border-radius: 50%;
-  width: 80%;
-  margin: 25px;
-  height: 70%;
+    margin: 25px;
+    height: 200px;
+    border: 5px solid #464040;
+    width: 200px;
 }
 
 .img-circlle-title {
@@ -1065,7 +1065,6 @@ input:focus {
 .navbar-text {
   color: white !important;
 }
-
 
 .nav-link{
   color: #e8e8e8 !important;
