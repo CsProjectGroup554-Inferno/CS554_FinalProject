@@ -7,12 +7,12 @@ import { BiBed, BiFontSize, BiHeart } from "react-icons/bi";
 import { GiBathtub } from "react-icons/gi";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
+import Profile from "./Profile";
 const MyProperty = (props) => {
   const { user } = useContext(AuthorizeContext);
   const [propertyData, setPropertyData] = useState([]);
   const [loading, setLoading] = useState(true);
   let div = null;
-
 
   useEffect(() => {
     async function fetchData() {
@@ -28,16 +28,14 @@ const MyProperty = (props) => {
     fetchData();
   }, [user]);
 
-  const handleDelete = async (event) => {
-    event.preventDefault();
-    let propertyId = event.target.getAttribute("data-property");
+  const handleDelete = async (propertyId) => {
     try {
       await serverRequest.deleteProperty(propertyId, user);
-      const { data: resData } = await serverRequest.getUser(user);
-      setPropertyData(resData.property);
-      alert.success("deleted");
+      const resData = await serverRequest.getUser(user);
+      setPropertyData(resData.properties);
+      alert("Property deleted");
     } catch (e) {
-      alert.error(e.message);
+      alert(e.message);
     }
   };
 
@@ -109,8 +107,11 @@ const MyProperty = (props) => {
     propertyData.map((property) => {
       return (
         <>
-          <div key={property._id} className="container-prop">
-            <div className="box">
+          <button className="btn btn-danger mb-2" style={{ float: "right", marginRight: "50px" }} onClick={() => handleDelete(property._id)}>
+            Remove
+          </button>
+          <div key={property._id} className="container-prop" style={{ marginTop: "20px" }}>
+            <div className="box" style={{ marginLeft: "30px", marginRight: "30px", width: "100%" }}>
               <Link to={"/properties/" + property._id}>
                 <div className="top">
                   <img src={property.imageData[0]} alt="" />
@@ -190,14 +191,27 @@ const MyProperty = (props) => {
   return (
     <>
       <title>My property - NJ Rental</title>
-      <div className="row property-card property-add mb-3">
-        <Link className="align-self-center d-flex align-items-center justify-content-center" to="/profile/properties/add">
-          <button className="btn my-3 btn-secondary" style={{ width: "260px", backgroundColor: "transparent" }}>
-            Add Property
-          </button>
-        </Link>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-3">
+            <Profile />
+          </div>
+
+          <div className="col-md-9" style={{ padding: "30px", marginTop: "20px" }}>
+            <h1 style={{ textAlign: "center" }}>My Properties</h1>
+            {propertyData.length === 0 ? (
+              <div className="row property-card property-add mb-3">
+                <Link className="align-self-center d-flex align-items-center justify-content-center" to="/profile/properties/add">
+                  <button className="btn my-3 btn-secondary" style={{ width: "260px", backgroundColor: "transparent" }}>
+                    Add Property
+                  </button>
+                </Link>
+              </div>
+            ) : null}
+            {div}
+          </div>
+        </div>
       </div>
-      {div}
     </>
   );
 };

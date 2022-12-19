@@ -15,6 +15,10 @@ const base64Img = require("base64-img");
 router.delete("/:id", authorizeuser, async (req, res) => {
   try {
     const propertyId = req.params.id;
+    await client.connect();
+    // reset property redis
+    await client.del("property" + req.params.id);
+    await client.quit();
     // get owner id
     const property = await propertiesData.getPropertyById(propertyId);
     if (!property) {
@@ -23,6 +27,7 @@ router.delete("/:id", authorizeuser, async (req, res) => {
     if (property.owner !== req.user.uid) {
       res.status(401).json({ error: "Unauthorized" });
     }
+    const deletedProperty = await propertiesData.deletePropertyFromDB(req.params.id, property.owner);
 
     // remove images
     try {
@@ -31,16 +36,10 @@ router.delete("/:id", authorizeuser, async (req, res) => {
         await imageData.deleteImageandChunks(imageId);
       }
     } catch (e) {
-      res.status(500).json({ error: "fail removing images" });
+      res.status(500).json({ error: e });
       return;
     }
 
-    const deletedProperty = await propertiesData.deletePropertyFromDB(req.params.id, ownerId);
-
-    await client.connect();
-    // reset property redis
-    await client.delAsync("property" + req.params.id);
-    await client.quit();
     res.json(deletedProperty);
   } catch (e) {
     await client.quit();
@@ -160,10 +159,9 @@ router.post("/", authorizeuser, async (req, res) => {
       imageData.validateBase64(imagesInfo[i][2]);
       let filepath = await base64Img.imgSync(imagesInfo[i][2], "./public/img", imagesInfo[i][0].split(".")[0]);
 
-      let mime = "image/" + filepath.split('.').pop()
+      let mime = "image/" + filepath.split(".").pop();
 
-      let id = await imageData.createGridFS(filepath, imagesInfo[i][0], imagesInfo[i][1], mime)
-
+      let id = await imageData.createGridFS(filepath, imagesInfo[i][0], imagesInfo[i][1], mime);
 
       propertyInfo.images.push(id);
     }

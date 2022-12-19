@@ -20,7 +20,7 @@ async function validateImage(filePath) {
   const type = mimetype.mime.split("/");
 
   if (!type) throw "Invalid file type";
-  console.log(mimetype)
+  console.log(mimetype);
 
   if (mimetype.mime !== "image/jpeg" && mimetype.mime !== "image/png" && mimetype.mime !== "image/jpg" && mimetype.mime !== "image/avif") {
     fs.unlinkSync(filePath);
@@ -124,7 +124,6 @@ let createGridFS = async (filePath, fileName, fieldName, mime) => {
 
 let deleteImageandChunks = async (id) => {
   if (!id) throw "You must provide an id to search for and delete";
-  if (typeof id !== "string" || id.trim() === "") throw "Invalid id";
   if (!ObjectId.isValid(id)) throw "Invalid id";
   const ImagesCollection = await images();
   const ChunksCollection = await chunks();

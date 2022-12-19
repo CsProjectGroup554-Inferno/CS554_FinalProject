@@ -1,10 +1,7 @@
 import { AuthorizeContext } from "../Authorization/Authorize";
-//import React, { useContext, useState, useCallback, useRef } from "react";
 import React, { useContext, useState, useCallback } from "react";
 import ReactTooltip from "react-tooltip";
-//import { Helmet } from "react-helmet-async";
 import { useDropzone } from "react-dropzone";
-//import { useAlert } from "react-alert";
 import serverRequest from "../serverRequest";
 import Profile from "./Profile";
 import { BiImageAdd } from "react-icons/bi";
@@ -171,8 +168,7 @@ const AddProperty = (props) => {
           <Profile />
         </div>
         <div className="col-md-9" style={{ padding: "30px" }}>
-          <title>Create property </title>
-          <h1 style={{ textAlign: "center" }}>Post Property</h1>
+          <h1 style={{ textAlign: "center" }}>Property Data</h1>
           <form onSubmit={addProperty}>
             <div className="row form-group-add">
               <div className="col-md-12 ">
@@ -188,11 +184,6 @@ const AddProperty = (props) => {
                   <textarea id="description" rows="10" className="form-control" name="description" type="text" placeholder="description" />
                 </div>
               </div>
-
-              {/* <div className="col-md-12">
-            {uploadImage}
-            {preview ? <div className="row mb-2">{preview}</div> : null}
-          </div> */}
 
               <div className="col-md-3 ">
                 <div className="form-group-add-content">
