@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { auth, googleProvider } from "./FirebaseConfig";
 import { AuthorizeContext } from "./Authorize";
 import validate from "../validation/index";
-import { signInWithEmailAndPassword, signInWithRedirect } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup, signInWithRedirect } from "firebase/auth";
 import { Link, Navigate } from "react-router-dom";
 
 const Login = () => {
@@ -16,15 +16,15 @@ const Login = () => {
       await validate.password(password.value);
       await signInWithEmailAndPassword(auth, email.value, password.value);
     } catch (error) {
-      alert(error.message);
+      console.log(error);
     }
   };
   const handleLogInWithGoogle = async () => {
     try {
       // close the popup window after login
-      await signInWithRedirect(auth, googleProvider);
+      await signInWithPopup(auth, googleProvider);
     } catch (error) {
-      alert(error.message);
+      console.log(error);
     }
   };
   if (user) {
