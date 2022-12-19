@@ -16,9 +16,12 @@ async function validateImage(filePath) {
   if (!filePath) throw "You must provide a file path";
   let stream = fs.createReadStream(filePath);
   let mimetype = await fileType.fromStream(stream);
+
   const type = mimetype.mime.split("/");
+
   if (!type) throw "Invalid file type";
-  if (type.mime !== "image/jpeg" && type.mime !== "image/png" && type.mime !== "image/jpg") {
+
+  if (mimetype.mime !== "image/jpeg" && mimetype.mime !== "image/png" && mimetype.mime !== "image/jpg") {
     fs.unlinkSync(filePath);
     throw "Invalid file type - must be jpeg or png";
   }
@@ -31,13 +34,13 @@ async function validateImage(filePath) {
     throw "File size too large";
   }
   return true;
-};
+}
 
 function validateBase64(base64) {
   if (!base64) throw "You must provide a base64 string";
   let re = /^data:image\/(jpeg|png|jpg);base64,/;
   if (!re.test(base64)) throw "Invalid base64 string";
-};
+}
 
 let splitBase64ToChunks = async (base64) => {
   let chunkSize = 255 * 1024;
@@ -50,18 +53,18 @@ let splitBase64ToChunks = async (base64) => {
   return chunks;
 };
 
-let createGridFS = async (filePath, fileName, fieldName) => {
+let createGridFS = async (filePath, fileName, fieldName, mime) => {
   if (validateImage(filePath)) {
     let RawImageData = fs.readFileSync(filePath);
-    let dimensions = sizeOf(RawImageData);  
-    let width = dimensions.width;
-    let height = dimensions.height;
-    if (dimensions.width > 1280) {
-      RawImageData = await resizeImg(RawImageData, { width: 1280 });
-    }
-    if (height > 720) {
-      RawImageData = await resizeImg(RawImageData, { height: 720 });
-    }
+    let dimensions = sizeOf(RawImageData);
+    // let width = dimensions.width;
+    // let height = dimensions.height;
+    // if (dimensions.width > 1280) {
+    //   RawImageData = await resizeImg(RawImageData, { width: 1280 });
+    // }
+    // if (height > 720) {
+    //   RawImageData = await resizeImg(RawImageData, { height: 720 });
+    // }
     // compress image
     const buffer = await imagemin.buffer(RawImageData, {
       plugins: [imageminMozjpeg({ quality: 80 }), imageminPngquant({ quality: [0.6, 0.8] })],
@@ -73,17 +76,20 @@ let createGridFS = async (filePath, fileName, fieldName) => {
     const ChunksCollection = await chunks();
 
     let base64 = base64Img.base64Sync(filePath);
+
+    const type = fileName.split("/");
+    console.log("type", type);
+
     let newImages = {
       filename: fileName,
       //contentType: "image/jpeg",
-      contentType: mimetype,
+      contentType: mime,
 
       //length: base64.length,
       //chunkSize: 255 * 1024,
       chunkSize: 261120,
       uploadDate: new Date(),
       md5: md5(base64),
-
 
       // metadata: {
       //   fieldName: fieldName,

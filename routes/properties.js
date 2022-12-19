@@ -159,7 +159,12 @@ router.post("/", authorizeuser, async (req, res) => {
     for (let i = 0; i < imagesInfo.length; i++) {
       imageData.validateBase64(imagesInfo[i][2]);
       let filepath = await base64Img.imgSync(imagesInfo[i][2], "./public/img", imagesInfo[i][0].split(".")[0]);
-      let id = await imageData.createGridFS(filepath, imagesInfo[i][0], imagesInfo[i][1]);
+
+      let mime = "image/" + filepath.split('.').pop()
+
+      let id = await imageData.createGridFS(filepath, imagesInfo[i][0], imagesInfo[i][1], mime)
+    
+
       propertyInfo.images.push(id);
     }
   } catch (e) {
