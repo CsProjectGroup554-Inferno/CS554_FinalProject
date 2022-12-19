@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useContext } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthorizeProvider } from "./Authorization/Authorize";
-import { AuthorizeContext } from "./Authorization/Authorize";
-import serverRequest from "./serverRequest";
 import Header from "./components/Header";
-import Chat1 from "./components/Chat";
 import Chat from "./pages/Chat";
 import Login from "./Authorization/Login";
 import SignUp from "./Authorization/SignUp";
@@ -18,15 +14,10 @@ import Properties from "./components/Properties";
 import PropertiesDetail from "./components/PropertiesDetail";
 import AddProperty from "./profile/AddProperty";
 import Favorites from "./profile/Favorites";
-import socket from "./socket";
-import Csocket from "./components/Csocket";
 import MyProperty from "./profile/MyProperty";
 // import EditProperty from "./profile/EditProperty";
 
 function App() {
-  const [userData, setUserData] = useState(null);
-  const [userName, setUserName] = useState("");
-  const [usersList, addUsers] = useState([]);
 
   return (
     <AuthorizeProvider>

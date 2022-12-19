@@ -178,6 +178,7 @@ let removeFavorite = async (propertyId) => {
   return response.data;
 };
 
+
 let exports = {
   getUserById,
   changePassword,

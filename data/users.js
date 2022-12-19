@@ -40,9 +40,6 @@ let addUserToDB = async (user) => {
   return userData;
 };
 
-// let getUserData = async (id) => {
-//   // this method gets detailed user data
-// };
 
 let getFavoritesList = async (id) => {
   // this method gets the list of favorites for a user

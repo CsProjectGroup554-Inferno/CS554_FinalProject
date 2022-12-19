@@ -4,7 +4,6 @@ const Sidebar = (props) => {
   const userList = props.connectedUsers;
   const un = props.username;
 
-  // console.log("In sidebar userlist:", userList);
 
   let selectedUser = "";
 

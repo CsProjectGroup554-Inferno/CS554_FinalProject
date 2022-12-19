@@ -55,9 +55,7 @@ router.get("/", authorizeuser, async (req, res) => {
 
     for (let i = 0; i < properties.length; i++) {
       properties[i].imageData = [];
-      // for (let j = 0; j < propData.properties[i].images.length; j++) {
       properties[i].imageData.push(await imageData.getImageById(properties[i].images[0].toString()));
-      // }
     }
     console.log(properties)
 

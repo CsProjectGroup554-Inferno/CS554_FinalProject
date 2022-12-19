@@ -1,7 +1,6 @@
-import React, { useState, useEffect /*useRef */ } from "react";
+import React, { useState, useEffect } from "react";
 import serverRequest from "../serverRequest";
 import { Link } from "react-router-dom";
-// import { useAlert } from 'react-alert'
 import { Dropdown } from "react-bootstrap";
 import { BiBed, BiFontSize, BiHeart } from "react-icons/bi";
 import { GiBathtub } from "react-icons/gi";
@@ -16,7 +15,6 @@ const Property = (props) => {
   const [pageData, setPageData] = useState({});
   const [loading, setLoading] = useState(true);
   const { user } = useContext(AuthorizeContext);
-  // const alert = useRef(useAlert());
   const urlParams = new URLSearchParams(window.location.search);
   let page = urlParams.get("page") || 1;
   let filter = urlParams.get("filter") || "null";
@@ -39,8 +37,6 @@ const Property = (props) => {
     async function fetchData() {
       try {
         setLoading(true);
-        // const un = await serverRequest.getAllProperty(1, "", "");
-        // const allDBData = await getUnique(un.properties, "city");
         const propData = await serverRequest.getAllProperty(page, filter, sort);
         const allDBData = propData.properties[0].cities
         setPropertyData(propData.properties);
@@ -48,23 +44,8 @@ const Property = (props) => {
         setPageData({ next: propData.next, prev: propData.prev });
         setLoading(false);
       } catch (e) {
-        // alert.current.error(e.message)
         setLoading(false);
       }
-    }
-    async function getUnique(arr, comp) {
-      // store the comparison  values in array
-      var unique = arr
-        .map((e) => e[comp])
-
-        // store the indexes of the unique objects
-        .map((e, i, final) => final.indexOf(e) === i && i)
-
-        // eliminate the false indexes & return unique objects
-        .filter((e) => arr[e])
-        .map((e) => arr[e]);
-
-      return unique;
     }
     fetchData();
   }, [props, filter, sort, page]);
@@ -238,7 +219,7 @@ const Property = (props) => {
                 Filter by city
               </Dropdown.Toggle>
 
-              <Dropdown.Menu  className="dropdown-menu">{d}</Dropdown.Menu>
+              <Dropdown.Menu className="dropdown-menu">{d}</Dropdown.Menu>
             </Dropdown>
           </div>
         </div>
@@ -270,7 +251,7 @@ const Property = (props) => {
                 <Dropdown.Item href={"?page=" + 1 + "&filter=1&sort=" + sort}>1 Bed</Dropdown.Item>
                 <Dropdown.Item href={"?page=" + 1 + "&filter=2&sort=" + sort}>2 Bed</Dropdown.Item>
                 <Dropdown.Item href={"?page=" + 1 + "&filter=3&sort=" + sort}>3 Bed</Dropdown.Item>
-                <Dropdown.Item href={"?page=" + 1 + "&filter=4&sort=" + sort}>4 Bed</Dropdown.Item>
+                <Dropdown.Item href={"?page=" + 1 + "&filter=4&sort=" + sort}>4+ Bed</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </div>

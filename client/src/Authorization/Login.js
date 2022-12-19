@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { auth, googleProvider } from "./FirebaseConfig";
 import { AuthorizeContext } from "./Authorize";
 import validate from "../validation/index";
-import { signInWithEmailAndPassword, signInWithPopup, signInWithRedirect } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { Link, Navigate } from "react-router-dom";
 
 const Login = () => {

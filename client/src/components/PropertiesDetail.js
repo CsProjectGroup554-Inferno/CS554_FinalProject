@@ -3,7 +3,7 @@ import serverRequest from "../serverRequest";
 import { Link, useNavigate } from "react-router-dom";
 import "react-image-lightbox/style.css";
 import { Carousel } from "react-responsive-carousel";
-import { BiBed, BiUserCircle } from "react-icons/bi";
+import { BiBed } from "react-icons/bi";
 import { GiBathtub } from "react-icons/gi";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
@@ -14,10 +14,8 @@ import { AuthorizeContext } from "../Authorization/Authorize";
 const PropertiesDetail = (props) => {
   const navigate = useNavigate();
   const [propertyData, setPropertyData] = useState([]);
-  // const [ /*isWatchlist,*/ setIsWatchlist] = useState();
   const [loading, setLoading] = useState(true);
   const { user } = useContext(AuthorizeContext);
-  // const alert = useRef(useAlert());
   var id = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
 
   useEffect(() => {
@@ -25,16 +23,14 @@ const PropertiesDetail = (props) => {
       try {
         setLoading(true);
         const property = await serverRequest.getPropertyById(id);
-        // console.log(property);
         setPropertyData(property);
         setLoading(false);
       } catch (e) {
         setLoading(false);
-        // alert.current.error(e.message)
       }
     }
     fetchData();
-  }, [props, id /*currentUser*/]);
+  }, [props, id ]);
 
   let addPropertyToFavorite = async () => {
     try {
@@ -53,26 +49,15 @@ const PropertiesDetail = (props) => {
       const id = propertyData.owner._id;
       let data1 = await serverRequest.getallUser(id);
       let data2 = await serverRequest.getUserById(id);
-      // console.log("index" + JSON.stringify(data1))
       let indexx = data1.findIndex((x) => x._id === id);
-      // console.log("index" + indexx);
-      // console.log(data1);
-      // console.log(data2)
-      // setpropertyindex(indexx)
-
-      // setContacts(data1);
       let oldData = JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
       let data3 = {
         index: indexx,
         propertyowner : data2,
         data: propertyData.owner
       };
-      // console.log("ddd"+JSON.stringify(data3))
-      // let oldData = JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
       console.log(JSON.stringify(oldData))
-      // const previousPosts = oldData ? JSON.parse(oldData) : [];
       const updatedPosts = {...oldData, ...data3};
-      // console.log("uuuu"+JSON.stringify(updatedPosts))
       localStorage.setItem(process.env.REACT_APP_LOCALHOST_KEY, JSON.stringify(updatedPosts));
       navigate("/chat");
     } catch (error) {
@@ -87,91 +72,6 @@ const PropertiesDetail = (props) => {
         <img src={item} alt="txt" />
       </div>
     ));
-  };
-
-  const li = (property) => {
-    let price, zipcode, address, city, bedrooms, bathrooms, owner;
-    if (property.price) {
-      price = (
-        <>
-          <BsCurrencyDollar />
-          {property.price}
-        </>
-      );
-    }
-    if (property.address) {
-      address = (
-        <>
-          <MdMyLocation />
-          {property.address}
-        </>
-      );
-    }
-    if (property.city) {
-      city = (
-        <>
-          <MdLocationCity />
-          {property.city}
-        </>
-      );
-    }
-    if (property.zipcode) {
-      zipcode = (
-        <>
-          <GoLocation />
-          {property.zipcode}
-        </>
-      );
-    }
-    if (property.bedrooms) {
-      bedrooms = (
-        <>
-          <BiBed />
-          {property.bedrooms}
-        </>
-      );
-    }
-    if (property.bathrooms) {
-      bathrooms = (
-        <>
-          <GiBathtub />
-          {property.bathrooms}
-        </>
-      );
-    }
-    if (property.owner._id && property.owner.email) {
-      owner = (
-        <>
-          <BiUserCircle />
-          <Link to={"/user/" + property.owner._id}>{property.owner.email}</Link>
-        </>
-      );
-    }
-
-    return (
-      <>
-        {price || bedrooms || bathrooms ? (
-          <div className="icon-group">
-            <p>
-              {price} &nbsp;&nbsp;{bedrooms}&nbsp;&nbsp; {bathrooms}
-            </p>
-          </div>
-        ) : null}
-
-        <div className="icon-group">
-          <p>{address}</p>
-        </div>
-        <div className="icon-group">
-          <p>{city}</p>
-        </div>
-        <div className="icon-group">
-          <p>{zipcode}</p>
-        </div>
-        <div className="icon-group">
-          <p>{owner}</p>
-        </div>
-      </>
-    );
   };
 
   if (loading) {

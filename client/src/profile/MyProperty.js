@@ -2,8 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { AuthorizeContext } from "../Authorization/Authorize";
 import serverRequest from "../serverRequest";
 import { Link } from "react-router-dom";
-import { useAlert } from "react-alert";
-import { BiBed, BiFontSize, BiHeart } from "react-icons/bi";
+import { BiBed, BiFontSize } from "react-icons/bi";
 import { GiBathtub } from "react-icons/gi";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
@@ -39,68 +38,6 @@ const MyProperty = (props) => {
     }
   };
 
-  let li = null;
-
-  // const buildListItem = (property) => {
-  //   return (
-  //     <div key={property._id} className="row property-card mb-4">
-  //       <div className="col-lg-6 col-6 pl-0">
-  //         <Link to={"/property/" + property._id}>
-  //           {property.album.length === 0 ? <img src="/img/default_property.jpg" className="card-img-left" alt="property" /> : <img src={property.album[0]} className="card-img-left" alt="property" />}
-  //         </Link>
-  //       </div>
-  //       <div className="col-lg-6 col-6 py-3">
-  //         <Link to={"/property/" + property._id}>
-  //           <h1 className="display-4 title">{property.title}</h1>
-  //         </Link>
-  //         {property.description ? <p className="description">{property.description}</p> : null}
-
-  //         {property.price || property.zipcode || property.type || property.bedroom || property.bath ? (
-  //           <div className="icon-group">
-  //             <p>
-  //               {property.price ? (
-  //                 <>
-  //                   <i className="fas fa-dollar-sign"></i>
-  //                   {property.price}
-  //                 </>
-  //               ) : null}
-  //               {property.zipcode ? (
-  //                 <>
-  //                   <i className="fas fa-map-marker-alt"></i>
-  //                   {property.zipcode}
-  //                 </>
-  //               ) : null}
-  //               {property.type ? (
-  //                 <>
-  //                   <i className="fas fa-building"></i>
-  //                   {property.type}
-  //                 </>
-  //               ) : null}
-  //               {property.bedroom ? (
-  //                 <>
-  //                   <i className="fas fa-bed"></i>
-  //                   {property.bedroom}
-  //                 </>
-  //               ) : null}
-  //               {property.bath ? (
-  //                 <>
-  //                   <i className="fas fa-bath"></i>
-  //                   {property.bath}
-  //                 </>
-  //               ) : null}
-  //             </p>
-  //           </div>
-  //         ) : null}
-  //         <Link to={"/account/property/" + property._id} className="btn btn-primary btn-sm btn-round btn-shadow btn-edit-property position-absolute">
-  //           edit
-  //         </Link>
-  //         <button type="button" onClick={handleDelete} data-property={property._id} className="btn btn-danger btn-sm btn-round btn-shadow btn-delete-property position-absolute">
-  //           delete
-  //         </button>
-  //       </div>
-  //     </div>
-  //   );
-  // };
 
   div =
     propertyData &&
@@ -172,11 +109,6 @@ const MyProperty = (props) => {
       );
     });
 
-  li =
-    propertyData &&
-    propertyData.map((property) => {
-      // return buildListItem(property);
-    });
 
   if (loading) {
     return (
