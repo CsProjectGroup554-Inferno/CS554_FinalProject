@@ -1065,3 +1065,8 @@ input:focus {
 .navbar-text {
   color: white !important;
 }
+
+
+.nav-link{
+  color: #e8e8e8 !important;
+}

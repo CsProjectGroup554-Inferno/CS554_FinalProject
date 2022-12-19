@@ -16,12 +16,12 @@ let getAllProperty = async (page, filter, sort) => {
     sort = {};
   }
 
-  console.log(page, filter);
+  // console.log(page, filter);
   //filter
   validate.checkPage(page);
   const propertyCollection = await properties();
   const propertyCity = await propertyCollection.findOne({ city: filter });
-  console.log(propertyCity);
+  // console.log(propertyCity);
   if (filter && filter === "price1") {
     filter = { price: { $lt: 1000 } };
   } else if (filter && filter === "price2") {
@@ -48,13 +48,13 @@ let getAllProperty = async (page, filter, sort) => {
     filter = {};
   }
 
-  console.log(filter);
+  // console.log(filter);
   //get propert after filter and sort
   var allProperty = await propertyCollection.find(filter).sort(sort).toArray();
   if (!allProperty) {
     throw "Property not found in data base";
   }
-  let take = 5;
+  let take = 3;
 
   let data = {
     properties: null,
@@ -79,7 +79,7 @@ let getAllProperty = async (page, filter, sort) => {
   }
   data.properties = allProperty;
 
-  console.log(data);
+  // console.log(data);
   return data;
 };
 
@@ -100,9 +100,9 @@ let getAllProperty = async (page, filter, sort) => {
 let getPropertyById = async (id) => {
   // validate.checkString(id);
   const propertyCollection = await properties();
-  console.log(id);
+  // console.log(id);
   const property = await propertyCollection.findOne({ _id: ObjectId(id) });
-  console.log(property);
+  // console.log(property);
   if (!property) throw "Property not found for this id";
   property._id = property._id.toString();
   return property;

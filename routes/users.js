@@ -7,6 +7,7 @@ const client = redis.createClient({
 });
 const authorizeuser = require("./authorize");
 const userData = data.users;
+const imageData = data.images;
 const propertiesData = data.properties;
 const validate = require("../validation/validate");
 
@@ -51,6 +52,15 @@ router.get("/", authorizeuser, async (req, res) => {
       let property = await propertiesData.getPropertyById(propertyList[i]);
       properties.push(property);
     }
+
+    for (let i = 0; i < properties.length; i++) {
+      properties[i].imageData = [];
+      // for (let j = 0; j < propData.properties[i].images.length; j++) {
+      properties[i].imageData.push(await imageData.getImageById(properties[i].images[0].toString()));
+      // }
+    }
+    console.log(properties)
+
     for (let i = 0; i < favoritesList.length; i++) {
       let favorite = await propertiesData.getPropertyById(favoritesList[i]);
       favorites.push(favorite);

@@ -76,13 +76,13 @@ router.get("/", async (req, res) => {
   let propData;
   try {
     propData = await propertiesData.getAllProperty(req.query.page, filter, sort);
-    console.log(propData);
+    // console.log(propData);
 
     for (let i = 0; i < propData.properties.length; i++) {
       propData.properties[i].imageData = [];
-      for (let j = 0; j < propData.properties[i].images.length; j++) {
-        propData.properties[i].imageData.push(await imageData.getImageById(propData.properties[i].images[j].toString()));
-      }
+      // for (let j = 0; j < propData.properties[i].images.length; j++) {
+      propData.properties[i].imageData.push(await imageData.getImageById(propData.properties[i].images[0].toString()));
+      // }
     }
     res.json(propData);
   } catch (e) {
@@ -163,7 +163,7 @@ router.post("/", authorizeuser, async (req, res) => {
       let mime = "image/" + filepath.split('.').pop()
 
       let id = await imageData.createGridFS(filepath, imagesInfo[i][0], imagesInfo[i][1], mime)
-    
+
 
       propertyInfo.images.push(id);
     }

@@ -83,8 +83,8 @@ const Chat = (props) => {
           let getData = async () => {
               let data = await serverRequest.getUserById(user.uid);
               setUserData(data);
-              console.log(data);
-              console.log("hhhhhh")
+              // console.log(data);
+              // console.log("hhhhhh")
               const dd = data.email;
               setUserName(dd);
               socket.auth = { dd };
