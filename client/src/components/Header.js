@@ -22,43 +22,27 @@ const Header = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto"></Nav>
           <Nav>
-            <NavDropdown title="Menu" id="collasible-nav-dropdown">
+            {!user ? (
+              <Link to="/login" className="nav-link">Login</Link>
+            ) : (
+              <>
+                <Link to="/properties" className="nav-link">Properties</Link>
+                <Link to="/profile" className="nav-link">Profile</Link>
+                <Link to="/chat" className="nav-link">Message</Link>
 
+                <Link to="/" onClick={() => auth.signOut()} className="nav-link">
+                  Logout
+                </Link>
+              </>
+            )}
 
-              {!user ? (
-                <NavDropdown.Item>
-                  <Link to="/login">Login</Link>
-                </NavDropdown.Item>
-              ) : (
-                <>
-                  <NavDropdown.Item>
-                    <Link to="/properties">Properties</Link>
-                  </NavDropdown.Item>
-                  <NavDropdown.Item>
-                    <Link to="/profile">Profile</Link>
-                  </NavDropdown.Item>
-                  <NavDropdown.Item>
-                    <Link to="/chat">Message</Link>
-                  </NavDropdown.Item>
-
-                  <NavDropdown.Item>
-                    <Link to="/" onClick={() => auth.signOut()}>
-                      Logout
-                    </Link>
-                  </NavDropdown.Item>
-                </>
-              )}
-
-              {!user && (
-                <NavDropdown.Item>
-                  <Link to="/signup">Sign up</Link>
-                </NavDropdown.Item>
-              )}
-            </NavDropdown>
+            {!user && (
+              <Link to="/signup" className="nav-link">Sign up</Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
-    </Navbar>
+    </Navbar >
   );
 };
 

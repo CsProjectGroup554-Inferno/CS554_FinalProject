@@ -25,7 +25,7 @@ const PropertiesDetail = (props) => {
       try {
         setLoading(true);
         const property = await serverRequest.getPropertyById(id);
-        console.log(property);
+        // console.log(property);
         setPropertyData(property);
         setLoading(false);
       } catch (e) {
