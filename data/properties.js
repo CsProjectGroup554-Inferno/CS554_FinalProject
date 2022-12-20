@@ -69,7 +69,7 @@ let getAllProperty = async (page, filter, sort) => {
   if (!allProperty) {
     throw "Property not found in data base";
   }
-  let take = 3;
+  let take = 6;
 
   let data = {
     properties: null,
@@ -79,10 +79,14 @@ let getAllProperty = async (page, filter, sort) => {
 
   if (allProperty.length - page * take > 0) {
     data.next = true;
+  }else{
+    data.next = false;
   }
 
   if (allProperty.length > take && page > 1) {
     data.prev = true;
+  }else{
+    data.prev = false;
   }
 
   allProperty = allProperty.slice((page - 1) * take);
@@ -93,7 +97,7 @@ let getAllProperty = async (page, filter, sort) => {
     allProperty[i]._id = allProperty[i]._id.toString();
   }
   data.properties = allProperty;
-
+  console.log(data)
   return data;
 };
 
@@ -123,7 +127,7 @@ let addPropertyToDB = async (property, userId) => {
     size: parseInt(property.size),
     address: property.address,
     zipcode: property.zipcode,
-    images: property.images ? property.images : [],
+    images: property.images,
     owner: userId,
   };
   const newInsertInfo = await propertyCollection.insertOne(newProperty);

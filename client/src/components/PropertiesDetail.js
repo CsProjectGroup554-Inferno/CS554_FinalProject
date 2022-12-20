@@ -30,7 +30,7 @@ const PropertiesDetail = (props) => {
       }
     }
     fetchData();
-  }, [props, id ]);
+  }, [props, id]);
 
   let addPropertyToFavorite = async () => {
     try {
@@ -53,11 +53,11 @@ const PropertiesDetail = (props) => {
       let oldData = JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
       let data3 = {
         index: indexx,
-        propertyowner : data2,
+        propertyowner: data2,
         data: propertyData.owner
       };
       console.log(JSON.stringify(oldData))
-      const updatedPosts = {...oldData, ...data3};
+      const updatedPosts = { ...oldData, ...data3 };
       localStorage.setItem(process.env.REACT_APP_LOCALHOST_KEY, JSON.stringify(updatedPosts));
       navigate("/chat");
     } catch (error) {
@@ -87,14 +87,78 @@ const PropertiesDetail = (props) => {
   return (
     <main>
       <section className="property-detail-title">
-        <div id="container">
+        <div className="pro-detail" id="container">
+
+          <div class="product-image">
+            {/* <img src={propertyData.images[0]} alt="imgprop" /> */}
+            {/* <div className="column carousal">
+              <Carousel>{div(propertyData)}</Carousel>
+            </div> */}
+
+            <div className="carousal">
+              <Carousel>{div(propertyData)}</Carousel>
+            </div>
+          </div>
+
           <div class="product-details">
+
             <h1>{propertyData.title}</h1>
+            <div class="info">
+              <ul>
+                <li>
+                  <strong>
+                    <BsCurrencyDollar />
+                    &nbsp;
+                  </strong>
+                  {propertyData.price}{" "}
+                </li>
+                {/* <br></br> */}
+                <li>
+                  <strong>
+                    <BiBed />
+                    &nbsp;
+                  </strong>
+                  {propertyData.bedrooms}
+                </li>
+                {/* <br></br> */}
+                <li>
+                  <strong>
+                    <GiBathtub />
+                    &nbsp;
+                  </strong>{" "}
+                  {propertyData.bathrooms}
+                </li>
+                {/* <br></br> */}
+                <li>
+                  <strong>
+                    <MdMyLocation />
+                    &nbsp;
+                  </strong>{" "}
+                  {propertyData.address}
+                </li>
+                {/* <br></br> */}
+                <li>
+                  <strong>
+                    <MdLocationCity />
+                    &nbsp;
+                  </strong>
+                  {propertyData.city}{" "}
+                </li>
+                {/* <br></br> */}
+                <li>
+                  <strong>
+                    <GoLocation />
+                    &nbsp;
+                  </strong>{" "}
+                  {propertyData.zipcode}
+                </li>
+              </ul>
+            </div>
 
             <p class="information">{propertyData.description}</p>
 
-            <br />
-            <br />
+            {/* <br /> */}
+            {/* <br /> */}
             {user ? (
               <div class="control">
                 <button class="btn" onClick={contactwithOwner}>
@@ -116,70 +180,10 @@ const PropertiesDetail = (props) => {
             )}
           </div>
 
-          <div class="product-image">
-            <img src={propertyData.images[0]} alt="" />
-            <div className="column carousal">
-              <Carousel>{div(propertyData)}</Carousel>
-            </div>
 
-            <div class="info">
-              <h2>Details</h2>
-              <ul>
-                <li>
-                  <strong>
-                    <BsCurrencyDollar />
-                    &nbsp;
-                  </strong>
-                  {propertyData.price}{" "}
-                </li>
-                <br></br>
-                <li>
-                  <strong>
-                    <BiBed />
-                    &nbsp;
-                  </strong>
-                  {propertyData.bedrooms}
-                </li>
-                <br></br>
-                <li>
-                  <strong>
-                    <GiBathtub />
-                    &nbsp;
-                  </strong>{" "}
-                  {propertyData.bathrooms}
-                </li>
-                <br></br>
-                <li>
-                  <strong>
-                    <MdMyLocation />
-                    &nbsp;
-                  </strong>{" "}
-                  {propertyData.address}
-                </li>
-                <br></br>
-                <li>
-                  <strong>
-                    <MdLocationCity />
-                    &nbsp;
-                  </strong>
-                  {propertyData.city}{" "}
-                </li>
-                <br></br>
-                <li>
-                  <strong>
-                    <GoLocation />
-                    &nbsp;
-                  </strong>{" "}
-                  {propertyData.zipcode}
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
 
-        <div className="carousal">
-          <Carousel>{div(propertyData)}</Carousel>
-        </div>
+
       </section>
     </main>
   );

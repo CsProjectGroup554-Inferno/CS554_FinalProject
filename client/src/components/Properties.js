@@ -8,6 +8,7 @@ import { BsCurrencyDollar } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import { useContext } from "react";
 import { AuthorizeContext } from "../Authorization/Authorize";
+import ReactTextCollapse from 'react-text-collapse'
 
 const Property = (props) => {
   const [propertyData, setPropertyData] = useState([]);
@@ -33,6 +34,7 @@ const Property = (props) => {
     }
   };
 
+  
   useEffect(() => {
     async function fetchData() {
       try {
@@ -55,69 +57,75 @@ const Property = (props) => {
     propertyData.map((property) => {
       return (
         <>
-          <div key={property._id} className="container-prop">
-            <div className="box">
-              <Link to={"/properties/" + property._id}>
-                <div className="top">
-                  <img src={property.imageData[0]} alt="" />
-                </div>
-              </Link>
-              <div className="bottom">
-                {user ? (
-                  <span className="heart-icon" style={{ float: "right", cursor: "pointer" }} onClick={() => addPropertyToFavorite(property._id)}>
-                    <BiHeart />
-                  </span>
-                ) : null}
-                <h1>
-                  <b>Title: </b>
-                  {property.title}
-                </h1>
-                <p className="about-prop">
-                  <b>About property: </b>
-                  {property.description}
-                </p>
-                <div className="advants">
-                  <div>
-                    <span>Bedrooms</span>
+        
+
+            <div key={property._id} className="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+              <div className="box prop-box">
+                <Link to={"/properties/" + property._id}>
+                  <div className="top">
+                    <img src={property.imageData[0]} alt="propImg" />
+                  </div>
+                </Link>
+                <div className="bottom">
+                 
+                  <h1>
+                  {user ? (
+                    <span className="heart-icon" style={{ float: "right", cursor: "pointer" }} onClick={() => addPropertyToFavorite(property._id)}>
+                      <BiHeart />
+                    </span>
+                  ) : null}
+                    <b>Title: </b>
+                    {property.title}
+                  </h1>
+                  <ReactTextCollapse options={TEXT_COLLAPSE_OPTIONS}>
+                  <p className="about-prop">
+                    <b>About property: </b>
+                    {property.description}
+                  </p>
+                  </ReactTextCollapse>
+                  <div className="advants">
                     <div>
-                      <BiBed />
-                      <span>{property.bedrooms}</span>
+                      <span>Bedrooms</span>
+                      <div>
+                        <BiBed />
+                        <span>{property.bedrooms}</span>
+                      </div>
+                    </div>
+                    <div>
+                      <span>Bathrooms</span>
+                      <div>
+                        <GiBathtub />
+                        <span>{property.bathrooms}</span>
+                      </div>
+                    </div>
+                    <div>
+                      <span>Area</span>
+                      <div>
+                        <BiFontSize />
+                        <span>
+                          {property.size}
+                          <span>Sq Ft</span>
+                        </span>
+                      </div>
+                    </div>
+                    <div></div>
+                    <div>
+                      <span>City</span>
+                      <div>
+                        <GoLocation />
+                        <span>{property.city}</span>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <span>Bathrooms</span>
-                    <div>
-                      <GiBathtub />
-                      <span>{property.bathrooms}</span>
-                    </div>
+                  <div className="price">
+                    <span>For Rent</span>
+                    <BsCurrencyDollar />
+                    <b>{property.price}</b>
                   </div>
-                  <div>
-                    <span>Area</span>
-                    <div>
-                      <BiFontSize />
-                      <span>
-                        {property.size}
-                        <span>Sq Ft</span>
-                      </span>
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <span>City</span>
-                    <div>
-                      <GoLocation />
-                      <span>{property.city}</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="price">
-                  <span>For Rent</span>
-                  <BsCurrencyDollar />
-                  <b>{property.price}</b>
                 </div>
               </div>
             </div>
-          </div>
+         
         </>
       );
     });
@@ -265,9 +273,9 @@ const Property = (props) => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu className="dropdown-menu">
-                <Dropdown.Item href={"?page=" + 1 + "&filter=size1&sort=" + sort}>$ 0 - 1000</Dropdown.Item>
-                <Dropdown.Item href={"?page=" + 1 + "&filter=size2&sort=" + sort}>$ 1000 - 2000</Dropdown.Item>
-                <Dropdown.Item href={"?page=" + 1 + "&filter=size3&sort=" + sort}>$ 2000 +</Dropdown.Item>
+                <Dropdown.Item href={"?page=" + 1 + "&filter=size1&sort=" + sort}> Less than 1000 sq ft</Dropdown.Item>
+                <Dropdown.Item href={"?page=" + 1 + "&filter=size2&sort=" + sort}> 1000 sq ft - 2000 sq ft</Dropdown.Item>
+                <Dropdown.Item href={"?page=" + 1 + "&filter=size3&sort=" + sort}> 2000 sq ft +</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </div>
@@ -294,10 +302,21 @@ const Property = (props) => {
           </a>
         </div>
       </div>
-      {div}
+      <div className="container-fluid">
+        <div className="row">
+          {div}
+        </div></div>
       {pagination}
     </main>
   );
 };
 
+const TEXT_COLLAPSE_OPTIONS = {
+  collapse: true, // default state when component rendered
+  collapseText: '... show more', // text to show when collapsed
+  expandText: 'show less', // text to show when expanded
+  minHeight:90, // component height when closed
+  maxHeight: 200 // expanded to
+  
+}
 export default Property;

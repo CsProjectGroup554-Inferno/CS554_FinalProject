@@ -42,14 +42,15 @@ const Signup = () => {
             <label htmlFor="confirmPassword">Confirm Password</label>
             <input type="password" className="form-control" id="confirmPassword" placeholder="confirm password" />
           </div>
+          <div className="loginButton">
           <button type="submit" className="btn btn-primary">
             Sign Up
-          </button>
+          </button></div>
+          <div className="loginButton">
           <Link to="/login" className=" btn btn-primary ms-3">
             Login
-          </Link>
+          </Link></div>
         </form>
-        <Link to="/login" id="HomeBtn" visibility="hidden"></Link>
       </div>
     </>
   );

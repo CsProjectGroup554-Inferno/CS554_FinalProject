@@ -74,18 +74,48 @@ li a:hover {
 }
 
 .loginContainer {
-  border: #282c34 solid 1px;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
-  /* color: #282c34; */
-  width: 400px;
+  border: 2px solid white;
+  border-radius: 8px;
+  padding: 40px;
+  margin: 20px;
+  width: 600px;
+  height:350px;
   position: absolute;
-  /* flex-direction: column;
-  align-items: center;
-  justify-content: center; */
   top: 20%;
-  left: 35%;
+  left: 30%;
+  box-shadow: 20px 20px grey;
+}
+
+.loginButton button {
+  background-color: transparent;
+  border: 1px solid white;
+  width: 80%;
+}
+
+.loginButton button:hover {
+  background-color: transparent;
+  border: 1px solid white;
+  width: 80%;
+
+}
+
+.loginButton a {
+  background-color: transparent;
+  border: 1px solid white;
+  width: 80%;
+  margin-left: 28px !important;
+}
+
+.loginButton a:hover {
+  background-color: transparent;
+  border: 1px solid white;
+  width: 80%;
+}
+
+.loginButton {
+  float: left;
+  width: 33.33%;
+  margin-top: 20px;
 }
 
 .home-section1 {
@@ -147,7 +177,7 @@ li a:hover {
 }
 
 .img-column {
-  
+
   width: 100% !important;
   height: 320px;
   text-align: center;
@@ -196,10 +226,10 @@ li a:hover {
 
 .circular--square {
   border-radius: 50%;
-    margin: 25px;
-    height: 200px;
-    border: 5px solid #464040;
-    width: 200px;
+  margin: 25px;
+  height: 200px;
+  border: 5px solid #464040;
+  width: 200px;
 }
 
 .img-circlle-title {
@@ -392,35 +422,31 @@ main {
   margin-bottom: 50px !important;
 }
 
-.container-prop {
-  width: 100%;
-  margin: 100px auto;
-  display: flex;
-  padding: 20px;
-}
 
-.container-prop .box {
-  width: 65%;
-  margin-left: 250px;
-  margin-right: 250px;
+.prop-box.box {
+  width: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
   background-color: transparent;
   position: relative;
-  border: 3px solid grey;
-  box-shadow: 20px 20px grey;
   border-radius: 10px;
 }
 
-.container-prop .box .top {
+.prop-box.box .top {
   position: relative;
-  height: 500px;
-  background-color: red;
+  max-height: 500px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  border-radius: 15px;
+  overflow: hidden;
+  height: 400px;
 }
 
-.container-prop .box .top:before {
+.prop-box.box .top:before {
   content: "";
   width: 100%;
   height: 100%;
-  background-color: rgba(43, 187, 175, 0.829);
+  background-color: rgb(12 110 250 / 50%);
   position: absolute;
   left: 0;
   top: 0;
@@ -428,11 +454,11 @@ main {
   opacity: 0;
 }
 
-.container-prop .box .top:hover:before {
+.prop-box.box .top:hover:before {
   opacity: 1;
 }
 
-.container-prop .box .top:after {
+.prop-box.box .top:after {
   content: "View Property";
   color: white;
   font-size: 12px;
@@ -447,17 +473,16 @@ main {
   opacity: 0;
 }
 
-.container-prop .box .top:hover:after {
+.prop-box.box .top:hover:after {
   opacity: 1;
 }
 
-.container-prop .box .top img {
+.prop-box.box .top img {
   width: 100%;
   height: 100%;
-  /* margin-bottom: -4px;*/
 }
 
-.container-prop .box .top span {
+.prop-box.box .top span {
   position: absolute;
   right: 20px;
   bottom: 15px;
@@ -465,18 +490,20 @@ main {
   font-size: 20px;
 }
 
-.container-prop .box .top span i {
+.prop-box.box .top span i {
   margin-left: 5px;
 }
 
-.container-prop .box .bottom {
-  padding: 20px 15px;
+.prop-box.box .bottom {
+  padding: 15px;
   position: relative;
   color: #e8e8e8;
-  font-size: xx-large;
+  font-size: inherit;
+  border: 2px solid #333;
+  border-radius: 15px;
 }
 
-.container-prop .box:not(:last-of-type) .bottom:before {
+.prop-box.box:not(:last-of-type) .bottom:before {
   content: "Hot";
   background-color: #ea723d;
   color: white;
@@ -488,13 +515,13 @@ main {
   z-index: 1;
 }
 
-.container-prop .box .bottom h3 {
+.prop-box.box .bottom h3 {
   font-size: 15px;
   color: #e8e8e8;
   font-size: x-large;
 }
 
-.container-prop .box .bottom > p {
+.prop-box.box .bottom>p {
   margin: 15px 0;
   font-size: 13px;
   line-height: 1.4;
@@ -502,59 +529,64 @@ main {
   font-size: large;
 }
 
-.container-prop .box .bottom .advants {
+.prop-box.box .bottom .advants {
   display: flex;
   color: #e8e8e8;
   font-weight: 300;
+  justify-content: space-between;
+  margin-top: 15px;
+  float: left;
+  width: 100%;
+  margin-bottom: 15px;
 }
 
-.container-prop .box .bottom .advants > div {
+.prop-box.box .bottom .advants>div {
   margin-right: 15px;
 }
 
-.container-prop .box .bottom .advants > div > span {
+.prop-box.box .bottom .advants>div>span {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 13px;
   color: #e8e8e8;
 }
 
-.container-prop .box .bottom .advants > div > div {
+.prop-box.box .bottom .advants>div>div {
   margin-top: 10px;
   display: flex;
   align-items: center;
 }
 
-.container-prop .box .bottom .advants > div > div i {
+.prop-box.box .bottom .advants>div>div i {
   color: #777;
   font-size: 22px;
 }
 
-.container-prop .box .bottom .advants > div > div > span {
+.prop-box.box .bottom .advants>div>div>span {
   font-size: 12px;
   font-weight: bold;
   margin-left: 10px;
 }
 
-.container-prop .box .bottom .advants > div > div > span > span {
+.prop-box.box .bottom .advants>div>div>span>span {
   color: #777;
   font-weight: normal;
   margin-left: 5px;
 }
 
-.container-prop .box .bottom .price {
+.prop-box.box .bottom .price {
   margin-top: 20px;
 }
 
-.container-prop .box .bottom .price span:first-of-type {
+.prop-box.box .bottom .price span:first-of-type {
   display: block;
   font-size: 15px;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-.container-prop .box .bottom .price span:last-of-type {
+.prop-box.box .bottom .price span:last-of-type {
   color: #e8e8e8;
-  font-size: 22px;
+  font-size: 18px;
 }
 
 .a-btn {
@@ -642,32 +674,32 @@ main {
 
 #container {
   box-shadow: 20px 20px rgb(58, 57, 57);
-  background: rgba(255, 255, 255, 0.9);
+  background: #000;
   text-align: center;
   border-radius: 5px;
   overflow: hidden;
-  margin: 2em auto;
-  height: 700px;
-  width: 80%;
+  margin: 0;
+  width: 100%;
 }
 
 .product-details {
   position: relative;
   text-align: center;
   overflow: hidden;
-  padding: 30px 0 0 30px;
+  padding: 20px 30px;
   height: 100%;
-  float: left;
-  width: 40%;
+  float: right;
+  width: 50%;
+  margin-top: 2em;
 }
 
 #container .product-details h1 {
-  font-family: "Bebas Neue", cursive;
-  display: inline-block;
+  display: block;
   position: relative;
-  font-size: 30px;
-  color: #344055;
+  font-size: 24px;
+  color: #ffffff;
   margin: 0;
+  text-align: left;
 }
 
 #container .product-details h1:before {
@@ -694,18 +726,20 @@ main {
   width: 50%;
 }
 
-#container .product-details > p {
-  font-family: "EB Garamond", serif;
+#container .product-details>p {
   text-align: center;
-  font-size: 18px;
-  color: #7d7d7d;
+  font-size: 14px;
+  color: #c9c7c7;
+  border: 1px solid #333;
+  padding: 15px;
+  border-radius: 15px;
 }
 
-.control {
+/* .control {
   position: absolute;
   bottom: 20%;
   left: 22.8%;
-}
+} */
 
 .btn {
   transform: translateY(0px);
@@ -776,8 +810,8 @@ main {
   position: relative;
   overflow: hidden;
   height: 100%;
-  float: right;
-  width: 45%;
+  float: left;
+  width: 50%;
   display: inline-block;
 }
 
@@ -787,20 +821,16 @@ main {
 }
 
 .info {
-  background: rgba(27, 26, 26, 0.9);
+
   font-family: "Bree Serif", serif;
-  transition: all 0.3s ease-out;
-  transform: translateX(-100%);
-  position: absolute;
   line-height: 1.8;
   text-align: left;
-  font-size: 105%;
+  font-size: 16px;
   cursor: no-drop;
   color: #fff;
   height: 100%;
   width: 100%;
-  left: 0;
-  top: 0;
+
   padding: 20px;
 }
 
@@ -808,17 +838,13 @@ main {
   text-align: center;
 }
 
-.product-image:hover .info {
-  transform: translateX(0);
-}
-
 .info ul li {
   transition: 0.3s ease;
 }
 
-.info ul li:hover {
-  transform: translateX(50px) scale(1.3);
-}
+/* .info ul li:hover {
+  transform: scale(1.1);
+} */
 
 .product-image:hover img {
   transition: all 0.3s ease-out;
@@ -1027,10 +1053,11 @@ input:focus {
 }
 
 .control .btn {
-  border: 2px solid black;
+  border: 2px solid white;
   width: fit-content;
   margin: 10px;
   width: 80%;
+  color: #fff;
 }
 
 .form-group-add {
@@ -1061,6 +1088,25 @@ input:focus {
   color: white !important;
 }
 
-.nav-link{
+.nav-link {
   color: #e8e8e8 !important;
+}
+
+.home-text {
+  color: #727d86 !important;
+  font-size: larger;
+}
+
+.container-prop{
+  border: 2px solid white;
+  border-radius: 8px;
+  padding: 20px 40px 20px 20px;
+  box-shadow: 20px 20px grey;
+  margin-bottom: 50px;
+}
+
+.page-link{
+  background-color: transparent !important;
+  border: 1px solid white !important;
+  color: white !important;
 }
