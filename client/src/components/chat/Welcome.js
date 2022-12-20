@@ -12,11 +12,11 @@ export default function Welcome() {
   }, []);
   return (
     <Container>
-      <img src={Robot} alt="" />
+      <img src={Robot} alt="imgprop" />
       <h1>
-        Welcome, <span>{userName}!</span>
+        Welcome, <span style={{color: "yellow"}}>{userName}!</span>
       </h1>
-      <h3>Please select a chat to Start messaging.</h3>
+      <h2>Please select a chat to Start messaging.</h2>
     </Container>
   );
 }

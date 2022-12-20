@@ -105,7 +105,7 @@ console.log(JSON.stringify(data))
           <div className="avatar">
             <img
               src={`${avatar}`}
-              alt=""
+              alt="imgprop"
             />
           </div>
           <div className="username">

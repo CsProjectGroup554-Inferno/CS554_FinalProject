@@ -18,7 +18,7 @@ const Header = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <p> Copyright by Harshil@2040</p>
+                            <p> Copyright by Team Inferno</p>
                         </div>
 
                     </div>

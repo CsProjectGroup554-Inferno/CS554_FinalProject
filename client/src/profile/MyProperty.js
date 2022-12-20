@@ -44,14 +44,15 @@ const MyProperty = (props) => {
     propertyData.map((property) => {
       return (
         <>
-          <button className="btn btn-danger mb-2" style={{ float: "right", marginRight: "50px" }} onClick={() => handleDelete(property._id)}>
-            Remove
-          </button>
+
           <div key={property._id} className="container-prop" style={{ marginTop: "20px" }}>
+            <button className="btn btn-danger mb-2" style={{ float: "right", marginRight: "50px" }} onClick={() => handleDelete(property._id)}>
+              Remove
+            </button>
             <div className="box" style={{ marginLeft: "30px", marginRight: "30px", width: "100%" }}>
               <Link to={"/properties/" + property._id}>
                 <div className="top">
-                  <img src={property.imageData[0]} alt="" />
+                  <img src={property.imageData[0]} alt="imgprop" />
                 </div>
               </Link>
               <div className="bottom">
@@ -70,14 +71,14 @@ const MyProperty = (props) => {
                       <BiBed />
                       <span>{property.bedrooms}</span>
                     </div>
-                  </div>
+                  </div><br/>
                   <div>
                     <span>Bathrooms</span>
                     <div>
                       <GiBathtub />
                       <span>{property.bathrooms}</span>
                     </div>
-                  </div>
+                  </div><br/>
                   <div>
                     <span>Area</span>
                     <div>
@@ -88,7 +89,7 @@ const MyProperty = (props) => {
                       </span>
                     </div>
                   </div>
-                  <div></div>
+                  <div></div><br/>
                   <div>
                     <span>City</span>
                     <div>
@@ -96,9 +97,9 @@ const MyProperty = (props) => {
                       <span>{property.city}</span>
                     </div>
                   </div>
-                </div>
+                </div><br/>
                 <div className="price">
-                  <span>For Rent</span>
+                  <span>Rent</span>
                   <BsCurrencyDollar />
                   <b>{property.price}</b>
                 </div>

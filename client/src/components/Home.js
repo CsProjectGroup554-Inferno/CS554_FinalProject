@@ -37,7 +37,7 @@ const Home = () => {
           <div className="row">
             <div className="col-12">
               <div className="home-div">
-                <h3 className="home-h3-1 mt-0"> Major Cities</h3>
+                <h2 className="home-h3-1 mt-0"> Major Cities</h2>
               </div>
             </div>
           </div>
@@ -46,7 +46,7 @@ const Home = () => {
               <div className="img-column">
                 <Link to={"/properties?filter=Newark"}>
                   <img className="circular--square" src="./img/6.jpg" alt="txt" />
-                  <h6 className="img-circlle-title">Newark</h6>
+                  <h3 className="img-circlle-title">Newark</h3>
                 </Link>
               </div>
             </div>
@@ -54,7 +54,7 @@ const Home = () => {
               <div className="img-column">
                 <Link to="/properties?filter=Hoboken">
                   <img className="circular--square" src="./img/7.jpg" alt="txt" />
-                  <h6 className="img-circlle-title">Hoboken</h6>
+                  <h3 className="img-circlle-title">Hoboken</h3>
                 </Link>
               </div>
             </div>
@@ -62,7 +62,7 @@ const Home = () => {
               <div className="img-column">
                 <Link to="/properties?filter=Jersey City">
                   <img className="circular--square" src="./img/8.jpg" alt="txt" />
-                  <h6 className="img-circlle-title">Jersey City</h6>
+                  <h3 className="img-circlle-title">Jersey City</h3>
                 </Link>
               </div>
             </div>
@@ -70,7 +70,7 @@ const Home = () => {
               <div className="img-column">
                 <Link to="/properties?filter=Paterson">
                   <img className="circular--square" src="./img/9.jpg" alt="txt" />
-                  <h6 className="img-circlle-title">Paterson</h6>
+                  <h3 className="img-circlle-title">Paterson</h3>
                 </Link>
               </div>
             </div>
@@ -85,7 +85,7 @@ const Home = () => {
           <div className="row">
             <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
 
-              <img src="./img/5.jpg" alt="" className="img-fluid" />
+              <img src="./img/5.jpg" alt="imgprop" className="img-fluid" />
 
             </div>
             <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -93,7 +93,7 @@ const Home = () => {
                 <div className="about-title">
                   <h2>About <span class="common-color">Us</span></h2>
                 </div>
-                <p><b>NJ Rental</b> is one stop for all users to search for thier perfect home or post thier property available for rent. Chat with the owner get every little details checked off your check
+                <p className="home-text"><b>NJ Rental</b> is one stop for all users to search for thier perfect home or post thier property available for rent. Chat with the owner get every little details checked off your check
                   list for a perfect home. We make finding your perfect home in any city all across New Jersey easy.Our suite of online services enables clients to analyze, interpret and gain unmatched
                   insight on commercial property values, market conditions and current availabilities.Search thousands of up-to-date property listings on our easy-to-use website. Narrow down your options
                   by choosing what's most important to you, such as number of bedrooms and bathrooms, price range, location, pet policy and more. Chat with other users to get an insight to their experience

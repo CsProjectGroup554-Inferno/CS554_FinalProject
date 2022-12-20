@@ -46,15 +46,18 @@ const Login = () => {
           </label>
           <input type="password" className="form-control" id="password" placeholder="password" />
         </div>
-        <button type="submit" className="btn btn-primary me-4">
-          Log In
-        </button>
-        <button onClick={handleLogInWithGoogle} className="btn btn-primary">
-          Log In with Google
-        </button>
-        <Link to="/signup" className=" ms-3 btn btn-primary">
-          Sign Up
-        </Link>
+        <div className="loginButton">
+          <button type="submit" className="btn btn-primary me-4" >
+            Log In
+          </button></div>
+        <div className="loginButton">
+          <button onClick={handleLogInWithGoogle} style={{width:"100%"}} className="btn btn-primary">
+            Log In with Google
+          </button></div>
+        <div className="loginButton">
+          <Link to="/signup" className=" ms-3 btn btn-primary">
+            Sign Up
+          </Link></div>
       </form>
     </div>
   );
