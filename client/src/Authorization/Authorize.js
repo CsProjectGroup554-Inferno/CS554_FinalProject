@@ -1,5 +1,6 @@
 import { auth } from "./FirebaseConfig";
 import React, { useState, useEffect } from "react";
+import { ProgressBar } from 'react-loader-spinner'
 
 const AuthorizeContext = React.createContext();
 
@@ -23,7 +24,17 @@ const AuthorizeProvider = (props) => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    <div className="load">
+        <ProgressBar 
+          height="80"
+          width="80"
+          ariaLabel="progress-bar-loading"
+          wrapperStyle={{}}
+          wrapperClass="progress-bar-wrapper"
+          borderColor='#F4442E'
+          barColor='white'
+        /> Loading ...
+      </div>
   }
 
   return <AuthorizeContext.Provider value={{ user }}>{props.children}</AuthorizeContext.Provider>;

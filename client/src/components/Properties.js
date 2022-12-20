@@ -9,6 +9,7 @@ import { GoLocation } from "react-icons/go";
 import { useContext } from "react";
 import { AuthorizeContext } from "../Authorization/Authorize";
 import ReactTextCollapse from 'react-text-collapse'
+import { ProgressBar } from 'react-loader-spinner'
 
 const Property = (props) => {
   const [propertyData, setPropertyData] = useState([]);
@@ -34,7 +35,7 @@ const Property = (props) => {
     }
   };
 
-  
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -57,75 +58,75 @@ const Property = (props) => {
     propertyData.map((property) => {
       return (
         <>
-        
 
-            <div key={property._id} className="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-              <div className="box prop-box">
-                <Link to={"/properties/" + property._id}>
-                  <div className="top">
-                    <img src={property.imageData[0]} alt="propImg" />
-                  </div>
-                </Link>
-                <div className="bottom">
-                 
-                  <h1>
+
+          <div key={property._id} className="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+            <div className="box prop-box">
+              <Link to={"/properties/" + property._id}>
+                <div className="top">
+                  <img src={property.imageData[0]} alt="propImg" />
+                </div>
+              </Link>
+              <div className="bottom">
+
+                <h1>
                   {user ? (
                     <span className="heart-icon" style={{ float: "right", cursor: "pointer" }} onClick={() => addPropertyToFavorite(property._id)}>
                       <BiHeart />
                     </span>
                   ) : null}
-                    <b>Title: </b>
-                    {property.title}
-                  </h1>
-                  <ReactTextCollapse options={TEXT_COLLAPSE_OPTIONS}>
+                  <b>Title: </b>
+                  {property.title}
+                </h1>
+                <ReactTextCollapse options={TEXT_COLLAPSE_OPTIONS}>
                   <p className="about-prop">
                     <b>About property: </b>
                     {property.description}
                   </p>
-                  </ReactTextCollapse>
-                  <div className="advants">
+                </ReactTextCollapse>
+                <div className="advants">
+                  <div>
+                    <span>Bedrooms</span>
                     <div>
-                      <span>Bedrooms</span>
-                      <div>
-                        <BiBed />
-                        <span>{property.bedrooms}</span>
-                      </div>
-                    </div>
-                    <div>
-                      <span>Bathrooms</span>
-                      <div>
-                        <GiBathtub />
-                        <span>{property.bathrooms}</span>
-                      </div>
-                    </div>
-                    <div>
-                      <span>Area</span>
-                      <div>
-                        <BiFontSize />
-                        <span>
-                          {property.size}
-                          <span>Sq Ft</span>
-                        </span>
-                      </div>
-                    </div>
-                    <div></div>
-                    <div>
-                      <span>City</span>
-                      <div>
-                        <GoLocation />
-                        <span>{property.city}</span>
-                      </div>
+                      <BiBed />
+                      <span>{property.bedrooms}</span>
                     </div>
                   </div>
-                  <div className="price">
-                    <span>For Rent</span>
-                    <BsCurrencyDollar />
-                    <b>{property.price}</b>
+                  <div>
+                    <span>Bathrooms</span>
+                    <div>
+                      <GiBathtub />
+                      <span>{property.bathrooms}</span>
+                    </div>
                   </div>
+                  <div>
+                    <span>Area</span>
+                    <div>
+                      <BiFontSize />
+                      <span>
+                        {property.size}
+                        <span>Sq Ft</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div></div>
+                  <div>
+                    <span>City</span>
+                    <div>
+                      <GoLocation />
+                      <span>{property.city}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="price">
+                  <span>For Rent</span>
+                  <BsCurrencyDollar />
+                  <b>{property.price}</b>
                 </div>
               </div>
             </div>
-         
+          </div>
+
         </>
       );
     });
@@ -199,10 +200,16 @@ const Property = (props) => {
 
   if (loading) {
     return (
-      <div className="lds-facebook">
-        <div></div>
-        <div></div>
-        <div></div>
+      <div className="load">
+        <ProgressBar 
+          height="80"
+          width="80"
+          ariaLabel="progress-bar-loading"
+          wrapperStyle={{}}
+          wrapperClass="progress-bar-wrapper"
+          borderColor='#F4442E'
+          barColor='white'
+        /> Loading ...
       </div>
     );
   }
@@ -315,8 +322,8 @@ const TEXT_COLLAPSE_OPTIONS = {
   collapse: true, // default state when component rendered
   collapseText: '... show more', // text to show when collapsed
   expandText: 'show less', // text to show when expanded
-  minHeight:90, // component height when closed
+  minHeight: 90, // component height when closed
   maxHeight: 200 // expanded to
-  
+
 }
 export default Property;
