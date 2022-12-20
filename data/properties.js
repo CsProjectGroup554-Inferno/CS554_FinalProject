@@ -123,7 +123,7 @@ let addPropertyToDB = async (property, userId) => {
     size: parseInt(property.size),
     address: property.address,
     zipcode: property.zipcode,
-    images: property.images ? property.images : [],
+    images: property.images,
     owner: userId,
   };
   const newInsertInfo = await propertyCollection.insertOne(newProperty);

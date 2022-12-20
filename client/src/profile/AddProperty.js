@@ -133,7 +133,7 @@ const AddProperty = (props) => {
       if (!data.bedrooms) throw Object.assign(new Error("bedroom data does not exist"), { code: null });
       if (parseInt(data.bedrooms) < 1 || parseInt(data.bedrooms) > 10) throw Object.assign(new Error("bedroom data is invalid"), { code: null });
       if (!data.bathrooms) throw Object.assign(new Error("bathroom data does not exist"), { code: null });
-      if (parseInt(data.bathrooms) < 0 || parseInt(data.bathrooms) > 10) throw Object.assign(new Error("bathroom data is invalid"), { code: null });
+      if (data.images.length <1 ) throw Object.assign(new Error("Images data required"), { code: null });
       if (!data.size) throw Object.assign(new Error("size data does not exist"), { code: null });
       if (parseInt(data.size) < 0 ) throw Object.assign(new Error("size data is invalid"), { code: null });
       if (!data.price) throw Object.assign(new Error("price data does not exist"), { code: null });

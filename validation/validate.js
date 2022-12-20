@@ -106,8 +106,14 @@ const checkId = async (id) => {
   }
 };
 
+const checkImages = async (images) => {
+  if (images.length === 0) {
+    throw "Images have to be uploaded"
+  }
+};
+
 const checkPropertyInfo = async (info) => {
-  if(!info){
+  if (!info) {
     throw "Property info missing";
   }
 
@@ -120,7 +126,7 @@ const checkPropertyInfo = async (info) => {
   this.checkSize(parseInt(info.size));
   this.checkString(info.address);
   this.checkString(info.zipcode);
-  this.checkString(info.images);
+  this.checkImages(info.images);
 }
 // const checkPassword = async (password) => {
 //   if (!password) {
@@ -148,5 +154,6 @@ module.exports = {
   checkBedroom,
   checkSize,
   checkId,
-  checkPropertyInfo
+  checkPropertyInfo,
+  checkImages
 };
