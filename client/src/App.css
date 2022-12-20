@@ -1120,3 +1120,8 @@ input:focus {
   margin-left: 50% !important;
   margin-top: 15% !important;
 }
+
+.top img{
+  width: 500px;
+  height: 500px;
+}
