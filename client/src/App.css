@@ -392,35 +392,30 @@ main {
   margin-bottom: 50px !important;
 }
 
-.container-prop {
+
+.prop-box.box {
   width: 100%;
-  margin: 100px auto;
-  display: flex;
-  padding: 20px;
+    margin-left: 0px;
+    margin-right: 0px;
+    background-color: transparent;
+    position: relative;
+    border-radius: 10px;
 }
 
-.container-prop .box {
-  width: 65%;
-  margin-left: 250px;
-  margin-right: 250px;
-  background-color: transparent;
+.prop-box.box .top {
   position: relative;
-  border: 3px solid grey;
-  box-shadow: 20px 20px grey;
-  border-radius: 10px;
+  max-height: 500px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  border-radius: 15px;
+  overflow: hidden;
 }
 
-.container-prop .box .top {
-  position: relative;
-  height: 500px;
-  background-color: red;
-}
-
-.container-prop .box .top:before {
+.prop-box.box .top:before {
   content: "";
   width: 100%;
   height: 100%;
-  background-color: rgba(43, 187, 175, 0.829);
+  background-color: rgb(12 110 250 / 50%);
   position: absolute;
   left: 0;
   top: 0;
@@ -428,11 +423,11 @@ main {
   opacity: 0;
 }
 
-.container-prop .box .top:hover:before {
+.prop-box.box .top:hover:before {
   opacity: 1;
 }
 
-.container-prop .box .top:after {
+.prop-box.box .top:after {
   content: "View Property";
   color: white;
   font-size: 12px;
@@ -447,17 +442,17 @@ main {
   opacity: 0;
 }
 
-.container-prop .box .top:hover:after {
+.prop-box.box .top:hover:after {
   opacity: 1;
 }
 
-.container-prop .box .top img {
+.prop-box.box .top img {
   width: 100%;
   height: 100%;
   /* margin-bottom: -4px;*/
 }
 
-.container-prop .box .top span {
+.prop-box.box .top span {
   position: absolute;
   right: 20px;
   bottom: 15px;
@@ -465,18 +460,20 @@ main {
   font-size: 20px;
 }
 
-.container-prop .box .top span i {
+.prop-box.box .top span i {
   margin-left: 5px;
 }
 
-.container-prop .box .bottom {
-  padding: 20px 15px;
+.prop-box.box .bottom {
+  padding: 15px;
   position: relative;
   color: #e8e8e8;
-  font-size: xx-large;
+  font-size: inherit;
+  border: 2px solid #333;
+  border-radius: 15px;
 }
 
-.container-prop .box:not(:last-of-type) .bottom:before {
+.prop-box.box:not(:last-of-type) .bottom:before {
   content: "Hot";
   background-color: #ea723d;
   color: white;
@@ -488,13 +485,13 @@ main {
   z-index: 1;
 }
 
-.container-prop .box .bottom h3 {
+.prop-box.box .bottom h3 {
   font-size: 15px;
   color: #e8e8e8;
   font-size: x-large;
 }
 
-.container-prop .box .bottom > p {
+.prop-box.box .bottom > p {
   margin: 15px 0;
   font-size: 13px;
   line-height: 1.4;
@@ -502,59 +499,64 @@ main {
   font-size: large;
 }
 
-.container-prop .box .bottom .advants {
+.prop-box.box .bottom .advants {
   display: flex;
-  color: #e8e8e8;
-  font-weight: 300;
+    color: #e8e8e8;
+    font-weight: 300;
+    justify-content: space-between;
+    margin-top: 15px;
+    float: left;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
-.container-prop .box .bottom .advants > div {
+.prop-box.box .bottom .advants > div {
   margin-right: 15px;
 }
 
-.container-prop .box .bottom .advants > div > span {
+.prop-box.box .bottom .advants > div > span {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 13px;
   color: #e8e8e8;
 }
 
-.container-prop .box .bottom .advants > div > div {
+.prop-box.box .bottom .advants > div > div {
   margin-top: 10px;
   display: flex;
   align-items: center;
 }
 
-.container-prop .box .bottom .advants > div > div i {
+.prop-box.box .bottom .advants > div > div i {
   color: #777;
   font-size: 22px;
 }
 
-.container-prop .box .bottom .advants > div > div > span {
+.prop-box.box .bottom .advants > div > div > span {
   font-size: 12px;
   font-weight: bold;
   margin-left: 10px;
 }
 
-.container-prop .box .bottom .advants > div > div > span > span {
+.prop-box.box .bottom .advants > div > div > span > span {
   color: #777;
   font-weight: normal;
   margin-left: 5px;
 }
 
-.container-prop .box .bottom .price {
+.prop-box.box .bottom .price {
   margin-top: 20px;
 }
 
-.container-prop .box .bottom .price span:first-of-type {
+.prop-box.box .bottom .price span:first-of-type {
   display: block;
   font-size: 15px;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-.container-prop .box .bottom .price span:last-of-type {
+.prop-box.box .bottom .price span:last-of-type {
   color: #e8e8e8;
-  font-size: 22px;
+  font-size: 18px;
 }
 
 .a-btn {
