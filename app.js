@@ -7,7 +7,13 @@ require("dotenv").config();
 
 const http = require("http").createServer(app);
 
-app.use(cors());
+// Configure CORS from all origins
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://nj-rental.herokuapp.com"],
+    credentials: true,
+  })
+);
 // Configure Rounte and express
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
@@ -26,7 +32,7 @@ const server = http.listen(port, () => {
 // Configure socket.io
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "https://nj-rental.herokuapp.com"],
     credentials: true,
   },
 });
