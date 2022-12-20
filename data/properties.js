@@ -79,10 +79,14 @@ let getAllProperty = async (page, filter, sort) => {
 
   if (allProperty.length - page * take > 0) {
     data.next = true;
+  }else{
+    data.next = false;
   }
 
   if (allProperty.length > take && page > 1) {
     data.prev = true;
+  }else{
+    data.prev = false;
   }
 
   allProperty = allProperty.slice((page - 1) * take);
@@ -93,7 +97,7 @@ let getAllProperty = async (page, filter, sort) => {
     allProperty[i]._id = allProperty[i]._id.toString();
   }
   data.properties = allProperty;
-
+  console.log(data)
   return data;
 };
 

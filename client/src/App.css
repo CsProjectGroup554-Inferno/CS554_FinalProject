@@ -74,18 +74,48 @@ li a:hover {
 }
 
 .loginContainer {
-  border: #282c34 solid 1px;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
-  /* color: #282c34; */
-  width: 400px;
+  border: 2px solid white;
+  border-radius: 8px;
+  padding: 40px;
+  margin: 20px;
+  width: 600px;
+  height:350px;
   position: absolute;
-  /* flex-direction: column;
-  align-items: center;
-  justify-content: center; */
   top: 20%;
-  left: 35%;
+  left: 30%;
+  box-shadow: 20px 20px grey;
+}
+
+.loginButton button {
+  background-color: transparent;
+  border: 1px solid white;
+  width: 80%;
+}
+
+.loginButton button:hover {
+  background-color: transparent;
+  border: 1px solid white;
+  width: 80%;
+
+}
+
+.loginButton a {
+  background-color: transparent;
+  border: 1px solid white;
+  width: 80%;
+  margin-left: 28px !important;
+}
+
+.loginButton a:hover {
+  background-color: transparent;
+  border: 1px solid white;
+  width: 80%;
+}
+
+.loginButton {
+  float: left;
+  width: 33.33%;
+  margin-top: 20px;
 }
 
 .home-section1 {
@@ -147,7 +177,7 @@ li a:hover {
 }
 
 .img-column {
-  
+
   width: 100% !important;
   height: 320px;
   text-align: center;
@@ -196,10 +226,10 @@ li a:hover {
 
 .circular--square {
   border-radius: 50%;
-    margin: 25px;
-    height: 200px;
-    border: 5px solid #464040;
-    width: 200px;
+  margin: 25px;
+  height: 200px;
+  border: 5px solid #464040;
+  width: 200px;
 }
 
 .img-circlle-title {
@@ -395,11 +425,11 @@ main {
 
 .prop-box.box {
   width: 100%;
-    margin-left: 0px;
-    margin-right: 0px;
-    background-color: transparent;
-    position: relative;
-    border-radius: 10px;
+  margin-left: 0px;
+  margin-right: 0px;
+  background-color: transparent;
+  position: relative;
+  border-radius: 10px;
 }
 
 .prop-box.box .top {
@@ -409,6 +439,7 @@ main {
   border-radius: 15px;
   border-radius: 15px;
   overflow: hidden;
+  height: 400px;
 }
 
 .prop-box.box .top:before {
@@ -447,8 +478,8 @@ main {
 }
 
 .prop-box.box .top img {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .prop-box.box .top span {
@@ -490,7 +521,7 @@ main {
   font-size: x-large;
 }
 
-.prop-box.box .bottom > p {
+.prop-box.box .bottom>p {
   margin: 15px 0;
   font-size: 13px;
   line-height: 1.4;
@@ -500,43 +531,43 @@ main {
 
 .prop-box.box .bottom .advants {
   display: flex;
-    color: #e8e8e8;
-    font-weight: 300;
-    justify-content: space-between;
-    margin-top: 15px;
-    float: left;
-    width: 100%;
-    margin-bottom: 15px;
+  color: #e8e8e8;
+  font-weight: 300;
+  justify-content: space-between;
+  margin-top: 15px;
+  float: left;
+  width: 100%;
+  margin-bottom: 15px;
 }
 
-.prop-box.box .bottom .advants > div {
+.prop-box.box .bottom .advants>div {
   margin-right: 15px;
 }
 
-.prop-box.box .bottom .advants > div > span {
+.prop-box.box .bottom .advants>div>span {
   font-weight: bold;
   font-size: 13px;
   color: #e8e8e8;
 }
 
-.prop-box.box .bottom .advants > div > div {
+.prop-box.box .bottom .advants>div>div {
   margin-top: 10px;
   display: flex;
   align-items: center;
 }
 
-.prop-box.box .bottom .advants > div > div i {
+.prop-box.box .bottom .advants>div>div i {
   color: #777;
   font-size: 22px;
 }
 
-.prop-box.box .bottom .advants > div > div > span {
+.prop-box.box .bottom .advants>div>div>span {
   font-size: 12px;
   font-weight: bold;
   margin-left: 10px;
 }
 
-.prop-box.box .bottom .advants > div > div > span > span {
+.prop-box.box .bottom .advants>div>div>span>span {
   color: #777;
   font-weight: normal;
   margin-left: 5px;
@@ -695,7 +726,7 @@ main {
   width: 50%;
 }
 
-#container .product-details > p {
+#container .product-details>p {
   text-align: center;
   font-size: 14px;
   color: #c9c7c7;
@@ -795,7 +826,7 @@ main {
 }
 
 .info {
-  
+
   font-family: "Bree Serif", serif;
   line-height: 1.8;
   text-align: left;
@@ -1062,6 +1093,25 @@ input:focus {
   color: white !important;
 }
 
-.nav-link{
+.nav-link {
   color: #e8e8e8 !important;
+}
+
+.home-text {
+  color: #727d86 !important;
+  font-size: larger;
+}
+
+.container-prop{
+  border: 2px solid white;
+  border-radius: 8px;
+  padding: 20px 40px 20px 20px;
+  box-shadow: 20px 20px grey;
+  margin-bottom: 50px;
+}
+
+.page-link{
+  background-color: transparent !important;
+  border: 1px solid white !important;
+  color: white !important;
 }

@@ -92,7 +92,7 @@ const PropertiesDetail = (props) => {
         <div className="pro-detail" id="container">
 
           <div class="product-image">
-            {/* <img src={propertyData.images[0]} alt="" /> */}
+            {/* <img src={propertyData.images[0]} alt="imgprop" /> */}
             {/* <div className="column carousal">
               <Carousel>{div(propertyData)}</Carousel>
             </div> */}

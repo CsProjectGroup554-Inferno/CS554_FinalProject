@@ -63,7 +63,7 @@ const Property = (props) => {
               <div className="box prop-box">
                 <Link to={"/properties/" + property._id}>
                   <div className="top">
-                    <img src={property.imageData[0]} alt="" />
+                    <img src={property.imageData[0]} alt="propImg" />
                   </div>
                 </Link>
                 <div className="bottom">
@@ -273,9 +273,9 @@ const Property = (props) => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu className="dropdown-menu">
-                <Dropdown.Item href={"?page=" + 1 + "&filter=size1&sort=" + sort}>$ 0 - 1000</Dropdown.Item>
-                <Dropdown.Item href={"?page=" + 1 + "&filter=size2&sort=" + sort}>$ 1000 - 2000</Dropdown.Item>
-                <Dropdown.Item href={"?page=" + 1 + "&filter=size3&sort=" + sort}>$ 2000 +</Dropdown.Item>
+                <Dropdown.Item href={"?page=" + 1 + "&filter=size1&sort=" + sort}> Less than 1000 sq ft</Dropdown.Item>
+                <Dropdown.Item href={"?page=" + 1 + "&filter=size2&sort=" + sort}> 1000 sq ft - 2000 sq ft</Dropdown.Item>
+                <Dropdown.Item href={"?page=" + 1 + "&filter=size3&sort=" + sort}> 2000 sq ft +</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </div>

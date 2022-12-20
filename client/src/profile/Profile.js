@@ -38,11 +38,11 @@ const Profile = () => {
           <div className="col-md-3">
             {userData?.email ? (
               <div className="mt-4">
-                <h5>
+                <h1 style={{fontSize:"large"}}>
                   <br />
                   <MdOutlineEmail />
                   {userData.email}
-                </h5>
+                </h1>
               </div>
             ) : null}
             <div>

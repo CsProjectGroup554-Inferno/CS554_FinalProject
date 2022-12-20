@@ -51,7 +51,7 @@ export default function Contacts({ contacts, changeChat, indexx, propertyContact
         <Container>
           <div className="brand">
 
-            <h3>NJRental</h3>
+            <h1>NJRental</h1>
           </div>
           <div className="contacts">
             {contacts.filter(user => user.email !== currentUserName).map((contact, index) => {
@@ -65,7 +65,7 @@ export default function Contacts({ contacts, changeChat, indexx, propertyContact
                   <div className="avatar">
                     <img
                       src={`${avatar}`}
-                      alt=""
+                      alt="imgprop"
                     />
                   </div>
                   <div className="username">
