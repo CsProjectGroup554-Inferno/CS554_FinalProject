@@ -69,7 +69,7 @@ let getAllProperty = async (page, filter, sort) => {
   if (!allProperty) {
     throw "Property not found in data base";
   }
-  let take = 3;
+  let take = 6;
 
   let data = {
     properties: null,
