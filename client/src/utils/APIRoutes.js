@@ -1,4 +1,4 @@
-export const host = "http://localhost:4000";
+export const host = "http://localhost:4000/api";
 export const allUsersRoute = `${host}/users/allusers`;
 export const logoutRoute = `${host}/auth/logout`;
 export const sendMessageRoute = `${host}/messages/addmsg`;

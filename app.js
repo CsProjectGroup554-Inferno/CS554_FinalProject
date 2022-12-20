@@ -9,12 +9,12 @@ const http = require("http").createServer(app);
 
 app.use(cors());
 // Configure Rounte and express
-app.use(express.json({limit: '50mb'}));
-app.use(express.urlencoded({limit: '50mb', extended: true, parameterLimit: 50000}));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
 app.use(express.static(path.join(__dirname, "client/build")));
 const configRoutes = require("./routes/index");
 configRoutes(app);
-app.get("*", (req, res) => {
+app.get("/api/*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
 
@@ -45,8 +45,3 @@ io.on("connection", (socket) => {
     }
   });
 });
-
-
-
-
-

@@ -20,9 +20,7 @@ import MyProperty from "./profile/MyProperty";
 // import EditProperty from "./profile/EditProperty";
 
 function App() {
-
   return (
-  
     <AuthorizeProvider>
       <Router>
         <Header />
@@ -31,7 +29,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/properties" element={<Properties />} />
-          <Route path="/chat" element={<Chat />} />
           <Route path="/properties/:id" element={<PropertiesDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
@@ -41,6 +38,7 @@ function App() {
             {/* <Route path="/profile/properties/edit" element={<EditProperty />} /> */}
             <Route path="/profile/favorites" element={<Favorites />} />
             <Route path="/profile/myProperties" element={<MyProperty />} />
+            <Route path="/chat" element={<Chat />} />
           </Route>
         </Routes>
       </Router>
