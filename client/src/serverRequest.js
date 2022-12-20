@@ -2,7 +2,7 @@ import axios from "axios";
 import { auth, emailProvider } from "./Authorization/FirebaseConfig";
 import validate from "./validation";
 import { updatePassword } from "firebase/auth";
-const BASE_URL = "http://localhost:4000/api";
+const BASE_URL = process.env.PORT ? process.env.PORT + "/api" : "http://localhost:4000/api";
 
 let getmessages = async () => {
   const token = await auth.currentUser.getIdToken();
