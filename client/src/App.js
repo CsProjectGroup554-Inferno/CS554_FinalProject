@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthorizeProvider } from "./Authorization/Authorize";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Chat from "./pages/Chat";
 import Login from "./Authorization/Login";
 import SignUp from "./Authorization/SignUp";
@@ -41,6 +42,7 @@ function App() {
             <Route path="/chat" element={<Chat />} />
           </Route>
         </Routes>
+        <Footer/>
       </Router>
     </AuthorizeProvider>
   );
