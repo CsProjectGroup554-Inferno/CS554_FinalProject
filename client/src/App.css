@@ -1110,3 +1110,8 @@ input:focus {
   border: 1px solid white !important;
   color: white !important;
 }
+
+.load{
+  margin-left: 50% !important;
+  margin-top: 15% !important;
+}

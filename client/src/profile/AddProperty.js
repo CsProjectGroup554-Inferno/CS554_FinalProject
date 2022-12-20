@@ -5,6 +5,7 @@ import { useDropzone } from "react-dropzone";
 import serverRequest from "../serverRequest";
 import Profile from "./Profile";
 import { BiImageAdd } from "react-icons/bi";
+import { ProgressBar } from 'react-loader-spinner'
 
 const AddProperty = (props) => {
   const { user } = useContext(AuthorizeContext);
@@ -152,10 +153,16 @@ const AddProperty = (props) => {
   };
   if (loading) {
     return (
-      <div className="lds-facebook">
-        <div></div>
-        <div></div>
-        <div></div>
+      <div className="load">
+        <ProgressBar 
+          height="80"
+          width="80"
+          ariaLabel="progress-bar-loading"
+          wrapperStyle={{}}
+          wrapperClass="progress-bar-wrapper"
+          borderColor='#F4442E'
+          barColor='white'
+        /> Loading ...
       </div>
     );
   }

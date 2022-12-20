@@ -7,6 +7,9 @@ import { GiBathtub } from "react-icons/gi";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import Profile from "./Profile";
+import { ProgressBar } from 'react-loader-spinner'
+
+
 const MyProperty = (props) => {
   const { user } = useContext(AuthorizeContext);
   const [propertyData, setPropertyData] = useState([]);
@@ -113,10 +116,16 @@ const MyProperty = (props) => {
 
   if (loading) {
     return (
-      <div className="lds-facebook">
-        <div></div>
-        <div></div>
-        <div></div>
+      <div className="load">
+        <ProgressBar 
+          height="80"
+          width="80"
+          ariaLabel="progress-bar-loading"
+          wrapperStyle={{}}
+          wrapperClass="progress-bar-wrapper"
+          borderColor='#F4442E'
+          barColor='white'
+        /> Loading ...
       </div>
     );
   }

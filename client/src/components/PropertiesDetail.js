@@ -10,6 +10,7 @@ import { GoLocation } from "react-icons/go";
 import { MdLocationCity, MdMyLocation } from "react-icons/md";
 import { useContext } from "react";
 import { AuthorizeContext } from "../Authorization/Authorize";
+import { ProgressBar } from 'react-loader-spinner'
 
 const PropertiesDetail = (props) => {
   const navigate = useNavigate();
@@ -76,10 +77,16 @@ const PropertiesDetail = (props) => {
 
   if (loading) {
     return (
-      <div className="lds-facebook">
-        <div></div>
-        <div></div>
-        <div></div>
+      <div className="load">
+        <ProgressBar 
+          height="80"
+          width="80"
+          ariaLabel="progress-bar-loading"
+          wrapperStyle={{}}
+          wrapperClass="progress-bar-wrapper"
+          borderColor='#F4442E'
+          barColor='white'
+        /> Loading ...
       </div>
     );
   }
