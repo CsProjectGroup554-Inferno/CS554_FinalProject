@@ -41,7 +41,7 @@ const checkBedroom = async (bedrooms) => {
     throw "Bedroom info does not exist"
   }
 
-  if (bedrooms != Number) {
+  if (typeof bedrooms != "number") {
     throw "Number of bedroom data is not valid"
   }
 
@@ -59,7 +59,7 @@ const checkBathroom = async (bathroom) => {
     throw "Bathroom info does not exist"
   }
 
-  if (bathroom != Number) {
+  if (typeof bathroom != "number") {
     throw "Number of bedroom data is not valid"
   }
 
@@ -73,7 +73,7 @@ const checkSize = async (size) => {
     throw "Size info does not exist"
   }
 
-  if (size != Number) {
+  if (typeof size != "number") {
     throw "Size is not valid"
   }
 
@@ -87,7 +87,7 @@ const checkPrice = async (price) => {
     throw "Price does not exist"
   }
 
-  if (price != Number) {
+  if (typeof price != "number") {
     throw "Price is not valid"
   }
 
@@ -117,16 +117,16 @@ const checkPropertyInfo = async (info) => {
     throw "Property info missing";
   }
 
-  this.checkString(info.title);
-  this.checkString(info.description);
-  this.checkString(info.city);
-  this.checkPrice(parseInt(info.price));
-  this.checkBedroom(parseInt(info.bedrooms));
-  this.checkBathroom(parseInt(info.bathrooms));
-  this.checkSize(parseInt(info.size));
-  this.checkString(info.address);
-  this.checkString(info.zipcode);
-  this.checkImages(info.images);
+  checkString(info.title);
+  checkString(info.description);
+  checkString(info.city);
+  checkPrice(parseInt(info.price));
+  checkBedroom(parseInt(info.bedrooms));
+  checkBathroom(parseInt(info.bathrooms));
+  checkSize(parseInt(info.size));
+  checkString(info.address);
+  checkString(info.zipcode);
+  checkImages(info.images);
 }
 // const checkPassword = async (password) => {
 //   if (!password) {
