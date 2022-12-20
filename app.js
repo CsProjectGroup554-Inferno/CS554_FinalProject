@@ -14,7 +14,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 5000
 app.use(express.static(path.join(__dirname, "client/build")));
 const configRoutes = require("./routes/index");
 configRoutes(app);
-app.get("/api/*", (req, res) => {
+app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
 
