@@ -14,7 +14,7 @@ app.use(
     credentials: true,
   })
 );
-// Configure Rounte and express
+// Configure Route and express
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
 app.use(express.static(path.join(__dirname, "client/build")));
