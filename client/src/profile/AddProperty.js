@@ -199,19 +199,6 @@ const AddProperty = (props) => {
 
   return (
     <div className="container">
-      <Alert
-        header={'Header'}
-        btnText={'Close'}
-        text={alert.text}
-        type={alert.type}
-        show={alert.show}
-        onClosePress={onCloseAlert}
-        pressCloseOnOutsideClick={true}
-        showBorderBottom={true}
-        alertStyles={{}}
-        headerStyles={{}}
-        textStyles={{}}
-        buttonStyles={{}} />
       <div className="row">
         <div className="col-md-3">
           <Profile />

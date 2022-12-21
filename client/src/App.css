@@ -1131,17 +1131,17 @@ input:focus {
   margin-top: 50px;
   padding: 20px !important;
   text-align: center;
-  color: red !important;
+  color: #ff6a6a !important;
 }
 
 .alert-main a {
   text-decoration: underline !important;
-  color: red;
+  color: #ff6a6a;
   text-align: center;
 }
 
 .alert-main a:hover {
   text-decoration: underline !important;
-  color: red;
+  color: #ff6a6a;
   text-align: center;
 }
