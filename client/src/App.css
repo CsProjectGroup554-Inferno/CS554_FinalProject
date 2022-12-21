@@ -247,7 +247,9 @@ li a:hover {
 }
 
 .img-fluid {
-  height: 500px !important;
+  padding: 10px;
+  display: flex;
+  height: 200px !important;
 }
 
 @-webkit-keyframes mover {
@@ -1114,4 +1116,9 @@ input:focus {
 .load{
   margin-left: 50% !important;
   margin-top: 15% !important;
+}
+
+.top img{
+  width: 500px;
+  height: 500px;
 }
