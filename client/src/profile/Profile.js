@@ -27,7 +27,7 @@ const Profile = () => {
     try {
       await serverRequest.changePassword(newPassword.value, confirmPassword.value);
     } catch (error) {
-      alert(error.message);
+      console.log(error);
     }
   };
 
@@ -38,7 +38,7 @@ const Profile = () => {
           <div className="col-md-3">
             {userData?.email ? (
               <div className="mt-4">
-                <h1 style={{fontSize:"large"}}>
+                <h1 style={{ fontSize: "large" }}>
                   <br />
                   <MdOutlineEmail />
                   {userData.email}
