@@ -57,7 +57,9 @@ let getAllProperty = async (page, filter, sort) => {
     allPropertyCity[0].cities.push(allPropertyCity[i].city);
   }
 
-  allPropertyCity[0].cities = allPropertyCity[0].cities.filter((item, index) => allPropertyCity[0].cities.indexOf(item) === index);
+  allPropertyCity[0].cities = allPropertyCity[0].cities.map(x => typeof x === 'string' ? x.toUpperCase() : x);
+
+  allPropertyCity[0].cities = Array.from(new Set(allPropertyCity[0].cities))
 
   for (let i = 0; i < allProperty.length; i++) {
     allProperty[i].cities = [];
