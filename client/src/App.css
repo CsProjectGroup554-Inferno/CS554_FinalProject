@@ -1054,9 +1054,10 @@ input:focus {
 }
 
 .control .btn:hover {
-  color: #000 !important;
-  border: 2px solid black;
+  color: transparent !important;
+  border: 2px solid white;
   margin: 10px;
+  color: #fff !important;
 }
 
 .control .btn {
@@ -1127,3 +1128,4 @@ input:focus {
   width: 500px;
   height: 500px;
 }
+
