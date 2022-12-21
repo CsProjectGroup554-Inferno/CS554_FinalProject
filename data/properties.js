@@ -15,7 +15,7 @@ let getAllProperty = async (page, filter, sort) => {
   }
 
   if (!page) {
-    page = 1
+    page = 1;
   }
   //filter
   validate.checkPage(page);
@@ -52,24 +52,19 @@ let getAllProperty = async (page, filter, sort) => {
   var allProperty = await propertyCollection.find(filter).sort(sort).toArray();
   var allPropertyCity = await propertyCollection.find({}).sort({}).toArray();
 
-
-  allPropertyCity[0].cities = []
+  allPropertyCity[0].cities = [];
   for (let i = 0; i < allPropertyCity.length; i++) {
-    allPropertyCity[0].cities.push(allPropertyCity[i].city)
+    allPropertyCity[0].cities.push(allPropertyCity[i].city);
   }
 
-  // allPropertyCity[0].cities= allPropertyCity[0].cities.filter((item, 
-  //   index) => allPropertyCity[0].cities.indexOf(item) === index);
+  allPropertyCity[0].cities = allPropertyCity[0].cities.filter((item, index) => allPropertyCity[0].cities.indexOf(item) === index);
 
-  allPropertyCity[0].cities = allPropertyCity[0].cities.map(x => typeof x === 'string' ? x.toUpperCase() : x);
-
-  allPropertyCity[0].cities = Array.from(new Set(allPropertyCity[0].cities))
   for (let i = 0; i < allProperty.length; i++) {
-    allProperty[i].cities = []
-    allProperty[i].cities = allPropertyCity[0].cities
+    allProperty[i].cities = [];
+    allProperty[i].cities = allPropertyCity[0].cities;
   }
 
-  console.log(allProperty[0].cities[0])
+  console.log(allProperty[0].cities[0]);
   if (!allProperty) {
     throw "Property not found in data base";
   }
@@ -101,10 +96,9 @@ let getAllProperty = async (page, filter, sort) => {
     allProperty[i]._id = allProperty[i]._id.toString();
   }
   data.properties = allProperty;
-  console.log(data)
+  console.log(data);
   return data;
 };
-
 
 let getPropertyById = async (id) => {
   id = id.toString();
@@ -117,7 +111,7 @@ let getPropertyById = async (id) => {
 };
 
 let addPropertyToDB = async (property, userId) => {
-  validate.checkPropertyInfo(property)
+  validate.checkPropertyInfo(property);
 
   const propertyCollection = await properties();
   const newProperty = {
