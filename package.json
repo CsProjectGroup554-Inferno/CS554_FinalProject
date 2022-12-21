@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "redis-server 2>&1 & node app.js",
-    "seed": "node ./seed/index.js",
     "server": "nodemon app.js",
     "heroku-postbuild": "cd client && npm install --legacy-peer-deps && npm install --legacy-peer-deps && npm run build"
   },
@@ -33,7 +32,8 @@
     "nodemon": "^2.0.7",
     "redis": "^4.5.0",
     "resize-img": "^2.0.0",
-    "socket.io": "3.1.2"
+    "socket.io": "3.1.2",
+    "xss": "^1.0.14"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

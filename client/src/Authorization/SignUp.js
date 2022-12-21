@@ -18,7 +18,7 @@ const Signup = () => {
       await auth.signOut();
       document.getElementById("HomeBtn").click();
     } catch (error) {
-      alert(error.message);
+      console.log(error);
     }
   };
 
@@ -29,6 +29,11 @@ const Signup = () => {
   return (
     <>
       <div className="loginContainer mt-5">
+        <div className=" visually-hidden">
+          <Link id="HomeBtn" to="/login">
+            Home
+          </Link>
+        </div>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="email">Email address</label>
@@ -43,13 +48,15 @@ const Signup = () => {
             <input type="password" className="form-control" id="confirmPassword" placeholder="confirm password" />
           </div>
           <div className="loginButton">
-          <button type="submit" className="btn btn-primary">
-            Sign Up
-          </button></div>
+            <button type="submit" className="btn btn-primary">
+              Sign Up
+            </button>
+          </div>
           <div className="loginButton">
-          <Link to="/login" className=" btn btn-primary ms-3">
-            Login
-          </Link></div>
+            <Link to="/login" className=" btn btn-primary ms-3">
+              Login
+            </Link>
+          </div>
         </form>
       </div>
     </>
