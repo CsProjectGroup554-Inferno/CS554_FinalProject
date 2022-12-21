@@ -75,5 +75,16 @@ Run client
   npm start
 ```
 
+## Environment Variables
+To run this project, you will need to add the following environment variables to your .env file
+
+```bash
+REACT_APP_LOCALHOST_KEY = "chat-app"
+```
+
+```bash 
+CONNECT_WITH_OWNER = "connect-with-owner"
+```
+
 
 
