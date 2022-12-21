@@ -57,8 +57,11 @@ let splitBase64ToChunks = async (base64) => {
 
 let createGridFS = async (filePath, fileName, fieldName, mime) => {
   if (validateImage(filePath)) {
+    let filePath1 = "./"+filePath
+    console.log(filePath)
     let RawImageData = fs.readFileSync(filePath);
-    im.identify(RawImageData, function(err, features){
+   
+    im.identify(filePath1, function(err, features){
         if (err) throw err;
       });
     // compress image
