@@ -147,6 +147,8 @@ let addPropertyToDB = async (property, userId) => {
 let updatePropertyInDB = async (id, propertyUpdateInfo) => {
   id = id.toString();
   validate.checkId(id);
+  let property = await getPropertyById(id);
+  propertyUpdateInfo.images = property.images;
 
   validate.checkPropertyInfo(propertyUpdateInfo);
   const objId = ObjectId.createFromHexString(id);
