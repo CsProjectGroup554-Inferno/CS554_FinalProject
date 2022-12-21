@@ -96,7 +96,8 @@ const AddProperty = (props) => {
           <div key={idx} className="col-3 mb-2">
             <div className="img-preview-container avatar-container">
               <img className="img-fluid img-preview" src={key[2]} alt={key[0]} />
-              <button type="button" onClick={() => removeImage(idx)} data-idx={idx} className="btn btn-danger btn-sm btn-round btn-shadow btn-delete-preview position-absolute">
+              <button type="button" onClick={() => removeImage(idx)} data-idx={idx} className="btn btn-danger btn-sm btn-round btn-shadow btn-delete-preview position-flex
+              ">
                 Delete
               </button>
             </div>
