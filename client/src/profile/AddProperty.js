@@ -6,12 +6,33 @@ import serverRequest from "../serverRequest";
 import Profile from "./Profile";
 import { BiImageAdd } from "react-icons/bi";
 import { ProgressBar } from 'react-loader-spinner'
+import Alert from 'react-popup-alert'
 
 const AddProperty = (props) => {
+  const [alert, setAlert] = React.useState({
+    type: 'error',
+    text: 'This is a alert message',
+    show: false
+  })
   const { user } = useContext(AuthorizeContext);
   const [imageData, setImageData] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  function onCloseAlert() {
+    setAlert({
+      type: '',
+      text: '',
+      show: false
+    })
+  }
+
+  function onShowAlert(type) {
+    setAlert({
+      type: type,
+      text: 'Information is missing, Please provide all valid data',
+      show: true
+    })
+  }
   const getbase64 = async (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -125,23 +146,28 @@ const AddProperty = (props) => {
 
     try {
 
+      if (!data.title || !data.address || !data.description || !data.bedrooms || !data.bathrooms || !data.size || !data.price || !data.zipcode || !data.city || data.images.length == 0) {
+        onShowAlert('Error')
+      }
+
       // TODO move these checker into function
       if (!data.title) throw Object.assign(new Error("title data does not exist"), { code: null });
       if (!data.address) throw Object.assign(new Error("address data does not exist"), { code: null });
       if (data.title.length > 70 || typeof data.title != "string") throw Object.assign(new Error("title data too long or invalid"), { code: null });
       if (!data.description) throw Object.assign(new Error("description data does not exist"), { code: null });
-      if (data.description.length > 3000 || typeof data.description != "string" ) throw Object.assign(new Error("description data too long or invalid"), { code: null });
+      if (data.description.length > 3000 || typeof data.description != "string") throw Object.assign(new Error("description data too long or invalid"), { code: null });
       if (!data.bedrooms) throw Object.assign(new Error("bedroom data does not exist"), { code: null });
       if (parseInt(data.bedrooms) < 1 || parseInt(data.bedrooms) > 10) throw Object.assign(new Error("bedroom data is invalid"), { code: null });
       if (!data.bathrooms) throw Object.assign(new Error("bathroom data does not exist"), { code: null });
-      if (data.images.length <1 ) throw Object.assign(new Error("Images data required"), { code: null });
+      if (data.images.length < 1) throw Object.assign(new Error("Images data required"), { code: null });
       if (!data.size) throw Object.assign(new Error("size data does not exist"), { code: null });
-      if (parseInt(data.size) < 0 ) throw Object.assign(new Error("size data is invalid"), { code: null });
+      if (parseInt(data.size) < 0) throw Object.assign(new Error("size data is invalid"), { code: null });
       if (!data.price) throw Object.assign(new Error("price data does not exist"), { code: null });
       if (parseInt(data.price) < 0) throw Object.assign(new Error("price invalid"), { code: null });
       if (!data.zipcode) throw Object.assign(new Error("zipcode data does not exist"), { code: null });
       if (!data.city || typeof data.description != "string") throw Object.assign(new Error("City data does not exist or is invalid"), { code: null });
       if (data.zipcode.length !== 5 || typeof data.description != "string") throw Object.assign(new Error("Zipcode data is invalid"), { code: null });
+
 
       await serverRequest.addProperty(user, data);
 
@@ -151,10 +177,13 @@ const AddProperty = (props) => {
       setLoading(false);
     }
   };
+
+
+
   if (loading) {
     return (
       <div className="load">
-        <ProgressBar 
+        <ProgressBar
           height="80"
           width="80"
           ariaLabel="progress-bar-loading"
@@ -169,6 +198,19 @@ const AddProperty = (props) => {
 
   return (
     <div className="container">
+      <Alert
+        header={'Header'}
+        btnText={'Close'}
+        text={alert.text}
+        type={alert.type}
+        show={alert.show}
+        onClosePress={onCloseAlert}
+        pressCloseOnOutsideClick={true}
+        showBorderBottom={true}
+        alertStyles={{}}
+        headerStyles={{}}
+        textStyles={{}}
+        buttonStyles={{}} />
       <div className="row">
         <div className="col-md-3">
           <Profile />
@@ -241,7 +283,18 @@ const AddProperty = (props) => {
                 {preview ? <div className="row mb-2">{preview}</div> : null}
               </div>
             </div>
-
+            <Alert
+              btnText={'Close'}
+              text={alert.text}
+              type={alert.type}
+              show={alert.show}
+              onClosePress={onCloseAlert}
+              pressCloseOnOutsideClick={true}
+              showBorderBottom={true}
+              alertStyles={{}}
+              headerStyles={{}}
+              textStyles={{}}
+              buttonStyles={{}} />
             <button className="btn btn-primary " style={{ width: "260px", backgroundColor: "transparent", margin: "50px", border: "2px solid white" }} type="submit">
               Post
             </button>
