@@ -247,7 +247,9 @@ li a:hover {
 }
 
 .img-fluid {
-  height: 500px !important;
+  padding: 10px;
+  display: flex;
+  height: 200px !important;
 }
 
 @-webkit-keyframes mover {
