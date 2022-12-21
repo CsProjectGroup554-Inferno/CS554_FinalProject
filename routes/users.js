@@ -10,9 +10,11 @@ const userData = data.users;
 const imageData = data.images;
 const propertiesData = data.properties;
 const validate = require("../validation/validate");
+const xss = require("xss");
 
 router.get("/allusers/:id", authorizeuser, async (req, res) => {
   try {
+    req.params.id = xss(req.params.id);
     const user = await userData.getalluser(req.params.id);
 
     return res.json(user);
@@ -57,7 +59,7 @@ router.get("/", authorizeuser, async (req, res) => {
       properties[i].imageData = [];
       properties[i].imageData.push(await imageData.getImageById(properties[i].images[0].toString()));
     }
-    console.log(properties)
+    console.log(properties);
 
     for (let i = 0; i < favoritesList.length; i++) {
       let favorite = await propertiesData.getPropertyById(favoritesList[i]);
@@ -74,6 +76,7 @@ router.get("/", authorizeuser, async (req, res) => {
 router.post("/favorites/delete", authorizeuser, async (req, res) => {
   try {
     const userId = req.user.uid;
+    req.body.propertyId = xss(req.body.propertyId);
     const propertyId = req.body.propertyId;
     const user = await userData.getUserById(userId);
     const property = await propertiesData.getPropertyById(propertyId);
@@ -97,6 +100,7 @@ router.post("/favorites/delete", authorizeuser, async (req, res) => {
 router.post("/favorites", authorizeuser, async (req, res) => {
   try {
     const userId = req.user.uid;
+    req.body.propertyId = xss(req.body.propertyId);
     const propertyId = req.body.propertyId;
     const user = await userData.getUserById(userId);
     const property = await propertiesData.getPropertyById(propertyId);
@@ -119,6 +123,7 @@ router.post("/favorites", authorizeuser, async (req, res) => {
 
 router.get("/:id", authorizeuser, async (req, res) => {
   try {
+    req.params.id = xss(req.params.id);
     const userId = req.params.id;
     const user = await userData.getUserById(userId);
     res.json(user);

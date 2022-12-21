@@ -18,7 +18,7 @@ import PropertiesDetail from "./components/PropertiesDetail";
 import AddProperty from "./profile/AddProperty";
 import Favorites from "./profile/Favorites";
 import MyProperty from "./profile/MyProperty";
-// import EditProperty from "./profile/EditProperty";
+import EditProperty from "./profile/EditProperty";
 
 function App() {
   return (
@@ -36,13 +36,13 @@ function App() {
           <Route element={<ProtectedRoutes />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/properties/add" element={<AddProperty />} />
-            {/* <Route path="/profile/properties/edit" element={<EditProperty />} /> */}
+            <Route path="/profile/properties/edit/:id" element={<EditProperty />} />
             <Route path="/profile/favorites" element={<Favorites />} />
             <Route path="/profile/myProperties" element={<MyProperty />} />
             <Route path="/chat" element={<Chat />} />
           </Route>
         </Routes>
-        <Footer/>
+        <Footer />
       </Router>
     </AuthorizeProvider>
   );
