@@ -7,6 +7,9 @@ import { GiBathtub } from "react-icons/gi";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import Profile from "./Profile";
+import { ProgressBar } from 'react-loader-spinner'
+
+
 const MyProperty = (props) => {
   const { user } = useContext(AuthorizeContext);
   const [propertyData, setPropertyData] = useState([]);
@@ -38,14 +41,15 @@ const MyProperty = (props) => {
     }
   };
 
-
   div =
     propertyData &&
     propertyData.map((property) => {
       return (
         <>
-
           <div key={property._id} className="container-prop" style={{ marginTop: "20px" }}>
+            <Link className="btn btn-danger mb-2" to={"/profile/properties/edit/" + property._id} style={{ float: "right" }}>
+              edit
+            </Link>
             <button className="btn btn-danger mb-2" style={{ float: "right", marginRight: "50px" }} onClick={() => handleDelete(property._id)}>
               Remove
             </button>
@@ -71,14 +75,16 @@ const MyProperty = (props) => {
                       <BiBed />
                       <span>{property.bedrooms}</span>
                     </div>
-                  </div><br/>
+                  </div>
+                  <br />
                   <div>
                     <span>Bathrooms</span>
                     <div>
                       <GiBathtub />
                       <span>{property.bathrooms}</span>
                     </div>
-                  </div><br/>
+                  </div>
+                  <br />
                   <div>
                     <span>Area</span>
                     <div>
@@ -89,7 +95,8 @@ const MyProperty = (props) => {
                       </span>
                     </div>
                   </div>
-                  <div></div><br/>
+                  <div></div>
+                  <br />
                   <div>
                     <span>City</span>
                     <div>
@@ -97,7 +104,8 @@ const MyProperty = (props) => {
                       <span>{property.city}</span>
                     </div>
                   </div>
-                </div><br/>
+                </div>
+                <br />
                 <div className="price">
                   <span>Rent</span>
                   <BsCurrencyDollar />
@@ -110,13 +118,18 @@ const MyProperty = (props) => {
       );
     });
 
-
   if (loading) {
     return (
-      <div className="lds-facebook">
-        <div></div>
-        <div></div>
-        <div></div>
+      <div className="load">
+        <ProgressBar 
+          height="80"
+          width="80"
+          ariaLabel="progress-bar-loading"
+          wrapperStyle={{}}
+          wrapperClass="progress-bar-wrapper"
+          borderColor='#F4442E'
+          barColor='white'
+        /> Loading ...
       </div>
     );
   }

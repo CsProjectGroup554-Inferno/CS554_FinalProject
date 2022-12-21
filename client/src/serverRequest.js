@@ -178,6 +178,25 @@ let removeFavorite = async (propertyId) => {
   return response.data;
 };
 
+let editProperty = async (id, user, property) => {
+  const token = await auth.currentUser.getIdToken();
+  const { title, description, city, price, bedrooms, bathrooms, size, address, zipcode } = property;
+  const data = {
+    title: title.value,
+    description: description.value,
+    city: city.value,
+    price: price.value,
+    bedrooms: bedrooms.value,
+    bathrooms: bathrooms.value,
+    size: size.value,
+    address: address.value,
+    zipcode: zipcode.value,
+  };
+
+  let response = await axios.put(BASE_URL + "/properties/" + id, data, { headers: { Authorization: token } });
+  return response.data;
+};
+
 let exports = {
   getUserById,
   changePassword,
@@ -192,6 +211,7 @@ let exports = {
   removeFavorite,
   getallUser,
   getmessages,
+  editProperty,
 };
 
 export default exports;

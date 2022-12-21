@@ -73,7 +73,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+
 .env.test
 .env*.local
 
@@ -123,3 +123,5 @@ client/package-lock.json
 client/package-lock.json
 client/package-lock.json
 client/package-lock.json
+client/package-lock.json
+*.json

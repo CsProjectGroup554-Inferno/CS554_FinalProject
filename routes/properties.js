@@ -11,9 +11,11 @@ const imageData = data.images;
 const userData = data.users;
 const validate = require("../validation/validate");
 const base64Img = require("base64-img");
+const xss = require("xss");
 
 router.delete("/:id", authorizeuser, async (req, res) => {
   try {
+    req.params.id = xss(req.params.id);
     const propertyId = req.params.id;
     await client.connect();
     // reset property redis
@@ -48,6 +50,10 @@ router.delete("/:id", authorizeuser, async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
+  req.query.page = xss(req.query.page);
+  req.query.sort = xss(req.query.sort);
+  req.query.filter = xss(req.query.filter);
+
   // let allSave = ""
   let page = 1;
   let sort;
@@ -88,6 +94,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
+    req.params.id = xss(req.params.id);
     let id = req.params.id.toString();
     validate.checkId(id);
     if (typeof id != "string") {
@@ -148,7 +155,6 @@ router.post("/", authorizeuser, async (req, res) => {
 
   let imagesInfo = propertyInfo.images;
   propertyInfo.images = [];
-
   try {
     for (let i = 0; i < imagesInfo.length; i++) {
       imageData.validateBase64(imagesInfo[i][2]);
@@ -175,50 +181,20 @@ router.post("/", authorizeuser, async (req, res) => {
 });
 
 router.put("/:id", authorizeuser, async (req, res) => {
+  try {
+    req.params.id = xss(req.params.id);
+  } catch (e) {
+    res.status(400).json({ error: "Invalid parameter" });
+    return;
+  }
   let propertyBody = req.body;
 
-  // get property
   let property;
   try {
+    // get property
     property = await propertiesData.getPropertyById(req.params.id);
   } catch (e) {
     res.status(404).json({ error: "property not found" });
-    return;
-  }
-
-  propertyBody.images = property.images;
-
-  // handle removed images
-  try {
-    let removedImages = propertyBody.removedImages;
-    let imagesIds = propertyBody.images;
-    for (let imageId of imagesIds) {
-      let imgData = await imageData.getImageById(imageId);
-      if (removedImages.includes(imgData)) {
-        var index = propertyBody.images.indexOf(imageId);
-        if (index > -1) {
-          propertyBody.images.splice(index, 1);
-          await imageData.deleteImageandChunks(imageId);
-        }
-      }
-    }
-  } catch (e) {
-    console.log(e);
-    res.status(500).json({ error: "fail handling removed images" });
-    return;
-  }
-
-  // handle new added images
-  try {
-    let newImages = propertyBody.newImages;
-    for (let i = 0; i < newImages.length; i++) {
-      imageData.validateBase64(newImages[i][2]);
-      let filepath = await base64Img.imgSync(newImages[i][2], "./public/img", newImages[i][0].split(".")[0]);
-      let id = await imageData.createGridFS(newImages[i][0], newImages[i][1], filepath);
-      propertyBody.images.push(id);
-    }
-  } catch (e) {
-    res.status(500).json({ error: "fail handling uploaded images" });
     return;
   }
 
@@ -228,7 +204,7 @@ router.put("/:id", authorizeuser, async (req, res) => {
 
     // reset property redis
     await client.connect();
-    await client.delAsync("property" + pid);
+    await client.del("property" + pid);
     await client.quit();
 
     res.json(property);

@@ -79,7 +79,7 @@ li a:hover {
   padding: 40px;
   margin: 20px;
   width: 600px;
-  height:350px;
+  height: 350px;
   position: absolute;
   top: 20%;
   left: 30%;
@@ -247,7 +247,9 @@ li a:hover {
 }
 
 .img-fluid {
-  height: 500px !important;
+  padding: 10px;
+  display: flex;
+  height: 200px !important;
 }
 
 @-webkit-keyframes mover {
@@ -1047,9 +1049,10 @@ input:focus {
 }
 
 .control .btn:hover {
-  color: #000 !important;
-  border: 2px solid black;
+  color: transparent !important;
+  border: 2px solid white;
   margin: 10px;
+  color: #fff !important;
 }
 
 .control .btn {
@@ -1097,7 +1100,7 @@ input:focus {
   font-size: larger;
 }
 
-.container-prop{
+.container-prop {
   border: 2px solid white;
   border-radius: 8px;
   padding: 20px 40px 20px 20px;
@@ -1105,8 +1108,40 @@ input:focus {
   margin-bottom: 50px;
 }
 
-.page-link{
+.page-link {
   background-color: transparent !important;
   border: 1px solid white !important;
   color: white !important;
+}
+
+.load {
+  margin-left: 50% !important;
+  margin-top: 15% !important;
+}
+
+.top img {
+  width: 500px;
+  height: 500px;
+}
+
+.alert-main {
+  border: none;
+  width: 200px !important;
+  margin-left: 50px !important;
+  margin-top: 50px;
+  padding: 20px !important;
+  text-align: center;
+  color: #ff6a6a !important;
+}
+
+.alert-main a {
+  text-decoration: underline !important;
+  color: #ff6a6a;
+  text-align: center;
+}
+
+.alert-main a:hover {
+  text-decoration: underline !important;
+  color: #ff6a6a;
+  text-align: center;
 }
