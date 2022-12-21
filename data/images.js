@@ -11,10 +11,9 @@ const resizeImg = require("resize-img");
 const sizeOf = require("image-size");
 const fileType = require("file-type");
 const md5 = require("md5");
-const im = require('imagemagick');
+const im = require("imagemagick");
 
 async function validateImage(filePath) {
-
   if (!filePath) throw "You must provide a file path";
   let stream = fs.createReadStream(filePath);
   let mimetype = await fileType.fromStream(stream);
@@ -57,10 +56,13 @@ let splitBase64ToChunks = async (base64) => {
 
 let createGridFS = async (filePath, fileName, fieldName, mime) => {
   if (validateImage(filePath)) {
+    let filePath1 = "./" + filePath;
+    console.log(filePath);
     let RawImageData = fs.readFileSync(filePath);
-    //im.identify(RawImageData, function(err, features){
-      //  if (err) throw err;
-      //});
+
+    im.identify(filePath1, function (err, features) {
+      if (err) throw err;
+    });
     // compress image
     const buffer = await imagemin.buffer(RawImageData, {
       plugins: [imageminMozjpeg({ quality: 80 }), imageminPngquant({ quality: [0.6, 0.8] })],
@@ -81,7 +83,6 @@ let createGridFS = async (filePath, fileName, fieldName, mime) => {
       chunkSize: 261120,
       uploadDate: new Date(),
       md5: md5(base64),
-
     };
     const insertInfo = await ImagesCollection.insertOne(newImages);
     if (insertInfo.aknowledged === false) {
